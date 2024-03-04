@@ -1,0 +1,9 @@
+AdminWindow.xbf
+App.xbf
+MainWindow.xbf
+Views\LoginDialog.xbf
+Views\SignupDialog.xbf
+Views\User_Home.xbf
+Views\User_Profile.xbf
+Views\User_Search.xbf
+Views\User_Ticket.xbf

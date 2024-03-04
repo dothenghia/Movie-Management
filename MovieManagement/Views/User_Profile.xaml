@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Page
-    x:Class="MovieManagement.Views.Home"
+    x:Class="MovieManagement.Views.User_Profile"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:MovieManagement.Views"
@@ -9,9 +9,16 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-        <TextBlock Text="Home Page" Style="{StaticResource TitleTextBlockStyle}"/>
+    <Grid Margin="20, 10">
+        <StackPanel>
+            
+        <TextBlock Text="Profile Page" Style="{StaticResource TitleTextBlockStyle}"/>
 
+        <Button Content="Log in" Click="LoginButton_Click"/>
+            
+        <Button Content="Sign up" Click="SignupButton_Click"/>
+
+        </StackPanel>
 
     </Grid>
 </Page>

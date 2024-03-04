@@ -23,32 +23,33 @@ namespace MovieManagement
         {
             this.InitializeComponent();
 
-            // Load default page
-            MainContent.Navigate(typeof(Views.Home));
+            // Default page is User_Home
+            MainContent.Navigate(typeof(Views.User_Home));
         }
+
 
         // Navigate to the page corresponding to selected item
-        private void NavigationBar_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+        private void NavigationBar_MainWindow_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
-            NavigationViewItem item = args.SelectedItem as NavigationViewItem;
-            if (item != null)
+            NavigationViewItem selectedItem = args.SelectedItem as NavigationViewItem;
+            if (selectedItem != null)
             {
-                Type pageType = typeof(Views.Home); // default page type
-
-                if (item.Tag.ToString() == "Page1_Tag")
+                switch (selectedItem.Tag.ToString())
                 {
-                    pageType = typeof(Views.BlankPage1);
+                    case "Home_NavgationTag":
+                        MainContent.Navigate(typeof(Views.User_Home));
+                        break;
+                    case "Ticket_NavgationTag":
+                        MainContent.Navigate(typeof(Views.User_Ticket));
+                        break;
+                    case "Profile_NavgationTag":
+                        MainContent.Navigate(typeof(Views.User_Profile));
+                        break;
+                    default:
+                        break;
                 }
-                else if (item.Tag.ToString() == "Page2_Tag")
-                {
-                    pageType = typeof(Views.BlankPage2);
-                }
-
-                MainContent.Navigate(pageType);
             }
         }
-
-
 
 
     }

@@ -7,22 +7,61 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Title="Movie Management"
-    
+    Title="HeartSteel Movie App"
     >
 
-    <!-- =============== Navigation Bar =============== -->
-    <NavigationView x:Name="NavigationBar" SelectionChanged="NavigationBar_SelectionChanged">
-        <NavigationView.MenuItems>
-            <NavigationViewItem Icon="Home" Content="Home" Tag="Home_Tag" />
-            <NavigationViewItem Icon="Download" Content="Page 1" Tag="Page1_Tag" />
-            <NavigationViewItem Icon="Download" Content="Page 2" Tag="Page2_Tag" />
-        </NavigationView.MenuItems>
+    <!-- =============== Application Backdrop =============== -->
+    <Window.SystemBackdrop>
+        <DesktopAcrylicBackdrop/>
+    </Window.SystemBackdrop>
 
-        <!-- =============== Main Content =============== -->
-        <Frame x:Name="MainContent"/>
+    <!-- ==================================================== -->
+    <Grid>
+        <NavigationView x:Name="NavigationBar_MainWindow"
+            IsSettingsVisible="False"
+            PaneDisplayMode="Top"
+            IsTabStop="False"
+            IsBackButtonVisible="Collapsed"
+            AlwaysShowHeader="False"
+            SelectionFollowsFocus="Enabled"
+            SelectionChanged="NavigationBar_MainWindow_SelectionChanged"
+            >
+            <!-- ====== Logo ====== -->
+            <NavigationView.PaneHeader>
+                <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                    <Image Width="40" Source="/Assets/Logo.png" />
+                </StackPanel>
+            </NavigationView.PaneHeader>
+
+            <NavigationView.MenuItems>
+                <!-- ====== Home Tag ====== -->
+                <NavigationViewItem Content="Home" Tag="Home_NavgationTag" x:Name="Home_NavgationItem" Icon="Home"/>
+
+                <!-- ====== My Tickets Tag ====== -->
+                <NavigationViewItem Content="My Tickets" Tag="Ticket_NavgationTag" x:Name="Ticket_NavgationItem" Icon="Calendar" />
+            </NavigationView.MenuItems>
+
+
+            <!-- ====== Search Input ====== -->
+            <NavigationView.AutoSuggestBox>
+                <AutoSuggestBox QueryIcon="Find" AutomationProperties.Name="Search" />
+            </NavigationView.AutoSuggestBox>
+
+
+            <!-- ====== Profile Tag ====== -->
+            <NavigationView.FooterMenuItems>
+                <NavigationViewItem Content="Profile" Tag="Profile_NavgationTag" x:Name="Profile_NavgationItem" Icon="Emoji"/>
+            </NavigationView.FooterMenuItems>
+
+
+            <!-- ====== MAIN CONTENT ====== -->
+            <Frame x:Name="MainContent" />
+            
+            
+        </NavigationView>
         
-    </NavigationView>
+    
+    </Grid>
     
     
 </Window>

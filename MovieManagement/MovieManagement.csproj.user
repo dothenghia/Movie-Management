@@ -2,6 +2,9 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
+    <Page Update="AdminWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <None Update="App.xaml">
       <SubType>Designer</SubType>
     </None>
@@ -11,13 +14,22 @@
     <None Update="Package.appxmanifest">
       <SubType>Designer</SubType>
     </None>
-    <Page Update="Views\Home.xaml">
+    <Page Update="Views\SignupDialog.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\BlankPage2.xaml">
+    <Page Update="Views\LoginDialog.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\BlankPage1.xaml">
+    <Page Update="Views\User_Search.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\User_Ticket.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\User_Home.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\User_Profile.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

@@ -12,9 +12,13 @@
     <EnableMsixTooling>true</EnableMsixTooling>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="Views\BlankPage1.xaml" />
-    <None Remove="Views\BlankPage2.xaml" />
-    <None Remove="Views\Home.xaml" />
+    <None Remove="AdminWindow.xaml" />
+    <None Remove="Views\LoginDialog.xaml" />
+    <None Remove="Views\SignupDialog.xaml" />
+    <None Remove="Views\User_Home.xaml" />
+    <None Remove="Views\User_Profile.xaml" />
+    <None Remove="Views\User_Search.xaml" />
+    <None Remove="Views\User_Ticket.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -46,17 +50,42 @@
     <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Views\Home.xaml">
+    <Content Update="Assets\Logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="AdminWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Views\BlankPage2.xaml">
+    <Page Update="Views\SignupDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Views\BlankPage1.xaml">
+    <Page Update="Views\LoginDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\User_Search.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\User_Ticket.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\User_Home.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\User_Profile.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
