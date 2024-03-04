@@ -6,10 +6,54 @@
     xmlns:local="using:MovieManagement"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    Title="HeartSteel Admin"
+    >
+
+    <!-- =============== Application Backdrop =============== -->
+    <Window.SystemBackdrop>
+        <DesktopAcrylicBackdrop/>
+    </Window.SystemBackdrop>
 
     <Grid>
-        <TextBlock Text="Admin Window" Style="{StaticResource TitleTextBlockStyle}"/>
+        <NavigationView x:Name="NavigationBar_AdminWindow"
+            IsSettingsVisible="False"
+            PaneDisplayMode="Left"
+            IsTabStop="False"
+            IsBackButtonVisible="Collapsed"
+            AlwaysShowHeader="False"
+            SelectionFollowsFocus="Enabled"
+            SelectionChanged="NavigationBar_AdminWindow_SelectionChanged"
+            >
+            <NavigationView.MenuItems>
+                <!-- ====== Main Tag ====== -->
+                <NavigationViewItem Content="Main" Tag="Main_NavgationTag" x:Name="Main_NavgationItem" Icon="Home"/>
+
+                <!-- ====== Manage Film Tag ====== -->
+                <NavigationViewItem Content="Manage Film" Tag="Film_NavgationTag" x:Name="Film_NavgationItem" Icon="Calendar" />
+
+                <!-- ====== Manage ShowTime Tag ====== -->
+                <NavigationViewItem Content="Manage ShowTime" Tag="ShowTime_NavgationTag" x:Name="ShowTime_NavgationItem" Icon="Calendar" />
+
+                <!-- ====== Manage Tickets Tag ====== -->
+                <NavigationViewItem Content="Manage Tickets" Tag="Tickets_NavgationTag" x:Name="Tickets_NavgationItem" Icon="Calendar" />
+
+                <!-- ====== Manage Voucher Tag ====== -->
+                <NavigationViewItem Content="Manage Voucher" Tag="Voucher_NavgationTag" x:Name="Voucher_NavgationItem" Icon="Calendar" />
+
+                <!-- ====== Manage Report Tag ====== -->
+                <NavigationViewItem Content="Report" Tag="Report_NavgationTag" x:Name="Report_NavgationItem" Icon="Calendar" />
+
+            </NavigationView.MenuItems>
+
+            <!-- ====== MAIN CONTENT ====== -->
+            <Frame x:Name="AdminContent" />
+
+
+        </NavigationView>
+
 
     </Grid>
+
+
 </Window>

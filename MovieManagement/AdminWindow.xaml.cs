@@ -26,6 +26,42 @@ namespace MovieManagement
         public AdminWindow()
         {
             this.InitializeComponent();
+
+            // Default page is User_Home
+            AdminContent.Navigate(typeof(Views.Admin_Main));
+        }
+
+
+        // Navigate to the page corresponding to selected item
+        private void NavigationBar_AdminWindow_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+        {
+            NavigationViewItem selectedItem = args.SelectedItem as NavigationViewItem;
+            if (selectedItem != null)
+            {
+                switch (selectedItem.Tag.ToString())
+                {
+                    case "Main_NavgationTag":
+                        AdminContent.Navigate(typeof(Views.Admin_Main));
+                        break;
+                    case "Film_NavgationTag":
+                        AdminContent.Navigate(typeof(Views.Admin_Film));
+                        break;
+                    case "ShowTime_NavgationTag":
+                        AdminContent.Navigate(typeof(Views.Admin_ShowTime));
+                        break;
+                    case "Tickets_NavgationTag":
+                        AdminContent.Navigate(typeof(Views.Admin_Tickets));
+                        break;
+                    case "Voucher_NavgationTag":
+                        AdminContent.Navigate(typeof(Views.Admin_Voucher));
+                        break;
+                    case "Report_NavgationTag":
+                        AdminContent.Navigate(typeof(Views.Admin_Report));
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
     }
 }

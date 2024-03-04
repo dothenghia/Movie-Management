@@ -68,7 +68,13 @@ namespace MovieManagement.Views
 
             var result = await dialog.ShowAsync();
 
+            if (result == ContentDialogResult.Primary)
+            {
+                //MainWindow.Close(); BUG CHUA TIM DUOC CACH XOA WINDOW
 
+                var adminWindow = new AdminWindow();
+                adminWindow.Activate();
+            }
         }
     }
 }

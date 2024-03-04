@@ -1,6 +1,12 @@
 AdminWindow.xbf
 App.xbf
 MainWindow.xbf
+Views\Admin_Film.xbf
+Views\Admin_Main.xbf
+Views\Admin_Report.xbf
+Views\Admin_ShowTime.xbf
+Views\Admin_Tickets.xbf
+Views\Admin_Voucher.xbf
 Views\LoginDialog.xbf
 Views\SignupDialog.xbf
 Views\User_Home.xbf
