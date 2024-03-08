@@ -7,7 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    >
 
     <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <StackPanel Margin="32, 0, 32, 60">
@@ -19,7 +19,7 @@
             <ScrollViewer HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Visible" 
                           VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Hidden"
                           IsVerticalScrollChainingEnabled="True" ZoomMode="Disabled" IsTabStop="True"
-                          Margin="20, 20, 20, 50" HorizontalAlignment="Center"
+                          Margin="32, 20, 32, 50" HorizontalAlignment="Center"
                           >
                 <ItemsRepeater x:Name="Blockbuster_Slider">
                     <ItemsRepeater.Layout>
@@ -48,10 +48,10 @@
 
             <!-- ==================== Movie Slider ==================== -->
             <ScrollViewer HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Visible" 
-              VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Hidden"
-              IsVerticalScrollChainingEnabled="True" ZoomMode="Disabled" IsTabStop="True"
-              Margin="20, 20, 20, 50" HorizontalAlignment="Center"
-              >
+                          VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Hidden"
+                          IsVerticalScrollChainingEnabled="True" ZoomMode="Disabled" IsTabStop="True"
+                          Margin="32, 20, 32, 50" HorizontalAlignment="Center"
+                          >
                 <ItemsRepeater x:Name="Primetime_Slider">
                     <ItemsRepeater.Layout>
                         <StackLayout Orientation="Horizontal" Spacing="20"/>
@@ -77,7 +77,7 @@
             <ScrollViewer HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Visible" 
                           VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Hidden"
                           IsVerticalScrollChainingEnabled="True" ZoomMode="Disabled" IsTabStop="True"
-                          Margin="20, 20, 20, 50" HorizontalAlignment="Center"
+                          Margin="32, 20, 32, 50" HorizontalAlignment="Center"
                           >
                 <ItemsRepeater x:Name="Nighttime_Slider">
                     <ItemsRepeater.Layout>
@@ -102,10 +102,10 @@
 
             <!-- ==================== Movie Slider ==================== -->
             <ScrollViewer HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Visible" 
-              VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Hidden"
-              IsVerticalScrollChainingEnabled="True" ZoomMode="Disabled" IsTabStop="True"
-              Margin="20, 20, 20, 50" HorizontalAlignment="Center"
-              >
+                          VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Hidden"
+                          IsVerticalScrollChainingEnabled="True" ZoomMode="Disabled" IsTabStop="True"
+                          Margin="32, 20, 32, 50" HorizontalAlignment="Center"
+                          >
                 <ItemsRepeater x:Name="Standardtime_Slider">
                     <ItemsRepeater.Layout>
                         <StackLayout Orientation="Horizontal" Spacing="20"/>

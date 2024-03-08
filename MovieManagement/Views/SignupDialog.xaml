@@ -7,19 +7,23 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    >
 
-    <StackPanel>
+    <StackPanel Width="400">
 
-        <TextBox Header="Username" PlaceholderText="Enter username" />
+        <!-- Username TextBox -->
+        <TextBox Header="Username" PlaceholderText="Enter username" Margin="10"/>
 
-        <TextBox Header="Password" PlaceholderText="Enter password" />
+        <!-- Password TextBox -->
+        <PasswordBox Header="Password" PlaceholderText="Enter password" Margin="10"/>
 
-        <TextBox Header="Confirm Password" PlaceholderText="Confirm password" />
+        <!-- Confirm Password TextBox -->
+        <PasswordBox Header="Confirm Password" PlaceholderText="Confirm password" Margin="10"/>
 
+        <!-- Gender RadioButtons -->
         <RadioButtons Header="Gender">
-            <RadioButton Content="Male"/>
-            <RadioButton Content="Female"/>
+            <RadioButton Content="Male" Margin="10, 4, 0, 0"/>
+            <RadioButton Content="Female" Margin="10, 4, 0, 0"/>
         </RadioButtons>
 
     </StackPanel>

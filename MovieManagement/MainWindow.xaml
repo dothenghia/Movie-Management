@@ -12,7 +12,7 @@
 
     <!-- =============== Application Backdrop =============== -->
     <Window.SystemBackdrop>
-        <DesktopAcrylicBackdrop/>
+        <MicaBackdrop Kind="BaseAlt"/>
     </Window.SystemBackdrop>
 
     <!-- ==================================================== -->

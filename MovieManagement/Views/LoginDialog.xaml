@@ -7,13 +7,15 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    >
 
-    <StackPanel>
-        
-        <TextBox Header="Username" PlaceholderText="Enter username" />
-        
-        <TextBox Header="Password" PlaceholderText="Enter password" />
-        
+    <StackPanel Width="400">
+
+        <!-- Username TextBox -->
+        <TextBox Header="Username" PlaceholderText="Enter username" Margin="10"/>
+
+        <!-- Password TextBox -->
+        <PasswordBox Header="Password" PlaceholderText="Enter password" Margin="10"/>
+
     </StackPanel>
 </Page>

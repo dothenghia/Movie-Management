@@ -1,3 +1,4 @@
+using Microsoft.UI.Composition.SystemBackdrops;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -22,6 +23,7 @@ namespace MovieManagement
         public MainWindow()
         {
             this.InitializeComponent();
+            SystemBackdrop = new MicaBackdrop() { Kind = MicaKind.BaseAlt };
 
             // Default page is User_Home
             MainContent.Navigate(typeof(Views.User_Home));
