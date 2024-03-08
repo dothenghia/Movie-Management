@@ -9,8 +9,119 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid Margin="20, 10">
-        <TextBlock Text="Home Page" Style="{StaticResource TitleTextBlockStyle}"/>
-        
-    </Grid>
+    <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <StackPanel Margin="32, 0, 32, 60">
+
+            <!-- ==================== Blockbuster Movies ==================== -->
+            <TextBlock Margin="0, 20, 0, 0" Text="Blockbuster Movies" Style="{StaticResource TitleTextBlockStyle}"/>
+
+            <!-- ==================== Movie Slider ==================== -->
+            <ScrollViewer HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Visible" 
+                          VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Hidden"
+                          IsVerticalScrollChainingEnabled="True" ZoomMode="Disabled" IsTabStop="True"
+                          Margin="20, 20, 20, 50" HorizontalAlignment="Center"
+                          >
+                <ItemsRepeater x:Name="Blockbuster_Slider">
+                    <ItemsRepeater.Layout>
+                        <StackLayout Orientation="Horizontal" Spacing="20"/>
+                    </ItemsRepeater.Layout>
+                    <ItemsRepeater.ItemTemplate>
+                        <DataTemplate>
+                            <Canvas Width="480" Height="240">
+                                <TextBlock FontSize="220" FontFamily="Impact" Canvas.Top="10" Canvas.ZIndex="0" Text="{Binding Index}" />
+                                <Border CornerRadius="16" Width="400" Height="240" 
+                                        Canvas.Left="80" Canvas.Top="0" Canvas.ZIndex="1">
+                                    <StackPanel>
+                                        <Image Source="{Binding Image}" Stretch="UniformToFill" Width="400" Height="240"/>
+                                    </StackPanel>
+                                </Border>
+                            </Canvas>
+                        </DataTemplate>
+                    </ItemsRepeater.ItemTemplate>
+                </ItemsRepeater>
+            </ScrollViewer>
+
+
+
+            <!-- ==================== Prime Time Movies ==================== -->
+            <TextBlock Text="Prime Time Movies" Style="{StaticResource TitleTextBlockStyle}"/>
+
+            <!-- ==================== Movie Slider ==================== -->
+            <ScrollViewer HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Visible" 
+              VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Hidden"
+              IsVerticalScrollChainingEnabled="True" ZoomMode="Disabled" IsTabStop="True"
+              Margin="20, 20, 20, 50" HorizontalAlignment="Center"
+              >
+                <ItemsRepeater x:Name="Primetime_Slider">
+                    <ItemsRepeater.Layout>
+                        <StackLayout Orientation="Horizontal" Spacing="20"/>
+                    </ItemsRepeater.Layout>
+                    <ItemsRepeater.ItemTemplate>
+                        <DataTemplate>
+                            <Border CornerRadius="16" Width="400" Height="240">
+                                <StackPanel>
+                                    <Image Source="{Binding Image}" Stretch="UniformToFill" Width="400" Height="240"/>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsRepeater.ItemTemplate>
+                </ItemsRepeater>
+            </ScrollViewer>
+
+
+
+            <!-- ==================== Night Time Movies ==================== -->
+            <TextBlock Text="Night Time Movies" Style="{StaticResource TitleTextBlockStyle}"/>
+
+            <!-- ==================== Movie Slider ==================== -->
+            <ScrollViewer HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Visible" 
+                          VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Hidden"
+                          IsVerticalScrollChainingEnabled="True" ZoomMode="Disabled" IsTabStop="True"
+                          Margin="20, 20, 20, 50" HorizontalAlignment="Center"
+                          >
+                <ItemsRepeater x:Name="Nighttime_Slider">
+                    <ItemsRepeater.Layout>
+                        <StackLayout Orientation="Horizontal" Spacing="20"/>
+                    </ItemsRepeater.Layout>
+                    <ItemsRepeater.ItemTemplate>
+                        <DataTemplate>
+                            <Border CornerRadius="16" Width="400" Height="240">
+                                <StackPanel>
+                                    <Image Source="{Binding Image}" Stretch="UniformToFill" Width="400" Height="240"/>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsRepeater.ItemTemplate>
+                </ItemsRepeater>
+            </ScrollViewer>
+
+
+
+            <!-- ==================== Standard Time Movies ==================== -->
+            <TextBlock Text="Standard Time Movies" Style="{StaticResource TitleTextBlockStyle}"/>
+
+            <!-- ==================== Movie Slider ==================== -->
+            <ScrollViewer HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Visible" 
+              VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Hidden"
+              IsVerticalScrollChainingEnabled="True" ZoomMode="Disabled" IsTabStop="True"
+              Margin="20, 20, 20, 50" HorizontalAlignment="Center"
+              >
+                <ItemsRepeater x:Name="Standardtime_Slider">
+                    <ItemsRepeater.Layout>
+                        <StackLayout Orientation="Horizontal" Spacing="20"/>
+                    </ItemsRepeater.Layout>
+                    <ItemsRepeater.ItemTemplate>
+                        <DataTemplate>
+                            <Border CornerRadius="16" Width="400" Height="240">
+                                <StackPanel>
+                                    <Image Source="{Binding Image}" Stretch="UniformToFill" Width="400" Height="240"/>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsRepeater.ItemTemplate>
+                </ItemsRepeater>
+            </ScrollViewer>
+
+        </StackPanel>
+    </ScrollViewer>
 </Page>
