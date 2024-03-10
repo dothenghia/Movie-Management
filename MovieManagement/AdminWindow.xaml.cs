@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -35,33 +36,44 @@ namespace MovieManagement
         // Navigate to the page corresponding to selected item
         private void NavigationBar_AdminWindow_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
-            NavigationViewItem selectedItem = args.SelectedItem as NavigationViewItem;
-            if (selectedItem != null)
-            {
-                switch (selectedItem.Tag.ToString())
+            var selectedItem = (NavigationViewItem)args.SelectedItem;
+            string selectedItemTag = (string)selectedItem.Tag;
+
+            switch (selectedItemTag)
                 {
-                    case "Main_NavgationTag":
+                    case "Main_NavTag":
                         AdminContent.Navigate(typeof(Views.Admin_Main));
                         break;
-                    case "Film_NavgationTag":
-                        AdminContent.Navigate(typeof(Views.Admin_Film));
+                    case "FilmInfo_NavTag":
+                        AdminContent.Navigate(typeof(Views.Admin_FilmInfo));
                         break;
-                    case "ShowTime_NavgationTag":
+                    case "FilmGenre_NavTag":
+                        AdminContent.Navigate(typeof(Views.Admin_FilmGenre));
+                        break;
+                    case "FilmCerti_NavTag":
+                        AdminContent.Navigate(typeof(Views.Admin_FilmCerti));
+                        break;
+                    case "FilmStars_NavTag":
+                        AdminContent.Navigate(typeof(Views.Admin_FilmStars));
+                        break;
+                    case "FilmDirector_NavTag":
+                        AdminContent.Navigate(typeof(Views.Admin_FilmDirector));
+                        break;
+                    case "ShowTime_NavTag":
                         AdminContent.Navigate(typeof(Views.Admin_ShowTime));
                         break;
-                    case "Tickets_NavgationTag":
+                    case "Tickets_NavTag":
                         AdminContent.Navigate(typeof(Views.Admin_Tickets));
                         break;
-                    case "Voucher_NavgationTag":
+                    case "Voucher_NavTag":
                         AdminContent.Navigate(typeof(Views.Admin_Voucher));
                         break;
-                    case "Report_NavgationTag":
+                    case "Report_NavTag":
                         AdminContent.Navigate(typeof(Views.Admin_Report));
                         break;
                     default:
                         break;
                 }
-            }
         }
     }
 }

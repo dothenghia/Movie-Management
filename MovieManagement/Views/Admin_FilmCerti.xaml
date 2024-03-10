@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Page
-    x:Class="MovieManagement.Views.Admin_Report"
+    x:Class="MovieManagement.Views.Admin_FilmCerti"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:MovieManagement.Views"
@@ -10,7 +10,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid Margin="20, 10">
-        <TextBlock Text="Report and Statistics" Style="{StaticResource TitleTextBlockStyle}"/>
+        <TextBlock Text="Manage Certification" Style="{StaticResource TitleTextBlockStyle}"/>
 
     </Grid>
 </Page>
