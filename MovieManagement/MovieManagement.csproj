@@ -76,18 +76,21 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-<<<<<<< Updated upstream
     <Page Update="Views\User_Setting.xaml">
-=======
-    <Page Update="Views\Admin_FilmDirector.xaml">
->>>>>>> Stashed changes
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-<<<<<<< Updated upstream
+    <Page Update="Views\Admin_FilmDirector.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
     <Page Update="Views\User_Movie.xaml">
-=======
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
     <Page Update="Views\Admin_FilmStars.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -104,7 +107,6 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\Admin_FilmInfo.xaml">
->>>>>>> Stashed changes
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
