@@ -21,6 +21,21 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\User_Movie.xaml">
+	<SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Admin_FilmDirector.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Admin_FilmStars.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Admin_FilmCerti.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Admin_FilmGenre.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Admin_FilmInfo.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Admin_Report.xaml">
@@ -33,9 +48,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Admin_Tickets.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\Admin_Film.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Admin_Main.xaml">

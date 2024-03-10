@@ -11,7 +11,15 @@
 
     <!-- CODE VAO DAY -->
     <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-
+        <StackPanel Margin="32,0,32, 60">
+            <TextBlock Text="Change your name" Style ="{StaticResource TitleTextBlockStyle}"/>
+            <TextBox Width ="300" Header="Enter your name:" PlaceholderText="Name" />
+            <TextBlock Text="Change your password" Style ="{StaticResource TitleTextBlockStyle}" />
+            <PasswordBox Width="300" Header="Your recent password" PlaceholderText="*********" PasswordChar="*"  />
+            <PasswordBox Width="300" Header="Type new password" PlaceholderText="*********" PasswordChar="*"  />
+            <PasswordBox Width="300" Header="Retype new password" PlaceholderText="*********" PasswordChar="*" />
+            <Button Content="Save changes" Background="Cyan" HorizontalAlignment ="Right"/>
+        </StackPanel>
 
 
     </ScrollViewer>
