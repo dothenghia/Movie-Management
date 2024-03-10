@@ -39,6 +39,27 @@
 
                 <!-- ====== My Tickets Tag ====== -->
                 <NavigationViewItem Content="My Tickets" Tag="Ticket_NavgationTag" x:Name="Ticket_NavgationItem" Icon="Calendar" />
+
+
+
+
+
+
+
+
+
+                <NavigationViewItem Content="Detail Movie (Temp)" Tag="Movie_NavgationTag" x:Name="Movie_NavgationItem" Icon="Calendar" />
+                <NavigationViewItem Content="Chỉnh sửa Profile (Temp)" Tag="Setting_NavgationTag" x:Name="Setting_NavgationItem" Icon="Calendar" />
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
             </NavigationView.MenuItems>
 
 

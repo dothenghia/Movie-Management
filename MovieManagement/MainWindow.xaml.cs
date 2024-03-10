@@ -47,6 +47,21 @@ namespace MovieManagement
                     case "Profile_NavgationTag":
                         MainContent.Navigate(typeof(Views.User_Profile));
                         break;
+
+
+
+
+                    case "Movie_NavgationTag":
+                        MainContent.Navigate(typeof(Views.User_Movie));
+                        break;
+
+                    case "Setting_NavgationTag":
+                        MainContent.Navigate(typeof(Views.User_Setting));
+                        break;
+
+
+
+
                     default:
                         break;
                 }
