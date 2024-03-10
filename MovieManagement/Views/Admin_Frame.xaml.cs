@@ -35,32 +35,43 @@ namespace MovieManagement.Views
         // Navigate to the page corresponding to selected item
         private void NavigationBar_Admin_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
-            NavigationViewItem selectedItem = args.SelectedItem as NavigationViewItem;
-            if (selectedItem != null)
+            var selectedItem = (NavigationViewItem)args.SelectedItem;
+            string selectedItemTag = (string)selectedItem.Tag;
+
+            switch (selectedItemTag)
             {
-                switch (selectedItem.Tag.ToString())
-                {
-                    case "Main_NavgationTag":
-                        MainContent.Navigate(typeof(Views.Admin_Main));
-                        break;
-                    case "Film_NavgationTag":
-                        MainContent.Navigate(typeof(Views.Admin_Film));
-                        break;
-                    case "ShowTime_NavgationTag":
-                        MainContent.Navigate(typeof(Views.Admin_ShowTime));
-                        break;
-                    case "Tickets_NavgationTag":
-                        MainContent.Navigate(typeof(Views.Admin_Tickets));
-                        break;
-                    case "Voucher_NavgationTag":
-                        MainContent.Navigate(typeof(Views.Admin_Voucher));
-                        break;
-                    case "Report_NavgationTag":
-                        MainContent.Navigate(typeof(Views.Admin_Report));
-                        break;
-                    default:
-                        break;
-                }
+                case "Main_NavTag":
+                    MainContent.Navigate(typeof(Views.Admin_Main));
+                    break;
+                case "FilmInfo_NavTag":
+                    MainContent.Navigate(typeof(Views.Admin_FilmInfo));
+                    break;
+                case "FilmGenre_NavTag":
+                    MainContent.Navigate(typeof(Views.Admin_FilmGenre));
+                    break;
+                case "FilmCerti_NavTag":
+                    MainContent.Navigate(typeof(Views.Admin_FilmCerti));
+                    break;
+                case "FilmStars_NavTag":
+                    MainContent.Navigate(typeof(Views.Admin_FilmStars));
+                    break;
+                case "FilmDirector_NavTag":
+                    MainContent.Navigate(typeof(Views.Admin_FilmDirector));
+                    break;
+                case "ShowTime_NavTag":
+                    MainContent.Navigate(typeof(Views.Admin_ShowTime));
+                    break;
+                case "Tickets_NavTag":
+                    MainContent.Navigate(typeof(Views.Admin_Tickets));
+                    break;
+                case "Voucher_NavTag":
+                    MainContent.Navigate(typeof(Views.Admin_Voucher));
+                    break;
+                case "Report_NavTag":
+                    MainContent.Navigate(typeof(Views.Admin_Report));
+                    break;
+                default:
+                    break;
             }
         }
     }

@@ -1,3 +1,4 @@
+using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -7,6 +8,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -57,8 +59,10 @@ namespace MovieManagement.Views
                         MainContent.Navigate(typeof(Views.User_Setting));
                         break;
                     case "Admin_NavgationTag":
+                        var currentWindow = (Application.Current as App)?.m_window as MainWindow;
                         var adminWindow = new MainWindow(1);
                         adminWindow.Activate();
+                        currentWindow.Close();
                         break;
 
 
