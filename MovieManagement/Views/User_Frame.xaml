@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="MovieManagement.Views.User_Frame"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MovieManagement.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    >
+
+    <Grid Background="Transparent">
+
+        <NavigationView x:Name="NavigationBar_User"
+            IsSettingsVisible="False" PaneDisplayMode="Top" IsTabStop="False" IsBackButtonVisible="Collapsed" AlwaysShowHeader="False"
+            SelectionFollowsFocus="Enabled"
+            SelectionChanged="NavigationBar_User_SelectionChanged"
+            >
+
+            <NavigationView.MenuItems>
+                <!-- ====== Home Tag ====== -->
+                <NavigationViewItem Content="Home" Tag="Home_NavgationTag" x:Name="Home_NavgationItem" Icon="Home"/>
+
+                <!-- ====== My Tickets Tag ====== -->
+                <NavigationViewItem Content="My Tickets" Tag="Ticket_NavgationTag" x:Name="Ticket_NavgationItem" Icon="Calendar" />
+
+
+                <!-- ====== TEMPTEMPTEMP ====== -->
+                <NavigationViewItem Content="Detail Movie (Temp)" Tag="Movie_NavgationTag" x:Name="Movie_NavgationItem" Icon="Calendar" />
+                <NavigationViewItem Content="Chỉnh sửa Profile (Temp)" Tag="Setting_NavgationTag" x:Name="Setting_NavgationItem" Icon="Calendar" />
+                <NavigationViewItem Content="Open Admin" Tag="Admin_NavgationTag" x:Name="Admin_NavgationItem" Icon="Calendar" />
+
+                
+                
+            </NavigationView.MenuItems>
+
+
+            <!-- ====== Search Input ====== -->
+            <NavigationView.AutoSuggestBox>
+                <AutoSuggestBox QueryIcon="Find" AutomationProperties.Name="Search" />
+            </NavigationView.AutoSuggestBox>
+
+
+            <!-- ====== Profile Tag ====== -->
+            <NavigationView.FooterMenuItems>
+                <NavigationViewItem Content="Profile" Tag="Profile_NavgationTag" x:Name="Profile_NavgationItem" Icon="Emoji"/>
+            </NavigationView.FooterMenuItems>
+
+
+            <!-- ====== MAIN CONTENT ====== -->
+            <Frame x:Name="MainContent" />
+
+
+        </NavigationView>
+
+    </Grid>
+</Page>

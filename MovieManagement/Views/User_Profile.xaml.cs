@@ -46,9 +46,7 @@ namespace MovieManagement.Views
 
             if (result == ContentDialogResult.Primary)
             {
-                //MainWindow.Close(); BUG CHUA TIM DUOC CACH XOA WINDOW
-
-                var adminWindow = new AdminWindow();
+                var adminWindow = new MainWindow(1);
                 adminWindow.Activate();
             }
         }
@@ -70,10 +68,7 @@ namespace MovieManagement.Views
 
             if (result == ContentDialogResult.Primary)
             {
-                //MainWindow.Close(); BUG CHUA TIM DUOC CACH XOA WINDOW
-
-                var adminWindow = new AdminWindow();
-                adminWindow.Activate();
+                
             }
         }
     }

@@ -8,11 +8,13 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using MovieManagement.Views;
 
 
 namespace MovieManagement
@@ -20,54 +22,35 @@ namespace MovieManagement
 
     public sealed partial class MainWindow : Window
     {
-        public MainWindow()
+        // Init window mode
+        // 0 -> User
+        // 1 -> Admin
+        public MainWindow(int mode)
         {
             this.InitializeComponent();
+
+            // Set Backdrop
             SystemBackdrop = new MicaBackdrop() { Kind = MicaKind.BaseAlt };
 
-            // Default page is User_Home
-            MainContent.Navigate(typeof(Views.User_Home));
-        }
-
-
-        // Navigate to the page corresponding to selected item
-        private void NavigationBar_MainWindow_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
-        {
-            NavigationViewItem selectedItem = args.SelectedItem as NavigationViewItem;
-            if (selectedItem != null)
+            Page page = null;
+            if (mode == 0)
             {
-                switch (selectedItem.Tag.ToString())
-                {
-                    case "Home_NavgationTag":
-                        MainContent.Navigate(typeof(Views.User_Home));
-                        break;
-                    case "Ticket_NavgationTag":
-                        MainContent.Navigate(typeof(Views.User_Ticket));
-                        break;
-                    case "Profile_NavgationTag":
-                        MainContent.Navigate(typeof(Views.User_Profile));
-                        break;
-
-
-
-
-                    case "Movie_NavgationTag":
-                        MainContent.Navigate(typeof(Views.User_Movie));
-                        break;
-
-                    case "Setting_NavgationTag":
-                        MainContent.Navigate(typeof(Views.User_Setting));
-                        break;
-
-
-
-
-                    default:
-                        break;
-                }
+                page = new User_Frame();
             }
-        }
+            else if (mode == 1)
+            {
+                page = new Admin_Frame();
+            }
+            else
+            {
+                page = new User_Frame();
+            }
 
+            this.Content = page;
+
+        }
 
     }
+
+
 }

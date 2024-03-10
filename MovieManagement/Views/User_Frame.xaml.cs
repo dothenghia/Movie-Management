@@ -16,48 +16,53 @@ using Windows.Foundation.Collections;
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-namespace MovieManagement
+namespace MovieManagement.Views
 {
     /// <summary>
-    /// An empty window that can be used on its own or navigated to within a Frame.
+    /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class AdminWindow : Window
+    public sealed partial class User_Frame : Page
     {
-        public AdminWindow()
+        public User_Frame()
         {
             this.InitializeComponent();
 
             // Default page is User_Home
-            AdminContent.Navigate(typeof(Views.Admin_Main));
+            MainContent.Navigate(typeof(Views.User_Home));
         }
 
 
         // Navigate to the page corresponding to selected item
-        private void NavigationBar_AdminWindow_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+        private void NavigationBar_User_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
             NavigationViewItem selectedItem = args.SelectedItem as NavigationViewItem;
             if (selectedItem != null)
             {
                 switch (selectedItem.Tag.ToString())
                 {
-                    case "Main_NavgationTag":
-                        AdminContent.Navigate(typeof(Views.Admin_Main));
+                    case "Home_NavgationTag":
+                        MainContent.Navigate(typeof(Views.User_Home));
                         break;
-                    case "Film_NavgationTag":
-                        AdminContent.Navigate(typeof(Views.Admin_Film));
+                    case "Ticket_NavgationTag":
+                        MainContent.Navigate(typeof(Views.User_Ticket));
                         break;
-                    case "ShowTime_NavgationTag":
-                        AdminContent.Navigate(typeof(Views.Admin_ShowTime));
+                    case "Profile_NavgationTag":
+                        MainContent.Navigate(typeof(Views.User_Profile));
                         break;
-                    case "Tickets_NavgationTag":
-                        AdminContent.Navigate(typeof(Views.Admin_Tickets));
+
+                    case "Movie_NavgationTag":
+                        MainContent.Navigate(typeof(Views.User_Movie));
                         break;
-                    case "Voucher_NavgationTag":
-                        AdminContent.Navigate(typeof(Views.Admin_Voucher));
+                    case "Setting_NavgationTag":
+                        MainContent.Navigate(typeof(Views.User_Setting));
                         break;
-                    case "Report_NavgationTag":
-                        AdminContent.Navigate(typeof(Views.Admin_Report));
+                    case "Admin_NavgationTag":
+                        var adminWindow = new MainWindow(1);
+                        adminWindow.Activate();
                         break;
+
+
+
                     default:
                         break;
                 }

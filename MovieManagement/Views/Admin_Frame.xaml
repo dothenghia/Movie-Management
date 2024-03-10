@@ -1,30 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Window
-    x:Class="MovieManagement.AdminWindow"
+<Page
+    x:Class="MovieManagement.Views.Admin_Frame"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:MovieManagement"
+    xmlns:local="using:MovieManagement.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Title="HeartSteel Admin"
     >
 
-    <!-- =============== Application Backdrop =============== -->
-    <Window.SystemBackdrop>
-        <DesktopAcrylicBackdrop/>
-    </Window.SystemBackdrop>
-
     <Grid>
-        <NavigationView x:Name="NavigationBar_AdminWindow"
-            IsSettingsVisible="False"
-            PaneDisplayMode="Left"
-            IsTabStop="False"
-            IsBackButtonVisible="Collapsed"
-            AlwaysShowHeader="False"
+        
+        <NavigationView x:Name="NavigationBar_Admin"
+            IsSettingsVisible="False" PaneDisplayMode="Left" IsTabStop="False" IsBackButtonVisible="Collapsed" AlwaysShowHeader="False"
             SelectionFollowsFocus="Enabled"
-            SelectionChanged="NavigationBar_AdminWindow_SelectionChanged"
+            SelectionChanged="NavigationBar_Admin_SelectionChanged"
             >
+            
             <NavigationView.MenuItems>
                 <!-- ====== Main Tag ====== -->
                 <NavigationViewItem Content="Main" Tag="Main_NavgationTag" x:Name="Main_NavgationItem" Icon="Home"/>
@@ -47,13 +39,10 @@
             </NavigationView.MenuItems>
 
             <!-- ====== MAIN CONTENT ====== -->
-            <Frame x:Name="AdminContent" />
+            <Frame x:Name="MainContent" />
 
 
         </NavigationView>
 
-
     </Grid>
-
-
-</Window>
+</Page>
