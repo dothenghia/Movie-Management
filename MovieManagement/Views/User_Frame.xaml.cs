@@ -30,7 +30,7 @@ namespace MovieManagement.Views
             this.InitializeComponent();
 
             // Default page is User_Home
-            MainContent.Navigate(typeof(Views.User_Home));
+            //MainContent.Navigate(typeof(Views.User_Home));
         }
 
 

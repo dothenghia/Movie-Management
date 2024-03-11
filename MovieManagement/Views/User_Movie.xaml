@@ -9,16 +9,73 @@
     mc:Ignorable="d"
     >
 
-    <!-- CODE VAO DAY -->
     <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
         <StackPanel>
-            
-            <Button Content="Back" Click="BackButton_Click"/>
-        
-            <TextBlock x:Name="MovieTitle_TextBlock" Style="{StaticResource TitleTextBlockStyle}"/>
 
+            <Button Content="Back" Click="BackButton_Click"/>
+
+            <TextBlock x:Name="MovieTitle_TextBlock" Style="{StaticResource TitleTextBlockStyle}"/>
+            <Pivot>
+                <PivotItem Header="Film details" HorizontalAlignment="Center">
+                    <TextBlock Text="Film details here." />
+                </PivotItem>
+                <PivotItem Header="Showtimes" HorizontalAlignment="Center">
+                    <StackPanel>
+                            <GridView
+                            x:Name="DateGridView"
+                            IsItemClickEnabled="True"
+                            SelectionMode="Single">
+                                <GridView.ItemTemplate>
+                                    <DataTemplate x:Name="DateShowtimes" x:DataType="local:Showtime" >
+                                        <Canvas Width="100" Height="20" Background="AntiqueWhite" Margin="10">
+                                            <TextBlock Text="{x:Bind Date}" Canvas.ZIndex="0"/>
+                                            <!--<Border CornerRadius="16" Width="400" Height="240" 
+                                                    Canvas.Left="80" Canvas.Top="0" Canvas.ZIndex="1">
+                                                <StackPanel>
+                                                    <Image Source="{Binding Image}" Stretch="UniformToFill" Width="400" Height="240"/>
+                                                </StackPanel>
+                                            </Border>-->
+                                        </Canvas>
+                                    </DataTemplate>
+                                </GridView.ItemTemplate>
+                            </GridView>
+
+                            <GridView
+                                x:Name="TimeGridView"
+                                IsItemClickEnabled="True"
+                                SelectionMode="Single">
+                                <GridView.ItemTemplate>
+                                    <DataTemplate x:Name="TimeShowtimes" x:DataType="local:Showtime" >
+                                        <Canvas Width="100" Height="20" Background="AliceBlue" Margin="10">
+                                            <TextBlock Text="{x:Bind Time}" Canvas.ZIndex="0" Foreground="Brown" />
+                                        </Canvas>
+                                    </DataTemplate>
+                                </GridView.ItemTemplate>
+                            </GridView>
+                            <TextBlock Text="Screen" FontSize="20" HorizontalAlignment="Center" Foreground="Red"/>
+                        
+                            <TextBlock Text="___________________________________________" FontSize="20" HorizontalAlignment="Center" Foreground="Red"/>
+                            <GridView
+                                x:Name="SeatGridView"
+                                IsItemClickEnabled="True"
+                                SelectionMode="Multiple"
+                                Margin="50">
+                                <GridView.ItemTemplate>
+                                    <DataTemplate x:Name="Seats" x:DataType="local:Ticket" >
+                                        <Canvas Width="100" Height="20" Background="AliceBlue" Margin="10">
+                                            <TextBlock Text="{x:Bind position}" Canvas.ZIndex="0" Foreground="Brown" />
+                                        </Canvas>
+                                    </DataTemplate>
+                                </GridView.ItemTemplate>
+                            </GridView>
+
+                        <Button Content="Booking" HorizontalAlignment="Right" VerticalAlignment="Bottom" />
+                    </StackPanel>
+                        
+                </PivotItem>
+
+            </Pivot>
         </StackPanel>
     </ScrollViewer>
-
 </Page>
