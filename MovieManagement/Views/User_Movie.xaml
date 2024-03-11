@@ -11,9 +11,14 @@
 
     <!-- CODE VAO DAY -->
     <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+        <StackPanel>
+            
+            <Button Content="Back" Click="BackButton_Click"/>
         
-        
-        
+            <TextBlock x:Name="MovieTitle_TextBlock" Style="{StaticResource TitleTextBlockStyle}"/>
+
+        </StackPanel>
     </ScrollViewer>
 
 </Page>

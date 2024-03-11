@@ -27,5 +27,21 @@ namespace MovieManagement.Views
         {
             this.InitializeComponent();
         }
+
+        private void BackButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+        {
+            this.Frame.GoBack();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            if (e.Parameter != null)
+            {
+                string movieName = e.Parameter.ToString();
+                MovieTitle_TextBlock.Text = movieName;
+            }
+        }
     }
 }

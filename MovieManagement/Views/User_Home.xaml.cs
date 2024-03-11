@@ -13,7 +13,8 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
-
+using MovieManagement.Views;
+using System.Diagnostics;
 
 namespace MovieManagement.Views
 {
@@ -44,13 +45,28 @@ namespace MovieManagement.Views
 
             for (int i = 1; i < 10; i++)
             {
-                MovieCards.Add(new MovieCard(i.ToString(), "Movie 1", "ms-appx:///Assets/thumbnail-ngang.jpg"));
+                MovieCards.Add(new MovieCard(i.ToString(), $"Movie {i.ToString()}", "ms-appx:///Assets/thumbnail-ngang.jpg"));
             }
 
             Blockbuster_Slider.ItemsSource = MovieCards;
             Primetime_Slider.ItemsSource = MovieCards;
             Nighttime_Slider.ItemsSource = MovieCards;
             Standardtime_Slider.ItemsSource = MovieCards;
+        }
+
+        private void MovieCard_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var border = sender as Border;
+            var movie = border?.DataContext as MovieCard;
+
+            if (movie != null)
+            {
+                string movieInfo = $"Name: {movie.Name}";
+                Debug.WriteLine(movieInfo);
+            }
+
+            // Navigate to User_Movie page
+            this.Frame.Navigate(typeof(User_Movie), movie.Name);
         }
     }
 }
