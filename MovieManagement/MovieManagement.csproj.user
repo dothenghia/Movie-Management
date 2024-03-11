@@ -11,6 +11,9 @@
     <None Update="Package.appxmanifest">
       <SubType>Designer</SubType>
     </None>
+    <Page Update="Views\User_ExportTicket.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\Admin_Frame.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -21,7 +24,7 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\User_Movie.xaml">
-	<SubType>Designer</SubType>
+      <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Admin_FilmDirector.xaml">
       <SubType>Designer</SubType>

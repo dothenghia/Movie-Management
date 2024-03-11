@@ -64,7 +64,9 @@ namespace MovieManagement.Views
                         adminWindow.Activate();
                         currentWindow.Close();
                         break;
-
+                    case "ExportTicket_NavgationTag":
+                        MainContent.Navigate(typeof(Views.User_ExportTicket));
+                        break;
 
 
                     default:

@@ -25,6 +25,7 @@
     <None Remove="Views\Admin_Voucher.xaml" />
     <None Remove="Views\LoginDialog.xaml" />
     <None Remove="Views\SignupDialog.xaml" />
+    <None Remove="Views\User_ExportTicket.xaml" />
     <None Remove="Views\User_Frame.xaml" />
     <None Remove="Views\User_Home.xaml" />
     <None Remove="Views\User_Movie.xaml" />
@@ -75,6 +76,11 @@
     <Content Update="Assets\watch_illustration.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\User_ExportTicket.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\Admin_Frame.xaml">
