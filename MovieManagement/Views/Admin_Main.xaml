@@ -4,13 +4,103 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:MovieManagement.Views"
+    xmlns:local1="using:MovieManagement.ViewModels"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid Margin="20, 10">
-        <TextBlock Text="Admin Dashboard" Style="{StaticResource TitleTextBlockStyle}"/>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Margin="20, 10" Style="{StaticResource TitleTextBlockStyle}" Text="Admin Dashboard"/>
+        <Grid Grid.Row="1" x:Name="MainGrid" Margin="20, 0, 0, 0" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
 
+            <StackPanel Grid.Column="0" CornerRadius="16" Background="{ThemeResource SystemColorHighlightTextColor}"
+                VerticalAlignment="Center" Margin="20,0,20,0">
+                <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}" Text="Onsale Movie" Margin="20,10"/>
+                <TextBlock Style="{StaticResource TitleLargeTextBlockStyle}" Text="7,265" Margin="20,10" />
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" CornerRadius="16" Background="{ThemeResource AccentAcrylicBackgroundFillColorDefaultBrush}"
+                VerticalAlignment="Center" Margin="20,0,20,0">
+                <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}" Text="Onsale Showtime" Margin="20,10"/>
+                <TextBlock Style="{StaticResource TitleLargeTextBlockStyle}" Text="3,265" Margin="20,10" />
+            </StackPanel>
+        </Grid>
+        <TextBlock Grid.Row="2" Margin="20, 10" Style="{StaticResource SubtitleTextBlockStyle}" Text="Best Seller Movies"/>
+        <ListView Grid.Row="3" ItemsSource="{x:Bind myList}" Margin="20, 0">
+            <ListView.HeaderTemplate>
+                <DataTemplate>
+                    <Grid Padding="12" Background="{ThemeResource SystemColorHighlightTextColor}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Movie" Style="{ThemeResource BodyStrongTextBlockStyle}"/>
+                        <TextBlock Grid.Column="1" Text="Director" Style="{ThemeResource BodyStrongTextBlockStyle}"/>
+                        <TextBlock Grid.Column="2" Text="No. of tickets sold" Style="{ThemeResource BodyStrongTextBlockStyle}"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.HeaderTemplate>
+            <ListView.ItemTemplate>
+                <DataTemplate x:Name="TableDataTemplate" x:DataType="local:TopTen">
+                    <Grid Height="48" AutomationProperties.Name="{x:Bind Title}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Height="32" Width="64" VerticalAlignment="Center">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{x:Bind ImageLocation}"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <TextBlock Grid.Column="1" VerticalAlignment="Center" Style="{ThemeResource BaseTextBlockStyle}" Text="{x:Bind Title}" />
+                        <TextBlock Grid.Column="2" VerticalAlignment="Center" Style="{ThemeResource BaseTextBlockStyle}" Text="{x:Bind Title}" />
+                        <TextBlock Grid.Column="3" VerticalAlignment="Center" Text="{x:Bind TicketCount}"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
+
+
+    <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup>
+            <VisualState x:Name="NarrowView">
+                <VisualState.StateTriggers>
+                    <AdaptiveTrigger MinWindowWidth="0"/>
+                </VisualState.StateTriggers>
+                <VisualState.Setters>
+                    <Setter Target="MainGrid.ColumnDefinitions[0].Width" Value="*"/>
+                    <Setter Target="MainGrid.ColumnDefinitions[1].Width" Value="0"/>
+                    <Setter Target="SecondStackPanel.Visibility" Value="Collapsed"/>
+                </VisualState.Setters>
+            </VisualState>
+
+            <VisualState x:Name="WideView">
+                <VisualState.StateTriggers>
+                    <AdaptiveTrigger MinWindowWidth="720"/>
+                </VisualState.StateTriggers>
+                <VisualState.Setters>
+                    <Setter Target="MainGrid.ColumnDefinitions[0].Width" Value="1*"/>
+                    <Setter Target="MainGrid.ColumnDefinitions[1].Width" Value="1*"/>
+                    <Setter Target="SecondStackPanel.Visibility" Value="Visible"/>
+                </VisualState.Setters>
+            </VisualState>
+        </VisualStateGroup>
+    </VisualStateManager.VisualStateGroups>
+
+
 </Page>
