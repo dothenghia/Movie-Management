@@ -63,5 +63,10 @@ namespace MovieManagement.Views
             Flyout flyout = FlyoutBase.GetAttachedFlyout(sender as FrameworkElement) as Flyout;
             flyout.ShowAt(sender as FrameworkElement);
         }
+
+        private void MovieCard_PointerExited(object sender, PointerRoutedEventArgs e)
+        {
+            
+        }
     }
 }
