@@ -9,116 +9,257 @@
     mc:Ignorable="d"
     >
 
+    <!-- ==================== Define Page Resources ==================== -->
+    <Page.Resources>
+        <!-- Define Style for MovieSlider -->
+        <Style x:Key="MovieSlider_Style" TargetType="ScrollViewer">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="HorizontalScrollBarVisibility" Value="Visible"/>
+            <Setter Property="VerticalScrollBarVisibility" Value="Hidden"/>
+            <Setter Property="HorizontalScrollMode" Value="Enabled"/>
+            <Setter Property="VerticalScrollMode" Value="Disabled"/>
+            <Setter Property="IsVerticalScrollChainingEnabled" Value="True"/>
+            <Setter Property="ZoomMode" Value="Disabled"/>
+            <Setter Property="IsTabStop" Value="True"/>
+            <Setter Property="Margin" Value="32, 20, 32, 50"/>
+        </Style>
+
+        
+        <!-- Define Style for MovieTag -->
+        <Style x:Key="MovieTag_Style" TargetType="StackPanel">
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="Padding" Value="8, 4, 8, 4"/>
+            <Setter Property="BorderBrush" Value="{StaticResource ControlStrongStrokeColorDefault}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+        
+
+        <!-- Define Flyout for MovieCardHighlight -->
+        <Flyout x:Key="HighLightCard_Flyout">
+            <Flyout.FlyoutPresenterStyle>
+                <Style TargetType="FlyoutPresenter">
+                    <Setter Property="Padding" Value="0"/>
+                    <Setter Property="CornerRadius" Value="16"/>
+                </Style>
+            </Flyout.FlyoutPresenterStyle>
+
+            <!-- Flyout Content -->
+            <Grid Background="{StaticResource AcrylicBackgroundFillColorDefaultBrush}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Video Trailer -->
+                <MediaPlayerElement Grid.Row="0" Source="ms-appx:///Assets/trailer.mp4" AutoPlay="True" 
+                        Width="452" Stretch="Fill">
+                </MediaPlayerElement>
+
+                <Grid Grid.Row="1" Padding="12, 6, 12, 12">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0" Orientation="Vertical">
+                            <!-- Movie Name -->
+                            <TextBlock Text="Movie Title" TextWrapping="WrapWholeWords" FontSize="24" FontWeight="SemiBold"/>
+                            <!-- Movie Year -->
+                            <TextBlock Text="Year" FontSize="18"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1" Orientation="Vertical" Margin="0, 3, 0, 0">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Style="{StaticResource MovieTag_Style}">
+                                <!-- Movie Rating -->
+                                <TextBlock Text="8.2/10" FontSize="17"/>
+                                <FontIcon Glyph="&#xE735;" FontSize="16" Margin="5,0,0,0"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Style="{StaticResource MovieTag_Style}" 
+                                        Margin="0, 8, 0, 0" BorderBrush="Orange">
+                                <!-- Movie Age Certificate -->
+                                <TextBlock Text="C13" FontSize="17" Foreground="Orange"/>
+                                <FontIcon Glyph="&#xE77B;" FontSize="16" Margin="5,0,0,0" Foreground="Orange"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- Movie Description -->
+                    <TextBlock Grid.Row="1" Text="Câu chuyện về cuộc phiêu lưu của anh em Super Mario đến vương quốc Nấm" 
+                               TextWrapping="Wrap" Margin="0, 8, 0, 8" Width="428"/>
+
+                    <!-- Buttons -->
+                    <StackPanel Grid.Row="2" HorizontalAlignment="Right">
+                        <Button>
+                            <StackPanel Orientation="Horizontal">
+                                <FontIcon Glyph="&#xE946;" FontSize="18" Margin="0,0,6,0"/>
+                                <TextBlock Text="Information" FontSize="17"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Flyout>
+
+
+        <!-- Define DataTemplate for BLOCKBUSTER MovieCard -->
+        <DataTemplate x:Key="BlockbusterCard_DataTemplate">
+            <Canvas Width="560" Height="380">
+
+                <!-- ==================== Blockbuster Index ==================== -->
+                <TextBlock FontSize="260" FontFamily="Impact" Canvas.Top="40" Canvas.ZIndex="0" Text="2" />
+
+                <!-- ==================== Blockbuster Card ==================== -->
+                <Grid CornerRadius="16" Width="440" Height="320" Canvas.Left="110" Canvas.Top="0" Canvas.ZIndex="1"
+                      PointerEntered="MovieCard_PointerEntered"
+                      FlyoutBase.AttachedFlyout="{StaticResource HighLightCard_Flyout}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="240"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    
+                    <!-- Image Thumbnail -->
+                    <Image Grid.Row="0" Source="ms-appx:///Assets/thumbnail-ngang.jpg" Stretch="UniformToFill"/>
+                    
+                    <!-- General Information -->
+                    <Grid Grid.Row="1" Background="{StaticResource AcrylicBackgroundFillColorBaseBrush}" Padding="12, 4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <TextBlock Grid.Column="0" TextWrapping="WrapWholeWords" Text="Movie Title" 
+                                   FontSize="26" FontWeight="SemiBold"/>
+
+                        <StackPanel Grid.Column="1" Orientation="Vertical" Width="60" Padding="0, 2, 0, 0">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                <TextBlock Text="8.2" FontSize="19"/>
+                                <FontIcon Glyph="&#xE735;" FontSize="18" Margin="5,0,0,0"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0, 8, 0, 0">
+                                <TextBlock Text="C13" FontSize="19"/>
+                                <FontIcon Glyph="&#xE726;" FontSize="20" Margin="2,0,0,0"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Canvas>
+        </DataTemplate>
+
+
+        <!-- Define DataTemplate for NORMAL MovieCard -->
+        <DataTemplate x:Key="MovieCard_DataTemplate">
+            <Canvas Width="440" Height="380">
+                <!-- ==================== Movie Card ==================== -->
+                <Grid CornerRadius="16" Width="440" Height="320" Canvas.Left="0" Canvas.Top="0" Canvas.ZIndex="1"
+                      PointerEntered="MovieCard_PointerEntered"
+                      FlyoutBase.AttachedFlyout="{StaticResource HighLightCard_Flyout}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="240"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Image Thumbnail -->
+                    <Image Grid.Row="0" Source="ms-appx:///Assets/thumbnail-ngang.jpg" Stretch="UniformToFill"/>
+
+                    <!-- General Information -->
+                    <Grid Grid.Row="1" Background="{StaticResource AcrylicBackgroundFillColorBaseBrush}" Padding="12, 4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" TextWrapping="WrapWholeWords" Text="Movie Title" 
+                           FontSize="26" FontWeight="SemiBold"/>
+
+                        <StackPanel Grid.Column="1" Orientation="Vertical" Width="60" Padding="0, 2, 0, 0">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                <TextBlock Text="8.2" FontSize="19"/>
+                                <FontIcon Glyph="&#xE735;" FontSize="18" Margin="5,0,0,0"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0, 8, 0, 0">
+                                <TextBlock Text="C13" FontSize="19"/>
+                                <FontIcon Glyph="&#xE726;" FontSize="20" Margin="2,0,0,0"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Canvas>
+        </DataTemplate>
+
+
+        <!-- Define Layout for MovieCard -->
+        <StackLayout x:Name="HorizontalStack_Layout_1" Orientation="Horizontal" Spacing="12"/>
+        <StackLayout x:Name="HorizontalStack_Layout_2" Orientation="Horizontal" Spacing="24"/>
+
+    </Page.Resources>
+
+
+
+
+
+    <!-- ==================== PAGE CONTENT ==================== -->
     <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <StackPanel Margin="32, 0, 32, 60">
+        <StackPanel Margin="32, 20, 32, 60">
 
-            <!-- ==================== Blockbuster Movies ==================== -->
-            <TextBlock Margin="0, 20, 0, 0" Text="Blockbuster Movies" Style="{StaticResource TitleTextBlockStyle}"/>
+            <!-- ==================== Blockbuster Title ==================== -->
+            <TextBlock Text="Blockbuster Movies" Style="{StaticResource TitleTextBlockStyle}"/>
 
-            <!-- ==================== Movie Slider ==================== -->
-            <ScrollViewer HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Visible" 
-                          VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Hidden"
-                          IsVerticalScrollChainingEnabled="True" ZoomMode="Disabled" IsTabStop="True"
-                          Margin="32, 20, 32, 50" HorizontalAlignment="Center"
-                          >
-                <ItemsRepeater x:Name="Blockbuster_Slider">
-                    <ItemsRepeater.Layout>
-                        <StackLayout Orientation="Horizontal" Spacing="20"/>
-                    </ItemsRepeater.Layout>
-                    <ItemsRepeater.ItemTemplate>
-                        <DataTemplate>
-                            <Canvas Width="480" Height="240">
-                                <TextBlock FontSize="220" FontFamily="Impact" Canvas.Top="10" Canvas.ZIndex="0" Text="{Binding Index}" />
-                                <Border CornerRadius="16" Width="400" Height="240" Tapped="MovieCard_Tapped"
-                                        Canvas.Left="80" Canvas.Top="0" Canvas.ZIndex="1">
-                                    <StackPanel>
-                                        <Image Source="{Binding Image}" Stretch="UniformToFill" Width="400" Height="240"/>
-                                    </StackPanel>
-                                </Border>
-                            </Canvas>
-                        </DataTemplate>
-                    </ItemsRepeater.ItemTemplate>
+            <!-- ==================== Blockbuster Movie Slider ==================== -->
+            <ScrollViewer Style="{StaticResource MovieSlider_Style}" Height="380">
+                <ItemsRepeater x:Name="Blockbuster_Slider"
+                               ItemTemplate="{StaticResource BlockbusterCard_DataTemplate}"
+                               Layout="{StaticResource HorizontalStack_Layout_1}"
+                               VerticalAlignment="Top">
                 </ItemsRepeater>
             </ScrollViewer>
-
+            
 
 
             <!-- ==================== Prime Time Movies ==================== -->
-            <TextBlock Text="Prime Time Movies" Style="{StaticResource TitleTextBlockStyle}"/>
+            <TextBlock Text="Prime Time Movies" Style="{StaticResource TitleTextBlockStyle}" Margin="0, -50, 0, 0"/>
 
             <!-- ==================== Movie Slider ==================== -->
-            <ScrollViewer HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Visible" 
-                          VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Hidden"
-                          IsVerticalScrollChainingEnabled="True" ZoomMode="Disabled" IsTabStop="True"
-                          Margin="32, 20, 32, 50" HorizontalAlignment="Center"
-                          >
-                <ItemsRepeater x:Name="Primetime_Slider">
-                    <ItemsRepeater.Layout>
-                        <StackLayout Orientation="Horizontal" Spacing="20"/>
-                    </ItemsRepeater.Layout>
-                    <ItemsRepeater.ItemTemplate>
-                        <DataTemplate>
-                            <Border CornerRadius="16" Width="400" Height="240" Tapped="MovieCard_Tapped">
-                                <StackPanel>
-                                    <Image Source="{Binding Image}" Stretch="UniformToFill" Width="400" Height="240"/>
-                                </StackPanel>
-                            </Border>
-                        </DataTemplate>
-                    </ItemsRepeater.ItemTemplate>
+            <ScrollViewer Style="{StaticResource MovieSlider_Style}" Height="380">
+                <ItemsRepeater x:Name="Primetime_Slider"
+                               ItemTemplate="{StaticResource MovieCard_DataTemplate}"
+                               Layout="{StaticResource HorizontalStack_Layout_2}"
+                               VerticalAlignment="Top">
                 </ItemsRepeater>
             </ScrollViewer>
 
 
 
             <!-- ==================== Night Time Movies ==================== -->
-            <TextBlock Text="Night Time Movies" Style="{StaticResource TitleTextBlockStyle}"/>
+            <TextBlock Text="Night Time Movies" Style="{StaticResource TitleTextBlockStyle}" Margin="0, -50, 0, 0"/>
 
             <!-- ==================== Movie Slider ==================== -->
-            <ScrollViewer HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Visible" 
-                          VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Hidden"
-                          IsVerticalScrollChainingEnabled="True" ZoomMode="Disabled" IsTabStop="True"
-                          Margin="32, 20, 32, 50" HorizontalAlignment="Center"
-                          >
-                <ItemsRepeater x:Name="Nighttime_Slider">
-                    <ItemsRepeater.Layout>
-                        <StackLayout Orientation="Horizontal" Spacing="20"/>
-                    </ItemsRepeater.Layout>
-                    <ItemsRepeater.ItemTemplate>
-                        <DataTemplate>
-                            <Border CornerRadius="16" Width="400" Height="240" Tapped="MovieCard_Tapped">
-                                <StackPanel>
-                                    <Image Source="{Binding Image}" Stretch="UniformToFill" Width="400" Height="240"/>
-                                </StackPanel>
-                            </Border>
-                        </DataTemplate>
-                    </ItemsRepeater.ItemTemplate>
+            <ScrollViewer Style="{StaticResource MovieSlider_Style}" Height="380">
+                <ItemsRepeater x:Name="Nighttime_Slider"
+                               ItemTemplate="{StaticResource MovieCard_DataTemplate}"
+                               Layout="{StaticResource HorizontalStack_Layout_2}"
+                               VerticalAlignment="Top">
                 </ItemsRepeater>
             </ScrollViewer>
 
 
 
             <!-- ==================== Standard Time Movies ==================== -->
-            <TextBlock Text="Standard Time Movies" Style="{StaticResource TitleTextBlockStyle}"/>
+            <TextBlock Text="Standard Time Movies" Style="{StaticResource TitleTextBlockStyle}" Margin="0, -50, 0, 0"/>
 
             <!-- ==================== Movie Slider ==================== -->
-            <ScrollViewer HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Visible" 
-                          VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Hidden"
-                          IsVerticalScrollChainingEnabled="True" ZoomMode="Disabled" IsTabStop="True"
-                          Margin="32, 20, 32, 50" HorizontalAlignment="Center"
-                          >
-                <ItemsRepeater x:Name="Standardtime_Slider">
-                    <ItemsRepeater.Layout>
-                        <StackLayout Orientation="Horizontal" Spacing="20"/>
-                    </ItemsRepeater.Layout>
-                    <ItemsRepeater.ItemTemplate>
-                        <DataTemplate>
-                            <Border CornerRadius="16" Width="400" Height="240" Tapped="MovieCard_Tapped">
-                                <StackPanel>
-                                    <Image Source="{Binding Image}" Stretch="UniformToFill" Width="400" Height="240"/>
-                                </StackPanel>
-                            </Border>
-                        </DataTemplate>
-                    </ItemsRepeater.ItemTemplate>
+            <ScrollViewer Style="{StaticResource MovieSlider_Style}" Height="380">
+                <ItemsRepeater x:Name="Standardtime_Slider"
+                               ItemTemplate="{StaticResource MovieCard_DataTemplate}"
+                               Layout="{StaticResource HorizontalStack_Layout_2}"
+                               VerticalAlignment="Top">
                 </ItemsRepeater>
             </ScrollViewer>
 

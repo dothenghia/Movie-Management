@@ -38,6 +38,7 @@ namespace MovieManagement.Views
     {
 
         public ObservableCollection<MovieCard> MovieCards { get; } = new ObservableCollection<MovieCard>();
+        private DispatcherTimer holdTimer;
 
         public User_Home()
         {
@@ -52,21 +53,15 @@ namespace MovieManagement.Views
             Primetime_Slider.ItemsSource = MovieCards;
             Nighttime_Slider.ItemsSource = MovieCards;
             Standardtime_Slider.ItemsSource = MovieCards;
+            holdTimer = new DispatcherTimer();
+            holdTimer.Interval = TimeSpan.FromSeconds(3);
         }
 
-        private void MovieCard_Tapped(object sender, TappedRoutedEventArgs e)
+        private void MovieCard_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
-            var border = sender as Border;
-            var movie = border?.DataContext as MovieCard;
-
-            if (movie != null)
-            {
-                string movieInfo = $"Name: {movie.Name}";
-                Debug.WriteLine(movieInfo);
-            }
-
-            // Navigate to User_Movie page
-            this.Frame.Navigate(typeof(User_Movie), movie.Name);
+            // Get postion of sender element relative to the window
+            Flyout flyout = FlyoutBase.GetAttachedFlyout(sender as FrameworkElement) as Flyout;
+            flyout.ShowAt(sender as FrameworkElement);
         }
     }
 }
