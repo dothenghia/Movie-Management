@@ -97,7 +97,7 @@
 
                     <!-- Buttons -->
                     <StackPanel Grid.Row="2" HorizontalAlignment="Right">
-                        <Button>
+                        <Button Click="DetailMovie_Click">
                             <StackPanel Orientation="Horizontal">
                                 <FontIcon Glyph="&#xE946;" FontSize="18" Margin="0,0,6,0"/>
                                 <TextBlock Text="Information" FontSize="17"/>
@@ -267,7 +267,7 @@
 
 
             <!-- ==================== Footer ==================== -->
-            <Grid Margin="-32, 0, -32, 0" Padding="68, 38, 68, 40" Background="{StaticResource AcrylicBackgroundFillColorBaseBrush}">
+            <Grid Margin="-32, 0, -32, 0" Padding="68, 20, 68, 20" Background="{StaticResource AcrylicBackgroundFillColorBaseBrush}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>

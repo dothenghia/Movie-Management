@@ -57,6 +57,12 @@ namespace MovieManagement.Views
             holdTimer.Interval = TimeSpan.FromSeconds(3);
         }
 
+
+        private void DetailMovie_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(User_Movie));
+        }
+
         private void MovieCard_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
             // Get postion of sender element relative to the window

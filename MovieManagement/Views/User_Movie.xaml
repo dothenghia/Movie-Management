@@ -8,74 +8,323 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     >
+    <!-- ==================== Define Page Resources ==================== -->
+    <Page.Resources>
+        <!-- Define Style for IMDbTag -->
+        <Style x:Key="IMDbTag_Style" TargetType="StackPanel">
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="Padding" Value="8, 4, 8, 4"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="0, 0, 6, 0"/>
+        </Style>
 
+        <!-- Define Style for AgeTag -->
+        <Style x:Key="AgeTag_Style" TargetType="StackPanel">
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="Padding" Value="8, 4, 8, 4"/>
+            <Setter Property="BorderBrush" Value="{StaticResource ControlStrongStrokeColorDefault}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+
+        <!-- Define Style for GenreTag -->
+        <Style x:Key="GenreTag_Style" TargetType="StackPanel">
+            <Setter Property="CornerRadius" Value="14"/>
+            <Setter Property="Padding" Value="8, 4, 8, 4"/>
+            <Setter Property="BorderBrush" Value="{StaticResource ControlStrongStrokeColorDefault}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+
+        <!-- Define Style for AvatarImage -->
+        <Style x:Key="AvatarImage_Style" TargetType="Border">
+            <Setter Property="CornerRadius" Value="100"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Height" Value="100"/>
+        </Style>
+        
+    </Page.Resources>
+    
+    
+    
+    
+    <!-- ==================== PAGE CONTENT ==================== -->
     <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <StackPanel Margin="32, 20, 32, 0">
 
-        <StackPanel>
+            <!-- Back Button -->
+            <Button Click="BackButton_Click">
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon Glyph="&#xE72B;" FontSize="15" Margin="0,0,6,0"/>
+                    <TextBlock Text="Back" FontSize="15"/>
+                </StackPanel>
+            </Button>
 
-            <Button Content="Back" Click="BackButton_Click"/>
+            <Pivot Margin="0, 12, 0, 0">
+                <!-- ==================== DETAIL MOVIE TAB ==================== -->
+                <PivotItem Header="Information" HorizontalAlignment="Stretch">
+                    <StackPanel Spacing="20">
+                        <Grid ColumnSpacing="20" Margin="0, 20, 0, 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.65*"/>
+                                <ColumnDefinition Width="0.35*"/>
+                            </Grid.ColumnDefinitions>
 
-            <TextBlock x:Name="MovieTitle_TextBlock" Style="{StaticResource TitleTextBlockStyle}"/>
-            <Pivot>
-                <PivotItem Header="Film details" HorizontalAlignment="Center">
-                    <TextBlock Text="Film details here." />
+                            <StackPanel Grid.Column="0" Orientation="Vertical">
+                                <!-- Movie Thumbnail -->
+                                <Border CornerRadius="20">
+                                    <Image Source="ms-appx:///Assets/thumbnail-ngang.jpg" Stretch="UniformToFill" />
+                                </Border>
+                            </StackPanel>
+
+
+                            <Grid Grid.Column="1" CornerRadius="20" Padding="20, 12, 20, 16"
+                                        Background="{StaticResource AcrylicBackgroundFillColorDefaultBrush}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <StackPanel Grid.Row="0">
+                                    <!-- Movie Name -->
+                                    <TextBlock Text="Movie Name" Style="{StaticResource TitleTextBlockStyle}"/>
+
+                            
+                                    <!-- Movie Published Year -->
+                                    <StackPanel Orientation="Horizontal" Margin="0, 16, 0, 0">
+                                        <FontIcon Glyph="&#xE787;" FontSize="20" Margin="0,0,6,0"/>
+                                        <TextBlock Text="Published Year" FontSize="18"/>
+                                    </StackPanel>
+                                    <TextBlock Text="2024" Margin="0, 4, 0, 0" FontSize="16" FontWeight="Medium"/>
+
+                            
+                                    <!-- Movie Rating Score IMDb -->
+                                    <StackPanel Orientation="Horizontal" Margin="0, 18, 0, 0">
+                                        <FontIcon Glyph="&#xE735;" FontSize="20" Margin="0,0,6,0"/>
+                                        <TextBlock Text="Rating Score" FontSize="18"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0, 6, 0, 0">
+                                        <StackPanel Style="{StaticResource IMDbTag_Style}">
+                                            <TextBlock Text="IMDb" FontSize="16" FontWeight="SemiBold" Foreground="{StaticResource AcrylicBackgroundFillColorDefaultBrush}"/>
+                                        </StackPanel>
+                                        <TextBlock Text="8.2/10" FontSize="16" FontWeight="Medium" VerticalAlignment="Center"/>
+                                    </StackPanel>
+
+                            
+                                    <!-- Movie Age Certificate -->
+                                    <StackPanel Orientation="Horizontal" Margin="0, 18, 0, 0">
+                                        <FontIcon Glyph="&#xE77B;" FontSize="20" Margin="0,0,6,0"/>
+                                        <TextBlock Text="Age Certificate" FontSize="18"/>
+                                    </StackPanel>
+                                    <StackPanel Style="{StaticResource AgeTag_Style}" BorderBrush="Orange" Margin="0, 6, 0, 0">
+                                        <TextBlock Text="C13" FontSize="16" FontWeight="Medium" Foreground="Orange"/>
+                                    </StackPanel>
+
+                            
+                                    <!-- Movie Genre -->
+                                    <StackPanel Orientation="Horizontal" Margin="0, 18, 0, 0">
+                                        <FontIcon Glyph="&#xE8FD;" FontSize="20" Margin="0,0,6,0"/>
+                                        <TextBlock Text="Genre" FontSize="18"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0, 8, 0, 0" Spacing="8">
+                                        <StackPanel Style="{StaticResource GenreTag_Style}">
+                                            <TextBlock Text="Action" FontSize="16"/>
+                                        </StackPanel>
+                                        <StackPanel Style="{StaticResource GenreTag_Style}">
+                                            <TextBlock Text="Cartoon" FontSize="16"/>
+                                        </StackPanel>
+                                        <StackPanel Style="{StaticResource GenreTag_Style}">
+                                            <TextBlock Text="Adventure" FontSize="16"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <!-- Booking Button -->
+                                <Button Grid.Row="1" HorizontalAlignment="Stretch" 
+                                        Margin="0, 18, 0, 0" Padding="20, 30" CornerRadius="12">
+                                    <StackPanel Orientation="Horizontal">
+                                        <FontIcon Glyph="&#xE8B2;" FontSize="36" Margin="0,0,8,0"/>
+                                        <TextBlock Text="Show Time" Style="{StaticResource TitleTextBlockStyle}"/>
+                                    </StackPanel>
+                                </Button>
+
+                            </Grid>
+
+                        </Grid>
+
+                        <StackPanel CornerRadius="20" Padding="20, 12, 20, 40"
+                                    Background="{StaticResource AcrylicBackgroundFillColorDefaultBrush}">
+
+                            <!-- Movie Description -->
+                            <TextBlock Text="Description" Style="{StaticResource SubtitleTextBlockStyle}"/>
+                            <TextBlock Text="Câu chuyện về cuộc phiêu lưu của anh em Super Mario đến vương quốc Nấm, và đó chính là Câu chuyện về cuộc phiêu lưu của anh em Super Mario đến vương quốc Nấm khi họ kể về Câu chuyện về cuộc phiêu lưu của anh em Super Mario đến vương quốc Nấm."
+                                       TextWrapping="Wrap" FontSize="16" Margin="0, 8, 0, 0"/>
+
+
+                            <!-- Movie Director & Actors -->
+                            <TextBlock Text="Director &amp; Actors" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0, 18, 0, 0"/>
+                            <Grid Margin="0, 8, 0, 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" Orientation="Horizontal" BorderBrush="Gray" BorderThickness="0, 0, 1, 0" Margin="0, 0, 12, 0" Padding="0, 0, 12, 0">
+                                    <!-- Director -->
+                                    <StackPanel>
+                                        <Border Style="{StaticResource AvatarImage_Style}">
+                                            <Image Source="ms-appx:///Assets/avatar.jpg" Stretch="UniformToFill"/>
+                                        </Border>
+                                        <TextBlock Text="Name" HorizontalAlignment="Center" Style="{StaticResource BodyStrongTextBlockStyle}"/>
+                                        <TextBlock Text="Director" HorizontalAlignment="Center" Style="{StaticResource CaptionTextBlockStyle}"/>
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="12">
+                                    <!-- Actors -->
+                                    <StackPanel>
+                                        <Border Style="{StaticResource AvatarImage_Style}">
+                                            <Image Source="ms-appx:///Assets/avatar.jpg" Stretch="UniformToFill"/>
+                                        </Border>
+                                        <TextBlock Text="Name" HorizontalAlignment="Center" Style="{StaticResource BodyStrongTextBlockStyle}"/>
+                                        <TextBlock Text="Actor" HorizontalAlignment="Center" Style="{StaticResource CaptionTextBlockStyle}"/>
+                                    </StackPanel>
+                                    <StackPanel>
+                                        <Border Style="{StaticResource AvatarImage_Style}">
+                                            <Image Source="ms-appx:///Assets/avatar.jpg" Stretch="UniformToFill"/>
+                                        </Border>
+                                        <TextBlock Text="Name" HorizontalAlignment="Center" Style="{StaticResource BodyStrongTextBlockStyle}"/>
+                                        <TextBlock Text="Actor" HorizontalAlignment="Center" Style="{StaticResource CaptionTextBlockStyle}"/>
+                                    </StackPanel>
+                                    <StackPanel>
+                                        <Border Style="{StaticResource AvatarImage_Style}">
+                                            <Image Source="ms-appx:///Assets/avatar.jpg" Stretch="UniformToFill"/>
+                                        </Border>
+                                        <TextBlock Text="Name" HorizontalAlignment="Center" Style="{StaticResource BodyStrongTextBlockStyle}"/>
+                                        <TextBlock Text="Actor" HorizontalAlignment="Center" Style="{StaticResource CaptionTextBlockStyle}"/>
+                                    </StackPanel>
+                                </StackPanel>
+
+                            </Grid>
+                            
+                            
+                            <!-- Movie Trailer -->
+                            <TextBlock Text="Trailer" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0, 18, 0, 0"/>
+                            <MediaPlayerElement Margin="80, 10, 80, 0" Source="ms-appx:///Assets/trailer.mp4"
+                                                AutoPlay="False" AreTransportControlsEnabled="True" Stretch="Fill">
+                            </MediaPlayerElement>
+
+                        </StackPanel>
+                    </StackPanel>
                 </PivotItem>
-                <PivotItem Header="Showtimes" HorizontalAlignment="Center">
+
+
+
+
+                <!-- ==================== SHOWTIME TAB ==================== -->
+                <PivotItem Header="Show Time" HorizontalAlignment="Center">
                     <StackPanel>
-                            <GridView
+                        <GridView
                             x:Name="DateGridView"
                             IsItemClickEnabled="True"
                             SelectionMode="Single">
-                                <GridView.ItemTemplate>
-                                    <DataTemplate x:Name="DateShowtimes" x:DataType="local:Showtime" >
-                                        <Canvas Width="100" Height="20" Background="AntiqueWhite" Margin="10">
-                                            <TextBlock Text="{x:Bind Date}" Canvas.ZIndex="0"/>
-                                            <!--<Border CornerRadius="16" Width="400" Height="240" 
-                                                    Canvas.Left="80" Canvas.Top="0" Canvas.ZIndex="1">
-                                                <StackPanel>
-                                                    <Image Source="{Binding Image}" Stretch="UniformToFill" Width="400" Height="240"/>
-                                                </StackPanel>
-                                            </Border>-->
-                                        </Canvas>
-                                    </DataTemplate>
-                                </GridView.ItemTemplate>
-                            </GridView>
+                            <GridView.ItemTemplate>
+                                <DataTemplate x:Name="DateShowtimes" x:DataType="local:Showtime" >
+                                    <Canvas Width="100" Height="20" Background="AntiqueWhite" Margin="10">
+                                        <TextBlock Text="{x:Bind Date}" Canvas.ZIndex="0"/>
+                                        <!--<Border CornerRadius="16" Width="400" Height="240" 
+                                                Canvas.Left="80" Canvas.Top="0" Canvas.ZIndex="1">
+                                            <StackPanel>
+                                                <Image Source="{Binding Image}" Stretch="UniformToFill" Width="400" Height="240"/>
+                                            </StackPanel>
+                                        </Border>-->
+                                    </Canvas>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                        </GridView>
 
-                            <GridView
-                                x:Name="TimeGridView"
-                                IsItemClickEnabled="True"
-                                SelectionMode="Single">
-                                <GridView.ItemTemplate>
-                                    <DataTemplate x:Name="TimeShowtimes" x:DataType="local:Showtime" >
-                                        <Canvas Width="100" Height="20" Background="AliceBlue" Margin="10">
-                                            <TextBlock Text="{x:Bind Time}" Canvas.ZIndex="0" Foreground="Brown" />
-                                        </Canvas>
-                                    </DataTemplate>
-                                </GridView.ItemTemplate>
-                            </GridView>
-                            <TextBlock Text="Screen" FontSize="20" HorizontalAlignment="Center" Foreground="Red"/>
-                        
-                            <TextBlock Text="___________________________________________" FontSize="20" HorizontalAlignment="Center" Foreground="Red"/>
-                            <GridView
-                                x:Name="SeatGridView"
-                                IsItemClickEnabled="True"
-                                SelectionMode="Multiple"
-                                Margin="50">
-                                <GridView.ItemTemplate>
-                                    <DataTemplate x:Name="Seats" x:DataType="local:Ticket" >
-                                        <Canvas Width="100" Height="20" Background="AliceBlue" Margin="10">
-                                            <TextBlock Text="{x:Bind position}" Canvas.ZIndex="0" Foreground="Brown" />
-                                        </Canvas>
-                                    </DataTemplate>
-                                </GridView.ItemTemplate>
-                            </GridView>
+                        <GridView
+                            x:Name="TimeGridView"
+                            IsItemClickEnabled="True"
+                            SelectionMode="Single">
+                            <GridView.ItemTemplate>
+                                <DataTemplate x:Name="TimeShowtimes" x:DataType="local:Showtime" >
+                                    <Canvas Width="100" Height="20" Background="AliceBlue" Margin="10">
+                                        <TextBlock Text="{x:Bind Time}" Canvas.ZIndex="0" Foreground="Brown" />
+                                    </Canvas>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                        </GridView>
+                        <TextBlock Text="Screen" FontSize="20" HorizontalAlignment="Center" Foreground="Red"/>
+
+                        <TextBlock Text="_________________________________________" FontSize="20" HorizontalAlignment="Center" Foreground="Red"/>
+                        <GridView x:Name="SeatGridView" IsItemClickEnabled="True" SelectionMode="Multiple" Margin="50" HorizontalAlignment="Center">
+                            <GridView.ItemTemplate>
+                                <DataTemplate x:Name="Seats" x:DataType="local:Ticket">
+                                    <TextBlock Text="{x:Bind position}" VerticalAlignment="Center" Canvas.ZIndex="1" Style="{ThemeResource BodyStrongTextBlockStyle}"/>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                            <GridView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <ItemsWrapGrid x:Name="MaxSeatsWrapGrid"
+                                                   MaximumRowsOrColumns="10"
+                                                   Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+
+                            </GridView.ItemsPanel>
+                            <GridView.ItemContainerStyle>
+                                <Style TargetType="GridViewItem">
+                                    <Setter Property="Background" Value="AliceBlue" />
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    <Setter Property="VerticalContentAlignment" Value="Center" />
+                                    <Setter Property="Margin" Value="30, 5, 5, 5"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="GridViewItem">
+                                                <GridViewItemPresenter
+                                                    SelectedBackground="LightSeaGreen"
+                                                    SelectedPointerOverBackground="LightGoldenrodYellow" 
+                                                    CornerRadius="10" Width="70"/>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+
+                            </GridView.ItemContainerStyle>
+                        </GridView>
+
 
                         <Button Content="Booking" HorizontalAlignment="Right" VerticalAlignment="Bottom" />
                     </StackPanel>
-                        
+
                 </PivotItem>
 
             </Pivot>
+
+
+            <!-- ==================== Footer ==================== -->
+            <Grid Margin="-32, 40, -32, 0" Padding="68, 20, 68, 20" Background="{StaticResource AcrylicBackgroundFillColorBaseBrush}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                    <Image Source="ms-appx:///Assets/logo.png"/>
+                    <TextBlock Text="Heart Steel Movie" Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Center" Margin="20, 0, 0, 0"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Orientation="Vertical" Spacing="8">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <FontIcon Glyph="&#xE899;" FontSize="18"/>
+                        <TextBlock Text="Team Members" FontSize="18" Margin="8, 0, 0, 0"/>
+                    </StackPanel>
+                    <TextBlock Text="21127367 - Đỗ Thế Nghĩa" FontSize="17" HorizontalAlignment="Right"/>
+                    <TextBlock Text="21127384 - Dương Hạnh Nhi" FontSize="17" HorizontalAlignment="Right"/>
+                    <TextBlock Text="21127461 - Lê Thành Trung" FontSize="17" HorizontalAlignment="Right"/>
+
+                </StackPanel>
+            </Grid>
         </StackPanel>
     </ScrollViewer>
 </Page>

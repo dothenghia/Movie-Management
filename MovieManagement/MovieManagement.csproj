@@ -64,6 +64,9 @@
     <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Update="Assets\avatar.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Update="Assets\Logo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

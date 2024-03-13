@@ -42,6 +42,8 @@ namespace MovieManagement
         public App()
         {
             this.InitializeComponent();
+            App.Current.RequestedTheme = (ApplicationTheme)(int)1;
+
         }
 
         /// <summary>
