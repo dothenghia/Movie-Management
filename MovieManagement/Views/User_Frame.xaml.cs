@@ -28,9 +28,6 @@ namespace MovieManagement.Views
         public User_Frame()
         {
             this.InitializeComponent();
-
-            // Default page is User_Home
-            //MainContent.Navigate(typeof(Views.User_Home));
         }
 
 
@@ -52,6 +49,8 @@ namespace MovieManagement.Views
                         MainContent.Navigate(typeof(Views.User_Profile));
                         break;
 
+
+                    // Temp Navigation for Test UI
                     case "Movie_NavgationTag":
                         MainContent.Navigate(typeof(Views.User_Movie));
                         break;
@@ -70,6 +69,7 @@ namespace MovieManagement.Views
 
 
                     default:
+                        MainContent.Navigate(typeof(Views.User_Home));
                         break;
                 }
             }

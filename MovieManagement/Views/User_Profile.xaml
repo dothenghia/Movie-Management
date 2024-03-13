@@ -9,6 +9,7 @@
     mc:Ignorable="d"
     >
 
+    <!-- ==================== PAGE CONTENT ==================== -->
     <Grid Margin="20, 10">
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>

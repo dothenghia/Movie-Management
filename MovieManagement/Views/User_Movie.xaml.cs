@@ -16,14 +16,10 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace MovieManagement.Views
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
+    // Temp Class Data
     public class Showtime
     {
         public string Index { get; set; }
@@ -38,6 +34,7 @@ namespace MovieManagement.Views
         }
     }
     
+    // Temp Class Data
     public class Ticket
     {
         public int id {  get; set; }
@@ -71,11 +68,13 @@ namespace MovieManagement.Views
             SeatGridView.ItemsSource = Tickets;
         }
 
+        // Event Click for Back Button
         private void BackButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
         {
             this.Frame.GoBack();
         }
 
+        // Get AttachData when Navigate from User_Home.xaml
         //protected override void OnNavigatedTo(NavigationEventArgs e)
         //{
         //    base.OnNavigatedTo(e);

@@ -46,8 +46,10 @@ namespace MovieManagement.Views
 
             if (result == ContentDialogResult.Primary)
             {
+                var currentWindow = (Application.Current as App)?.m_window as MainWindow;
                 var adminWindow = new MainWindow(1);
                 adminWindow.Activate();
+                currentWindow.Close();
             }
         }
 
@@ -68,7 +70,10 @@ namespace MovieManagement.Views
 
             if (result == ContentDialogResult.Primary)
             {
-                
+                var currentWindow = (Application.Current as App)?.m_window as MainWindow;
+                var adminWindow = new MainWindow(1);
+                adminWindow.Activate();
+                currentWindow.Close();
             }
         }
     }

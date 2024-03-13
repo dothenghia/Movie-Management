@@ -19,7 +19,7 @@ using System.Diagnostics;
 namespace MovieManagement.Views
 {
 
-    // Fake Movie Class
+    // Temp Movie Class
     public class MovieCard
     {
         public string Index { get; set; }
