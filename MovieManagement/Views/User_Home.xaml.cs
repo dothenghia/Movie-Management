@@ -36,9 +36,14 @@ namespace MovieManagement.Views
 
     public sealed partial class User_Home : Page
     {
-
+        // Movie Card Collection
         public ObservableCollection<MovieCard> MovieCards { get; } = new ObservableCollection<MovieCard>();
-        private DispatcherTimer holdTimer;
+
+        // Setting for Highlight Trailer
+        private DispatcherTimer hoverTimer;
+        private Flyout highLightCard;
+        private FrameworkElement parentFrame;
+        private MediaPlayerElement trailerMediaPlayer;
 
         public User_Home()
         {
@@ -48,31 +53,75 @@ namespace MovieManagement.Views
             {
                 MovieCards.Add(new MovieCard(i.ToString(), $"Movie {i.ToString()}", "ms-appx:///Assets/thumbnail-ngang.jpg"));
             }
-
             Blockbuster_Slider.ItemsSource = MovieCards;
             Primetime_Slider.ItemsSource = MovieCards;
             Nighttime_Slider.ItemsSource = MovieCards;
             Standardtime_Slider.ItemsSource = MovieCards;
-            holdTimer = new DispatcherTimer();
-            holdTimer.Interval = TimeSpan.FromSeconds(3);
+
+
+            // Set Hold timer for Movie Card
+            hoverTimer = new DispatcherTimer();
+            hoverTimer.Interval = TimeSpan.FromSeconds(1); // Wait 1 second before showing the highlight card
+            hoverTimer.Tick += HoverTimerConfig;
         }
 
-
+        // Navigate to Movie Detail Page
         private void DetailMovie_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(User_Movie));
         }
 
-        private void MovieCard_PointerEntered(object sender, PointerRoutedEventArgs e)
+        // Config Highlight Card Position
+        private void HoverTimerConfig(object sender, object e)
         {
-            // Get postion of sender element relative to the window
-            Flyout flyout = FlyoutBase.GetAttachedFlyout(sender as FrameworkElement) as Flyout;
-            flyout.ShowAt(sender as FrameworkElement);
+            hoverTimer.Stop();
+            FlyoutShowOptions coordinates = new FlyoutShowOptions();
+            double parentHeight = parentFrame.ActualHeight;
+            coordinates.Position = new Point(220, parentHeight + 60); // Center -> (GridCard / 2 , GridCard + 60)
+            coordinates.ShowMode = FlyoutShowMode.Transient;
+            highLightCard.ShowAt(parentFrame, coordinates);
         }
 
+        // Event PointerEntered for Movie Card
+        private void MovieCard_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            hoverTimer.Start();
+            this.highLightCard = FlyoutBase.GetAttachedFlyout(sender as FrameworkElement) as Flyout;
+            this.parentFrame = sender as FrameworkElement;
+            (parentFrame as Grid).Opacity = 0.7;
+        }
+
+        // Event PointerExited for Movie Card
         private void MovieCard_PointerExited(object sender, PointerRoutedEventArgs e)
         {
-            
+            hoverTimer.Stop();
+            (parentFrame as Grid).Opacity = 1;
+        }
+
+        // Event Closing for Highlight Card
+        private void HighLightCard_Closing(object sender, object e)
+        {
+            Grid content = (sender as Flyout).Content as Grid;
+            trailerMediaPlayer = content.FindName("Trailer_MediaPlayerElement") as MediaPlayerElement;
+            if (trailerMediaPlayer != null)
+            {
+                trailerMediaPlayer.MediaPlayer.Pause();
+            }
+            (parentFrame as Grid).Opacity = 1;
+        }
+
+        // Event Opened for Highlight Card
+        private void HighLightCard_Opened(object sender, object e)
+        {
+            Grid highlightContent = highLightCard.Content as Grid;
+
+            trailerMediaPlayer = highlightContent.FindName("Trailer_MediaPlayerElement") as MediaPlayerElement;
+            if (trailerMediaPlayer != null)
+            {
+                trailerMediaPlayer.MediaPlayer.Play();
+                trailerMediaPlayer.MediaPlayer.Position = TimeSpan.FromSeconds(0);
+                trailerMediaPlayer.MediaPlayer.IsLoopingEnabled = true;
+            }
         }
     }
 }

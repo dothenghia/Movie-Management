@@ -35,7 +35,9 @@
         
 
         <!-- Define Flyout for MovieCardHighlight -->
-        <Flyout x:Key="HighLightCard_Flyout">
+        <Flyout x:Key="HighLightCard_Flyout"
+                Closing="HighLightCard_Closing"
+                Opened="HighLightCard_Opened">
             <Flyout.FlyoutPresenterStyle>
                 <Style TargetType="FlyoutPresenter">
                     <Setter Property="Padding" Value="0"/>
@@ -51,8 +53,9 @@
                 </Grid.RowDefinitions>
 
                 <!-- Video Trailer -->
-                <MediaPlayerElement Grid.Row="0" Source="ms-appx:///Assets/trailer.mp4" AutoPlay="True" 
-                        Width="452" Stretch="Fill">
+                <MediaPlayerElement Grid.Row="0" x:Name="Trailer_MediaPlayerElement" 
+                                    Source="ms-appx:///Assets/trailer.mp4" AutoPlay="True" 
+                                    Width="452" Stretch="Fill" AreTransportControlsEnabled="False" IsFullWindow="True">
                 </MediaPlayerElement>
 
                 <Grid Grid.Row="1" Padding="12, 6, 12, 12">
