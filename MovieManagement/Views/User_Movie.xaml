@@ -228,41 +228,73 @@
                         <GridView
                             x:Name="DateGridView"
                             IsItemClickEnabled="True"
-                            SelectionMode="Single">
+                            SelectionMode="Single"
+                            Margin="30"
+                            HorizontalAlignment="Center">
                             <GridView.ItemTemplate>
                                 <DataTemplate x:Name="DateShowtimes" x:DataType="local:Showtime" >
-                                    <Canvas Width="100" Height="20" Background="AntiqueWhite" Margin="10">
-                                        <TextBlock Text="{x:Bind Date}" Canvas.ZIndex="0"/>
-                                        <!--<Border CornerRadius="16" Width="400" Height="240" 
-                                                Canvas.Left="80" Canvas.Top="0" Canvas.ZIndex="1">
-                                            <StackPanel>
-                                                <Image Source="{Binding Image}" Stretch="UniformToFill" Width="400" Height="240"/>
-                                            </StackPanel>
-                                        </Border>-->
-                                    </Canvas>
+                                    <TextBlock Text="{x:Bind Date}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="SaddleBrown" Style="{ThemeResource BodyStrongTextBlockStyle}"/>
                                 </DataTemplate>
                             </GridView.ItemTemplate>
+                            <GridView.ItemContainerStyle>
+                                <Style TargetType="GridViewItem">
+                                    <Setter Property="Background" Value="LightCyan" />
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    <Setter Property="VerticalContentAlignment" Value="Center" />
+                                    <Setter Property="Margin" Value="50, 5, 5, 5"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="GridViewItem">
+                                                <GridViewItemPresenter
+                                                    SelectedBackground="Violet"
+                                                    SelectedPointerOverBackground="Violet"
+                                                    PointerOverBackground="PaleVioletRed"
+                                                    CornerRadius="10" Width="70"/>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+
+                            </GridView.ItemContainerStyle>
                         </GridView>
 
-                        <GridView
-                            x:Name="TimeGridView"
-                            IsItemClickEnabled="True"
-                            SelectionMode="Single">
+                        <GridView  x:Name="TimeGridView" IsItemClickEnabled="True" SelectionMode="Single" Margin="10" HorizontalAlignment="Center">
                             <GridView.ItemTemplate>
                                 <DataTemplate x:Name="TimeShowtimes" x:DataType="local:Showtime" >
-                                    <Canvas Width="100" Height="20" Background="AliceBlue" Margin="10">
-                                        <TextBlock Text="{x:Bind Time}" Canvas.ZIndex="0" Foreground="Brown" />
-                                    </Canvas>
+                                    <TextBlock Text="{x:Bind Time}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Brown" Style="{ThemeResource BodyTextBlockStyle}" />
                                 </DataTemplate>
                             </GridView.ItemTemplate>
-                        </GridView>
-                        <TextBlock Text="Screen" FontSize="20" HorizontalAlignment="Center" Foreground="Red"/>
+                            <GridView.ItemContainerStyle>
+                                <Style TargetType="GridViewItem">
+                                    <Setter Property="Background" Value="LightBlue" />
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    <Setter Property="VerticalContentAlignment" Value="Center" />
+                                    <Setter Property="Margin" Value="20, 5, 5, 5"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="GridViewItem">
+                                                <GridViewItemPresenter
+                                                SelectedBackground="Violet"
+                                                SelectedPointerOverBackground="LightPink" 
+                                                PointerOverBackground="PaleVioletRed"
+                                                CornerRadius="10" Width="70"/>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
 
-                        <TextBlock Text="_________________________________________" FontSize="20" HorizontalAlignment="Center" Foreground="Red"/>
+                            </GridView.ItemContainerStyle>
+
+                        </GridView>
+                        
+                        
+                        <TextBlock Text="Screen" FontSize="30" HorizontalAlignment="Center" Foreground="Cyan" Margin="30"/>
+
+                        <TextBlock Text="______________________________________________________________________________________________________" FontSize="20" HorizontalAlignment="Center" Foreground="Cyan"/>
                         <GridView x:Name="SeatGridView" IsItemClickEnabled="True" SelectionMode="Multiple" Margin="50" HorizontalAlignment="Center">
                             <GridView.ItemTemplate>
                                 <DataTemplate x:Name="Seats" x:DataType="local:Ticket">
-                                    <TextBlock Text="{x:Bind position}" VerticalAlignment="Center" Canvas.ZIndex="1" Style="{ThemeResource BodyStrongTextBlockStyle}"/>
+                                    <TextBlock Text="{x:Bind position}" VerticalAlignment="Center"  Style="{ThemeResource BodyStrongTextBlockStyle}"/>
                                 </DataTemplate>
                             </GridView.ItemTemplate>
                             <GridView.ItemsPanel>
@@ -275,7 +307,7 @@
                             </GridView.ItemsPanel>
                             <GridView.ItemContainerStyle>
                                 <Style TargetType="GridViewItem">
-                                    <Setter Property="Background" Value="AliceBlue" />
+                                    <Setter Property="Background" Value="Brown" />                                
                                     <Setter Property="HorizontalContentAlignment" Value="Center" />
                                     <Setter Property="VerticalContentAlignment" Value="Center" />
                                     <Setter Property="Margin" Value="30, 5, 5, 5"/>
@@ -283,8 +315,9 @@
                                         <Setter.Value>
                                             <ControlTemplate TargetType="GridViewItem">
                                                 <GridViewItemPresenter
-                                                    SelectedBackground="LightSeaGreen"
-                                                    SelectedPointerOverBackground="LightGoldenrodYellow" 
+                                                    SelectedBackground="DarkOrange"
+                                                    SelectedPointerOverBackground="LightPink" 
+                                                    PointerOverBackground="PaleVioletRed"
                                                     CornerRadius="10" Width="70"/>
                                             </ControlTemplate>
                                         </Setter.Value>
@@ -295,7 +328,7 @@
                         </GridView>
 
 
-                        <Button Content="Booking" HorizontalAlignment="Right" VerticalAlignment="Bottom" />
+                        <Button Content="Booking" HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="DarkSeaGreen"/>
                     </StackPanel>
 
                 </PivotItem>
