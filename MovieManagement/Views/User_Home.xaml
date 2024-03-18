@@ -130,7 +130,7 @@
                     </Grid.RowDefinitions>
                     
                     <!-- Image Thumbnail -->
-                    <Image Grid.Row="0" Source="ms-appx:///Assets/thumbnail-ngang.jpg" Stretch="UniformToFill"/>
+                    <Image Grid.Row="0" Source="{Binding PosterUrl}" Stretch="UniformToFill"/>
                     
                     <!-- General Information -->
                     <Grid Grid.Row="1" Background="{StaticResource AcrylicBackgroundFillColorBaseBrush}" Padding="12, 4">
@@ -139,12 +139,12 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         
-                        <TextBlock Grid.Column="0" TextWrapping="WrapWholeWords" Text="Movie Title" 
+                        <TextBlock Grid.Column="0" TextWrapping="WrapWholeWords" Text="{Binding Title}" 
                                    FontSize="26" FontWeight="SemiBold"/>
 
                         <StackPanel Grid.Column="1" Orientation="Vertical" Width="60" Padding="0, 2, 0, 0">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                <TextBlock Text="8.2" FontSize="19"/>
+                                <TextBlock Text="{Binding ImdbScore}" FontSize="19"/>
                                 <FontIcon Glyph="&#xE735;" FontSize="18" Margin="5,0,0,0"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0, 8, 0, 0">
@@ -172,7 +172,7 @@
                     </Grid.RowDefinitions>
 
                     <!-- Image Thumbnail -->
-                    <Image Grid.Row="0" Source="ms-appx:///Assets/thumbnail-ngang.jpg" Stretch="UniformToFill"/>
+                    <Image Grid.Row="0" Source="{Binding PosterUrl}" Stretch="UniformToFill"/>
 
                     <!-- General Information -->
                     <Grid Grid.Row="1" Background="{StaticResource AcrylicBackgroundFillColorBaseBrush}" Padding="12, 4">
@@ -181,12 +181,12 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Column="0" TextWrapping="WrapWholeWords" Text="Movie Title" 
+                        <TextBlock Grid.Column="0" TextWrapping="WrapWholeWords" Text="{Binding Title}" 
                            FontSize="26" FontWeight="SemiBold"/>
 
                         <StackPanel Grid.Column="1" Orientation="Vertical" Width="60" Padding="0, 2, 0, 0">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                <TextBlock Text="8.2" FontSize="19"/>
+                                <TextBlock Text="{Binding ImdbScore}" FontSize="19"/>
                                 <FontIcon Glyph="&#xE735;" FontSize="18" Margin="5,0,0,0"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0, 8, 0, 0">
@@ -220,6 +220,7 @@
             <!-- ==================== Blockbuster Movie Slider ==================== -->
             <ScrollViewer Style="{StaticResource MovieSlider_Style}" Height="380">
                 <ItemsRepeater x:Name="Blockbuster_Slider"
+                               ItemsSource="{Binding Blockbuster_Movies}"
                                ItemTemplate="{StaticResource BlockbusterCard_DataTemplate}"
                                Layout="{StaticResource HorizontalStack_Layout_1}"
                                VerticalAlignment="Top">
@@ -234,6 +235,7 @@
             <!-- ==================== Movie Slider ==================== -->
             <ScrollViewer Style="{StaticResource MovieSlider_Style}" Height="380">
                 <ItemsRepeater x:Name="Primetime_Slider"
+                               ItemsSource="{Binding Primetime_Movies}"
                                ItemTemplate="{StaticResource MovieCard_DataTemplate}"
                                Layout="{StaticResource HorizontalStack_Layout_2}"
                                VerticalAlignment="Top">
@@ -248,6 +250,7 @@
             <!-- ==================== Movie Slider ==================== -->
             <ScrollViewer Style="{StaticResource MovieSlider_Style}" Height="380">
                 <ItemsRepeater x:Name="Nighttime_Slider"
+                               ItemsSource="{Binding Nighttime_Movies}"
                                ItemTemplate="{StaticResource MovieCard_DataTemplate}"
                                Layout="{StaticResource HorizontalStack_Layout_2}"
                                VerticalAlignment="Top">
@@ -262,6 +265,7 @@
             <!-- ==================== Movie Slider ==================== -->
             <ScrollViewer Style="{StaticResource MovieSlider_Style}" Height="380">
                 <ItemsRepeater x:Name="Standardtime_Slider"
+                               ItemsSource="{Binding Standard_Movies}"
                                ItemTemplate="{StaticResource MovieCard_DataTemplate}"
                                Layout="{StaticResource HorizontalStack_Layout_2}"
                                VerticalAlignment="Top">

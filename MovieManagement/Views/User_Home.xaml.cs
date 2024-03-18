@@ -15,30 +15,12 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using MovieManagement.Views;
 using System.Diagnostics;
+using MovieManagement.ViewModels;
 
 namespace MovieManagement.Views
 {
-
-    // Temp Movie Class
-    public class MovieCard
-    {
-        public string Index { get; set; }
-        public string Name { get; set; }
-        public string Image { get; set; }
-
-        public MovieCard(string index, string name, string image) { 
-            this.Index = index;
-            this.Name = name;
-            this.Image = image;
-        }
-    }
-
-
     public sealed partial class User_Home : Page
     {
-        // Movie Card Collection
-        public ObservableCollection<MovieCard> MovieCards { get; } = new ObservableCollection<MovieCard>();
-
         // Setting for Highlight Trailer
         private DispatcherTimer hoverTimer;
         private Flyout highLightCard;
@@ -49,15 +31,8 @@ namespace MovieManagement.Views
         {
             this.InitializeComponent();
 
-            for (int i = 1; i < 10; i++)
-            {
-                MovieCards.Add(new MovieCard(i.ToString(), $"Movie {i.ToString()}", "ms-appx:///Assets/thumbnail-ngang.jpg"));
-            }
-            Blockbuster_Slider.ItemsSource = MovieCards;
-            Primetime_Slider.ItemsSource = MovieCards;
-            Nighttime_Slider.ItemsSource = MovieCards;
-            Standardtime_Slider.ItemsSource = MovieCards;
-
+            // Binding Context to UI
+            DataContext = new User_Home_ViewModel();
 
             // Set Hold timer for Movie Card
             hoverTimer = new DispatcherTimer();
