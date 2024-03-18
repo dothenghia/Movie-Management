@@ -6,8 +6,7 @@
     xmlns:local="using:MovieManagement.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    >
+    mc:Ignorable="d">
     
     <!-- ==================== Define Page Resources ==================== -->
     <Page.Resources>
@@ -44,7 +43,8 @@
             <Setter Property="Height" Value="100"/>
         </Style>
         
-    </Page.Resources>
+
+        </Page.Resources>
     
     
     
@@ -229,85 +229,17 @@
                             x:Name="DateGridView"
                             IsItemClickEnabled="True"
                             SelectionMode="Single"
-                            Margin="30"
-                            HorizontalAlignment="Center">
+                            Margin="0"
+                            HorizontalAlignment="Center"
+                            ItemClick="DateGridView_ItemClick">
                             <GridView.ItemTemplate>
-                                <DataTemplate x:Name="DateShowtimes" x:DataType="local:Showtime" >
-                                    <TextBlock Text="{x:Bind Date}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="SaddleBrown" Style="{ThemeResource BodyStrongTextBlockStyle}"/>
+                                <DataTemplate x:Name="DateShowtimes" >
+                                    <TextBlock Text="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" Style="{ThemeResource SubtitleTextBlockStyle}"/>
                                 </DataTemplate>
                             </GridView.ItemTemplate>
                             <GridView.ItemContainerStyle>
                                 <Style TargetType="GridViewItem">
-                                    <Setter Property="Background" Value="LightCyan" />
-                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
-                                    <Setter Property="VerticalContentAlignment" Value="Center" />
-                                    <Setter Property="Margin" Value="50, 5, 5, 5"/>
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate TargetType="GridViewItem">
-                                                <GridViewItemPresenter
-                                                    SelectedBackground="Violet"
-                                                    SelectedPointerOverBackground="Violet"
-                                                    PointerOverBackground="PaleVioletRed"
-                                                    CornerRadius="10" Width="70"/>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-
-                            </GridView.ItemContainerStyle>
-                        </GridView>
-
-                        <GridView  x:Name="TimeGridView" IsItemClickEnabled="True" SelectionMode="Single" Margin="10" HorizontalAlignment="Center">
-                            <GridView.ItemTemplate>
-                                <DataTemplate x:Name="TimeShowtimes" x:DataType="local:Showtime" >
-                                    <TextBlock Text="{x:Bind Time}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Brown" Style="{ThemeResource BodyTextBlockStyle}" />
-                                </DataTemplate>
-                            </GridView.ItemTemplate>
-                            <GridView.ItemContainerStyle>
-                                <Style TargetType="GridViewItem">
-                                    <Setter Property="Background" Value="LightBlue" />
-                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
-                                    <Setter Property="VerticalContentAlignment" Value="Center" />
-                                    <Setter Property="Margin" Value="20, 5, 5, 5"/>
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate TargetType="GridViewItem">
-                                                <GridViewItemPresenter
-                                                SelectedBackground="Violet"
-                                                SelectedPointerOverBackground="LightPink" 
-                                                PointerOverBackground="PaleVioletRed"
-                                                CornerRadius="10" Width="70"/>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-
-                            </GridView.ItemContainerStyle>
-
-                        </GridView>
-                        
-                        
-                        <TextBlock Text="Screen" FontSize="30" HorizontalAlignment="Center" Foreground="Cyan" Margin="30"/>
-
-                        <TextBlock Text="______________________________________________________________________________________________________" FontSize="20" HorizontalAlignment="Center" Foreground="Cyan"/>
-                        <GridView x:Name="SeatGridView" IsItemClickEnabled="True" SelectionMode="Multiple" Margin="50" HorizontalAlignment="Center">
-                            <GridView.ItemTemplate>
-                                <DataTemplate x:Name="Seats" x:DataType="local:Ticket">
-                                    <TextBlock Text="{x:Bind position}" VerticalAlignment="Center"  Style="{ThemeResource BodyStrongTextBlockStyle}"/>
-                                </DataTemplate>
-                            </GridView.ItemTemplate>
-                            <GridView.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <ItemsWrapGrid x:Name="MaxSeatsWrapGrid"
-                                                   MaximumRowsOrColumns="10"
-                                                   Orientation="Horizontal"/>
-                                </ItemsPanelTemplate>
-
-                            </GridView.ItemsPanel>
-                            <GridView.ItemContainerStyle>
-                                <Style TargetType="GridViewItem">
-                                    <Setter Property="Background" Value="Brown" />                                
+                                    <Setter Property="Background" Value="White" />
                                     <Setter Property="HorizontalContentAlignment" Value="Center" />
                                     <Setter Property="VerticalContentAlignment" Value="Center" />
                                     <Setter Property="Margin" Value="30, 5, 5, 5"/>
@@ -315,10 +247,11 @@
                                         <Setter.Value>
                                             <ControlTemplate TargetType="GridViewItem">
                                                 <GridViewItemPresenter
-                                                    SelectedBackground="DarkOrange"
-                                                    SelectedPointerOverBackground="LightPink" 
-                                                    PointerOverBackground="PaleVioletRed"
-                                                    CornerRadius="10" Width="70"/>
+                                                    SelectedBackground="Orange"
+                                                    SelectedPointerOverBackground="DarkOrange"
+                                                    PointerOverBackground="OrangeRed"
+                                                    PlaceholderBackground="Red"
+                                                    CornerRadius="10" Width="150" Height="80"/>
                                             </ControlTemplate>
                                         </Setter.Value>
                                     </Setter>
@@ -327,10 +260,72 @@
                             </GridView.ItemContainerStyle>
                         </GridView>
 
+                        <GridView  x:Name="TimeGridView" IsItemClickEnabled="True" SelectionMode="Single" Margin="10" HorizontalAlignment="Center" ItemClick="ShowTimes_ItemClick">
+                            <GridView.ItemTemplate>
+                                <DataTemplate x:Name="TimeShowtimes" x:DataType="x:String" >
+                                    <TextBlock Text="{x:Bind}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" Style="{ThemeResource SubtitleTextBlockStyle}" />
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                            <GridView.ItemContainerStyle>
+                                <Style TargetType="GridViewItem">
+                                    <Setter Property="Background" Value="Gray" />
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    <Setter Property="VerticalContentAlignment" Value="Center" />
+                                    <Setter Property="Margin" Value="20, 5, 5, 5"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="GridViewItem">
+                                                <GridViewItemPresenter
+                                                SelectedBackground="Orange"
+                                                SelectedPointerOverBackground="Coral" 
+                                                PointerOverBackground="PaleVioletRed"
+                                                CornerRadius="10" Width="80"/>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
 
-                        <Button Content="Booking" HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="DarkSeaGreen"/>
+                            </GridView.ItemContainerStyle>
+
+                        </GridView>
+
+                        <StackPanel x:Name="SeatsSelectionMap" Visibility="Collapsed">
+                            <Grid>
+                                <Path Stroke="Orange" StrokeThickness="3">
+                                    <Path.Data>
+                                        <PathGeometry>
+                                            <PathFigure StartPoint="0,50">
+                                                <BezierSegment x:Name="ScreenLine" Point1="200,10" Point2="400,10" Point3="600,50" />
+                                            </PathFigure>
+                                        </PathGeometry>
+                                    </Path.Data>
+                                </Path>
+                            </Grid>
+                            <TextBlock Text="S C R E E N" FontSize="20" HorizontalAlignment="Center" Foreground="Orange" Style="{StaticResource SubtitleTextBlockStyle}"/>
+
+                            <ItemsRepeater ItemsSource="{x:Bind Tickets}" Margin="30">
+                                <ItemsRepeater.ItemTemplate>
+                                    <DataTemplate x:DataType="local:Ticket">
+                                        <ToggleButton Content="{x:Bind position}" IsEnabled="{x:Bind isAvailable}" MinHeight="50" MaxHeight="100" MinWidth="50" MaxWidth="100" Checked="ToggleButton_Checked" />
+                                    </DataTemplate>
+                                </ItemsRepeater.ItemTemplate>
+                                <ItemsRepeater.Layout>
+                                    <UniformGridLayout Orientation="Horizontal" MinColumnSpacing="10" ItemsJustification="SpaceAround" MaximumRowsOrColumns="10" MinRowSpacing="10"/>
+                                </ItemsRepeater.Layout>
+                            </ItemsRepeater>
+
+                            <StackPanel CornerRadius="20" Padding="20, 12, 20, 40">
+
+                                <TextBlock x:Name ="SeatsSelection" Text="Your selection: " Style="{StaticResource SubtitleTextBlockStyle}"/>
+
+                                <Button Content="Booking" HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="DarkSeaGreen"/>
+
+                            </StackPanel>
+                        </StackPanel>
+                        
+                        
                     </StackPanel>
-
+                    
                 </PivotItem>
 
             </Pivot>
