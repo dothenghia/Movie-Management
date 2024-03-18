@@ -10,8 +10,7 @@ namespace MovieManagement.Models
             Movies = new HashSet<Movie>();
         }
 
-        public string GenreName { get; set; }
-
+        public string? GenreName { get; set; }
         public int GenreId { get; set; }
 
         public virtual ICollection<Movie> Movies { get; set; }

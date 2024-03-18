@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -108,7 +109,7 @@ namespace MovieManagement.Views
             {
                 timesOfDay.Clear();
                 Debug.WriteLine(selectedDate);
-                var filteredShowtimes = Showtimes.Where(s => s.ShowDate.Date == DateTime.Parse(selectedDate));
+                var filteredShowtimes = Showtimes.Where(s => s.ShowDate.Date == DateTime.ParseExact(selectedDate,"dd/MM/yyyy",CultureInfo.InvariantCulture));
                 foreach (var showtime in filteredShowtimes)
                 {
                     Debug.WriteLine($"Show time: {showtime.ShowDate.ToString("HH:mm")}");

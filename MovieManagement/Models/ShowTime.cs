@@ -16,7 +16,7 @@ namespace MovieManagement.Models
         public int? MaxRow { get; set; }
         public int? MaxCol { get; set; }
 
-        public virtual Movie Movie { get; set; }
+        public virtual Movie? Movie { get; set; }
         public virtual ICollection<Ticket> Tickets { get; set; }
     }
 }
