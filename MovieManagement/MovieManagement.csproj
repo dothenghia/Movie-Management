@@ -12,6 +12,9 @@
     <EnableMsixTooling>true</EnableMsixTooling>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="RelayCommand.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="Views\Admin_FilmCerti.xaml" />
     <None Remove="Views\Admin_FilmDirector.xaml" />
     <None Remove="Views\Admin_FilmGenre.xaml" />
@@ -66,6 +69,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="RelayCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Update="Assets\avatar.jpg">

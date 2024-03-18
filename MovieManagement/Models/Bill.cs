@@ -12,12 +12,17 @@ namespace MovieManagement.Models
         }
 
         public double? Total { get; set; }
+
         public int? AccountId { get; set; }
+
         public DateTime? BookingTime { get; set; }
+
         public int BillId { get; set; }
 
         public virtual Account Account { get; set; }
+
         public virtual ICollection<BillVoucher> BillVouchers { get; set; }
+
         public virtual ICollection<Ticket> Tickets { get; set; }
     }
 }
