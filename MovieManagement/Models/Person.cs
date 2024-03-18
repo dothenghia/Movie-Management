@@ -12,8 +12,11 @@ namespace MovieManagement.Models
         }
 
         public string Fullname { get; set; }
+
         public string AvatarUrl { get; set; }
+
         public string Biography { get; set; }
+
         public int PersonId { get; set; }
 
         public virtual ICollection<Movie> Movies { get; set; }
