@@ -6,7 +6,8 @@
     xmlns:local="using:MovieManagement.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    Loaded="Window_Loaded">
     
     <!-- ==================== Define Page Resources ==================== -->
     <Page.Resources>
@@ -22,9 +23,7 @@
         <!-- Define Style for AgeTag -->
         <Style x:Key="AgeTag_Style" TargetType="StackPanel">
             <Setter Property="CornerRadius" Value="4"/>
-            <Setter Property="Padding" Value="8, 4, 8, 4"/>
-            <Setter Property="BorderBrush" Value="{StaticResource ControlStrongStrokeColorDefault}"/>
-            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="10,4,10,5"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
         </Style>
 
@@ -74,7 +73,7 @@
                             <StackPanel Grid.Column="0" Orientation="Vertical">
                                 <!-- Movie Thumbnail -->
                                 <Border CornerRadius="20">
-                                    <Image Source="ms-appx:///Assets/thumbnail-ngang.jpg" Stretch="UniformToFill" />
+                                    <Image Source="{Binding MovieInformation.PosterUrl}" Stretch="UniformToFill" />
                                 </Border>
                             </StackPanel>
 
@@ -88,17 +87,25 @@
 
                                 <StackPanel Grid.Row="0">
                                     <!-- Movie Name -->
-                                    <TextBlock Text="Movie Name" Style="{StaticResource TitleTextBlockStyle}"/>
+                                    <TextBlock Text="{Binding MovieInformation.Title}" Style="{StaticResource TitleTextBlockStyle}"/>
 
-                            
                                     <!-- Movie Published Year -->
                                     <StackPanel Orientation="Horizontal" Margin="0, 16, 0, 0">
                                         <FontIcon Glyph="&#xE787;" FontSize="20" Margin="0,0,6,0"/>
                                         <TextBlock Text="Published Year" FontSize="18"/>
                                     </StackPanel>
-                                    <TextBlock Text="2024" Margin="0, 4, 0, 0" FontSize="16" FontWeight="Medium"/>
+                                    <TextBlock Text="{Binding MovieInformation.PublishYear}" Margin="0, 4, 0, 0" FontSize="16" FontWeight="Medium"/>
 
-                            
+                                    <!-- Movie Duration -->
+                                    <StackPanel Orientation="Horizontal" Margin="0, 16, 0, 0">
+                                        <FontIcon Glyph="&#xE823;" FontSize="20" Margin="0,0,6,0"/>
+                                        <TextBlock Text="Duration" FontSize="18"/>
+                                    </StackPanel>
+                                    <TextBlock Margin="0, 4, 0, 0" FontSize="16" FontWeight="Medium">
+                                        <Run Text="{Binding MovieInformation.Duration}" />
+                                        <Run Text="minutes" />
+                                    </TextBlock>
+
                                     <!-- Movie Rating Score IMDb -->
                                     <StackPanel Orientation="Horizontal" Margin="0, 18, 0, 0">
                                         <FontIcon Glyph="&#xE735;" FontSize="20" Margin="0,0,6,0"/>
@@ -108,20 +115,23 @@
                                         <StackPanel Style="{StaticResource IMDbTag_Style}">
                                             <TextBlock Text="IMDb" FontSize="16" FontWeight="SemiBold" Foreground="{StaticResource AcrylicBackgroundFillColorDefaultBrush}"/>
                                         </StackPanel>
-                                        <TextBlock Text="8.2/10" FontSize="16" FontWeight="Medium" VerticalAlignment="Center"/>
+                                        <TextBlock FontSize="16" FontWeight="Medium" VerticalAlignment="Center">
+                                            <Run Text="{Binding MovieInformation.ImdbScore}"/>
+                                            <Run Text="/10"/>
+                                        </TextBlock>
                                     </StackPanel>
 
-                            
                                     <!-- Movie Age Certificate -->
                                     <StackPanel Orientation="Horizontal" Margin="0, 18, 0, 0">
                                         <FontIcon Glyph="&#xE77B;" FontSize="20" Margin="0,0,6,0"/>
                                         <TextBlock Text="Age Certificate" FontSize="18"/>
                                     </StackPanel>
-                                    <StackPanel Style="{StaticResource AgeTag_Style}" BorderBrush="Orange" Margin="0, 6, 0, 0">
-                                        <TextBlock Text="C13" FontSize="16" FontWeight="Medium" Foreground="Orange"/>
+                                    <StackPanel Style="{StaticResource AgeTag_Style}" Margin="0, 8, 0, 0" 
+                                                Background="{Binding MovieInformation.BackgroundColor}">
+                                        <TextBlock Text="{Binding MovieInformation.DisplayContent}" FontSize="17" FontWeight="SemiBold" 
+                                                   Foreground="{Binding MovieInformation.ForegroundColor}"/>
                                     </StackPanel>
 
-                            
                                     <!-- Movie Genre -->
                                     <StackPanel Orientation="Horizontal" Margin="0, 18, 0, 0">
                                         <FontIcon Glyph="&#xE8FD;" FontSize="20" Margin="0,0,6,0"/>
@@ -129,20 +139,15 @@
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Margin="0, 8, 0, 0" Spacing="8">
                                         <StackPanel Style="{StaticResource GenreTag_Style}">
-                                            <TextBlock Text="Action" FontSize="16"/>
+                                            <TextBlock Text="{Binding MovieInformation.GenreName}" FontSize="16"/>
                                         </StackPanel>
-                                        <StackPanel Style="{StaticResource GenreTag_Style}">
-                                            <TextBlock Text="Cartoon" FontSize="16"/>
-                                        </StackPanel>
-                                        <StackPanel Style="{StaticResource GenreTag_Style}">
-                                            <TextBlock Text="Adventure" FontSize="16"/>
-                                        </StackPanel>
+
                                     </StackPanel>
                                 </StackPanel>
 
                                 <!-- Booking Button -->
                                 <Button Grid.Row="1" HorizontalAlignment="Stretch" 
-                                        Margin="0, 18, 0, 0" Padding="20, 30" CornerRadius="12">
+                                        Margin="0, 18, 0, 0" Padding="20, 24" CornerRadius="12">
                                     <StackPanel Orientation="Horizontal">
                                         <FontIcon Glyph="&#xE8B2;" FontSize="36" Margin="0,0,8,0"/>
                                         <TextBlock Text="Show Time" Style="{StaticResource TitleTextBlockStyle}"/>
@@ -158,8 +163,7 @@
 
                             <!-- Movie Description -->
                             <TextBlock Text="Description" Style="{StaticResource SubtitleTextBlockStyle}"/>
-                            <TextBlock Text="Câu chuyện về cuộc phiêu lưu của anh em Super Mario đến vương quốc Nấm, và đó chính là Câu chuyện về cuộc phiêu lưu của anh em Super Mario đến vương quốc Nấm khi họ kể về Câu chuyện về cuộc phiêu lưu của anh em Super Mario đến vương quốc Nấm."
-                                       TextWrapping="Wrap" FontSize="16" Margin="0, 8, 0, 0"/>
+                            <TextBlock Text="{Binding MovieInformation.Description}" TextWrapping="Wrap" FontSize="16" Margin="0, 8, 0, 0"/>
 
 
                             <!-- Movie Director & Actors -->
@@ -170,40 +174,48 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <StackPanel Grid.Column="0" Orientation="Horizontal" BorderBrush="Gray" BorderThickness="0, 0, 1, 0" Margin="0, 0, 12, 0" Padding="0, 0, 12, 0">
+                                <StackPanel Grid.Column="0" Margin="0, 0, 18, 0" Padding="0, 0, 18, 0"  BorderBrush="Gray" BorderThickness="0,0,1,0">
                                     <!-- Director -->
-                                    <StackPanel>
-                                        <Border Style="{StaticResource AvatarImage_Style}">
-                                            <Image Source="ms-appx:///Assets/avatar.jpg" Stretch="UniformToFill"/>
-                                        </Border>
-                                        <TextBlock Text="Name" HorizontalAlignment="Center" Style="{StaticResource BodyStrongTextBlockStyle}"/>
-                                        <TextBlock Text="Director" HorizontalAlignment="Center" Style="{StaticResource CaptionTextBlockStyle}"/>
-                                    </StackPanel>
+                                    <ItemsControl ItemsSource="{Binding MovieDirectors}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Vertical" Width="100">
+                                                    <Border Style="{StaticResource AvatarImage_Style}">
+                                                        <Image Source="{Binding AvatarUrl}" Stretch="UniformToFill" Tapped="DirectorImage_Tapped"/>
+                                                    </Border>
+                                                    <TextBlock Text="{Binding Fullname}" TextWrapping="WrapWholeWords" TextAlignment="Center" Style="{StaticResource BodyStrongTextBlockStyle}"/>
+                                                    <TextBlock Text="Director" TextAlignment="Center" Style="{StaticResource CaptionTextBlockStyle}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <StackPanel Orientation="Horizontal" Spacing="18"/>
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                    </ItemsControl>
                                 </StackPanel>
 
-                                <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="12">
+                                <StackPanel Grid.Column="1" Orientation="Horizontal">
                                     <!-- Actors -->
-                                    <StackPanel>
-                                        <Border Style="{StaticResource AvatarImage_Style}">
-                                            <Image Source="ms-appx:///Assets/avatar.jpg" Stretch="UniformToFill"/>
-                                        </Border>
-                                        <TextBlock Text="Name" HorizontalAlignment="Center" Style="{StaticResource BodyStrongTextBlockStyle}"/>
-                                        <TextBlock Text="Actor" HorizontalAlignment="Center" Style="{StaticResource CaptionTextBlockStyle}"/>
-                                    </StackPanel>
-                                    <StackPanel>
-                                        <Border Style="{StaticResource AvatarImage_Style}">
-                                            <Image Source="ms-appx:///Assets/avatar.jpg" Stretch="UniformToFill"/>
-                                        </Border>
-                                        <TextBlock Text="Name" HorizontalAlignment="Center" Style="{StaticResource BodyStrongTextBlockStyle}"/>
-                                        <TextBlock Text="Actor" HorizontalAlignment="Center" Style="{StaticResource CaptionTextBlockStyle}"/>
-                                    </StackPanel>
-                                    <StackPanel>
-                                        <Border Style="{StaticResource AvatarImage_Style}">
-                                            <Image Source="ms-appx:///Assets/avatar.jpg" Stretch="UniformToFill"/>
-                                        </Border>
-                                        <TextBlock Text="Name" HorizontalAlignment="Center" Style="{StaticResource BodyStrongTextBlockStyle}"/>
-                                        <TextBlock Text="Actor" HorizontalAlignment="Center" Style="{StaticResource CaptionTextBlockStyle}"/>
-                                    </StackPanel>
+                                    <ItemsControl ItemsSource="{Binding MovieActors}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Vertical" Width="100">
+                                                    <Border Style="{StaticResource AvatarImage_Style}">
+                                                        <Image Source="{Binding AvatarUrl}" Stretch="UniformToFill"/>
+                                                    </Border>
+                                                    <TextBlock Text="{Binding Fullname}" TextAlignment="Center" Style="{StaticResource BodyStrongTextBlockStyle}"/>
+                                                    <TextBlock Text="Actor" TextAlignment="Center" Style="{StaticResource CaptionTextBlockStyle}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <StackPanel Orientation="Horizontal" Spacing="18"/>
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                    </ItemsControl>
                                 </StackPanel>
 
                             </Grid>

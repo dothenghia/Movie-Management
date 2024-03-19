@@ -1,4 +1,4 @@
-using ABI.Windows.ApplicationModel.Activation;
+﻿using ABI.Windows.ApplicationModel.Activation;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Navigation;
+using MovieManagement.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -52,6 +53,7 @@ namespace MovieManagement.Views
 
     public sealed partial class User_Movie : Page
     {
+        public int MovieID;
 
         public ObservableCollection<Showtime> Showtimes { get; } = new ObservableCollection<Showtime>();
         public ObservableCollection<Ticket> Tickets { get; } = new ObservableCollection<Ticket>();
@@ -63,6 +65,7 @@ namespace MovieManagement.Views
             this.InitializeComponent();
 
             // ############# INFORMATION TAB #############
+
 
 
 
@@ -95,6 +98,42 @@ namespace MovieManagement.Views
                     Tickets.Add(new Ticket(i, j.ToString(), i.ToString(), true));
                 }
         }
+
+        // -- Get attached data when Navigate from User_Home.xaml
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            if (e.Parameter != null) {
+                MovieID = (int)e.Parameter;
+            }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Binding Context to UI
+            DataContext = new User_Movie_ViewModel(MovieID);
+        }
+
+        private void DirectorImage_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            dynamic director = (sender as Image)?.DataContext;
+            if (director != null)
+            {
+                ShowBiographyFlyout(director.Biography, sender as UIElement);
+            }
+        }
+
+        private void ShowBiographyFlyout(string biography, UIElement sender)
+        {
+            var flyout = new Flyout();
+            var biographyTextBlock = new TextBlock { Text = biography };
+            flyout.Content = biographyTextBlock;
+
+            flyout.ShowAt(sender as FrameworkElement);
+        }
+
+
 
 
         // -- Event Window Size Changed
@@ -156,16 +195,5 @@ namespace MovieManagement.Views
         }
 
 
-        // -- Get attached data when Navigate from User_Home.xaml
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
-
-            if (e.Parameter != null)
-            {
-                int movieId = (int)e.Parameter;
-                Debug.WriteLine("Movie : " + movieId);
-            }
-        }
     }
 }

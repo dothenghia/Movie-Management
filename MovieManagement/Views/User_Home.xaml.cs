@@ -49,9 +49,7 @@ namespace MovieManagement.Views
         {
             if (sender is FrameworkElement button)
             {
-                // ------ Get MovieId
-                var movieId = (button.DataContext as dynamic)?.MovieId;
-
+                var movieId = (button.DataContext as dynamic)?.MovieId; // ------ Get MovieId
                 //Debug.WriteLine((int)movieId);
 
                 if (movieId != null)
