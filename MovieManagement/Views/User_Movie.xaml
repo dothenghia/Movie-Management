@@ -41,7 +41,24 @@
             <Setter Property="Width" Value="100"/>
             <Setter Property="Height" Value="100"/>
         </Style>
-        
+
+
+        <!-- Define Flyout for ContributorHightlight -->
+        <Flyout x:Key="BioCard_Flyout">
+            <Flyout.FlyoutPresenterStyle>
+                <Style TargetType="FlyoutPresenter">
+                    <Setter Property="Padding" Value="0"/>
+                    <Setter Property="CornerRadius" Value="16"/>
+                </Style>
+            </Flyout.FlyoutPresenterStyle>
+
+            <!-- Flyout Content -->
+            <StackPanel Background="{StaticResource AcrylicBackgroundFillColorDefaultBrush}"
+                        Width="300" Padding="20, 8, 20, 12" Spacing="8">
+                <TextBlock Text="{Binding Fullname}" TextWrapping="WrapWholeWords" Style="{StaticResource SubtitleTextBlockStyle}"/>
+                <TextBlock Text="{Binding Biography}" TextWrapping="WrapWholeWords" Style="{StaticResource BodyTextBlockStyle}"/>
+            </StackPanel>
+        </Flyout>
 
     </Page.Resources>
     
@@ -180,8 +197,12 @@
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Vertical" Width="100">
-                                                    <Border Style="{StaticResource AvatarImage_Style}">
-                                                        <Image Source="{Binding AvatarUrl}" Stretch="UniformToFill" Tapped="DirectorImage_Tapped"/>
+                                                    <Border Style="{StaticResource AvatarImage_Style}"
+                                                            PointerEntered="Contributor_PointerEntered"
+                                                            PointerExited="Contributor_PointerExited"
+                                                            Tapped="Contributor_Tapped"
+                                                            FlyoutBase.AttachedFlyout="{StaticResource BioCard_Flyout}">
+                                                        <Image Source="{Binding AvatarUrl}" Stretch="UniformToFill"/>
                                                     </Border>
                                                     <TextBlock Text="{Binding Fullname}" TextWrapping="WrapWholeWords" TextAlignment="Center" Style="{StaticResource BodyStrongTextBlockStyle}"/>
                                                     <TextBlock Text="Director" TextAlignment="Center" Style="{StaticResource CaptionTextBlockStyle}"/>
@@ -202,7 +223,11 @@
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Vertical" Width="100">
-                                                    <Border Style="{StaticResource AvatarImage_Style}">
+                                                    <Border Style="{StaticResource AvatarImage_Style}"
+                                                            PointerEntered="Contributor_PointerEntered"
+                                                            PointerExited="Contributor_PointerExited"
+                                                            Tapped="Contributor_Tapped"
+                                                            FlyoutBase.AttachedFlyout="{StaticResource BioCard_Flyout}">
                                                         <Image Source="{Binding AvatarUrl}" Stretch="UniformToFill"/>
                                                     </Border>
                                                     <TextBlock Text="{Binding Fullname}" TextAlignment="Center" Style="{StaticResource BodyStrongTextBlockStyle}"/>

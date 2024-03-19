@@ -54,6 +54,7 @@ namespace MovieManagement.Views
     public sealed partial class User_Movie : Page
     {
         public int MovieID;
+        public FrameworkElement ParentFrame;
 
         public ObservableCollection<Showtime> Showtimes { get; } = new ObservableCollection<Showtime>();
         public ObservableCollection<Ticket> Tickets { get; } = new ObservableCollection<Ticket>();
@@ -99,7 +100,7 @@ namespace MovieManagement.Views
                 }
         }
 
-        // -- Get attached data when Navigate from User_Home.xaml
+        // ========== Get attached data when Navigate from User_Home.xaml
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
@@ -109,29 +110,33 @@ namespace MovieManagement.Views
             }
         }
 
+        // ========== Binding Context to UI
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            // Binding Context to UI
             DataContext = new User_Movie_ViewModel(MovieID);
         }
 
-        private void DirectorImage_Tapped(object sender, TappedRoutedEventArgs e)
+        // ========== Event PointerEntered for BioFlyout
+        private void Contributor_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
-            dynamic director = (sender as Image)?.DataContext;
-            if (director != null)
-            {
-                ShowBiographyFlyout(director.Biography, sender as UIElement);
-            }
+            this.ParentFrame = sender as FrameworkElement;
+            (ParentFrame as Border).Opacity = 0.6;
         }
 
-        private void ShowBiographyFlyout(string biography, UIElement sender)
+        // ========== Event PointerExited for BioFlyout
+        private void Contributor_PointerExited(object sender, PointerRoutedEventArgs e)
         {
-            var flyout = new Flyout();
-            var biographyTextBlock = new TextBlock { Text = biography };
-            flyout.Content = biographyTextBlock;
+            (ParentFrame as Border).Opacity = 1;
+        }
 
+        // ========== Event Tapped for BioFlyout
+        private void Contributor_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Flyout flyout = FlyoutBase.GetAttachedFlyout(sender as FrameworkElement) as Flyout;
             flyout.ShowAt(sender as FrameworkElement);
         }
+
+
 
 
 
