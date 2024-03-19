@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 
-
 namespace MovieManagement.ViewModels
 {
     public class User_Home_ViewModel:ViewModelBase

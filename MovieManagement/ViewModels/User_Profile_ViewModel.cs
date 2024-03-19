@@ -8,8 +8,15 @@ using System.Collections.ObjectModel;
 
 namespace MovieManagement.ViewModels
 {
-    class User_Profile_ViewModel
+    public class User_Profile_ViewModel : ViewModelBase
     {
+        // Get database context
+        private readonly DB_MovieManagementContext _context = new DB_MovieManagementContext();
 
+
+        public User_Profile_ViewModel() 
+        {
+
+        }
     }
 }
