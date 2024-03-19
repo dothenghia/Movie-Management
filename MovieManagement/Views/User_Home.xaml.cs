@@ -31,14 +31,18 @@ namespace MovieManagement.Views
         {
             this.InitializeComponent();
 
-            // Binding Context to UI
+
+            // ========== Binding Context to UI
             DataContext = new User_Home_ViewModel();
 
-            // Set Hold timer for Movie Card
+
+
+            // ========== Set Hold timer for Movie Card
             hoverTimer = new DispatcherTimer();
             hoverTimer.Interval = TimeSpan.FromSeconds(1); // Wait 1 second before showing the highlight card
             hoverTimer.Tick += HoverTimerConfig;
         }
+
 
         // Navigate to Movie Detail Page
         private void DetailMovie_Click(object sender, RoutedEventArgs e)
