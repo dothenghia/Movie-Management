@@ -21,7 +21,7 @@ namespace MovieManagement.Views
 {
     public sealed partial class User_Home : Page
     {
-        // Setting for Highlight Trailer
+        // -- Setting for Highlight Trailer
         private DispatcherTimer hoverTimer;
         private Flyout highLightCard;
         private FrameworkElement parentFrame;
@@ -44,13 +44,25 @@ namespace MovieManagement.Views
         }
 
 
-        // Navigate to Movie Detail Page
+        // -- Navigate to Movie Detail Page
         private void DetailMovie_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(User_Movie));
+            if (sender is FrameworkElement button)
+            {
+                // ------ Get MovieId
+                var movieId = (button.DataContext as dynamic)?.MovieId;
+
+                //Debug.WriteLine((int)movieId);
+
+                if (movieId != null)
+                {
+                    Frame.Navigate(typeof(User_Movie), movieId);
+                }
+            }
         }
 
-        // Config Highlight Card Position
+
+        // -- Config Highlight Card Position
         private void HoverTimerConfig(object sender, object e)
         {
             hoverTimer.Stop();
@@ -61,7 +73,7 @@ namespace MovieManagement.Views
             highLightCard.ShowAt(parentFrame, coordinates);
         }
 
-        // Event PointerEntered for Movie Card
+        // -- Event PointerEntered for Movie Card
         private void MovieCard_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
             hoverTimer.Start();
@@ -70,14 +82,14 @@ namespace MovieManagement.Views
             (parentFrame as Grid).Opacity = 0.7;
         }
 
-        // Event PointerExited for Movie Card
+        // -- Event PointerExited for Movie Card
         private void MovieCard_PointerExited(object sender, PointerRoutedEventArgs e)
         {
             hoverTimer.Stop();
             (parentFrame as Grid).Opacity = 1;
         }
 
-        // Event Closing for Highlight Card
+        // -- Event Closing for Highlight Card
         private void HighLightCard_Closing(object sender, object e)
         {
             Grid content = (sender as Flyout).Content as Grid;
@@ -89,7 +101,7 @@ namespace MovieManagement.Views
             (parentFrame as Grid).Opacity = 1;
         }
 
-        // Event Opened for Highlight Card
+        // -- Event Opened for Highlight Card
         private void HighLightCard_Opened(object sender, object e)
         {
             Grid highlightContent = highLightCard.Content as Grid;

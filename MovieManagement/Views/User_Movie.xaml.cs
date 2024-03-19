@@ -17,6 +17,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+
 namespace MovieManagement.Views
 {
     // Temp Class Data
@@ -24,19 +25,20 @@ namespace MovieManagement.Views
     {
         public int ShowTimeId { get; set; }
         public int MovieId { get; set; }
-        public DateTime ShowDate {  get; set; }
+        public DateTime ShowDate { get; set; }
         public virtual ICollection<Ticket> Tickets { get; set; }
-        public Showtime(int showtimeid, int movieid, DateTime showdate) {
+        public Showtime(int showtimeid, int movieid, DateTime showdate)
+        {
             this.ShowTimeId = showtimeid;
             this.MovieId = movieid;
             this.ShowDate = showdate;
         }
     }
-    
+
     // Temp Class Data
     public class Ticket
     {
-        public int id {  get; set; }
+        public int id { get; set; }
         public string position { get; set; }
         public bool isAvailable { get; set; }
 
@@ -47,9 +49,10 @@ namespace MovieManagement.Views
             this.isAvailable = isAvailable;
         }
     }
+
     public sealed partial class User_Movie : Page
     {
-        
+
         public ObservableCollection<Showtime> Showtimes { get; } = new ObservableCollection<Showtime>();
         public ObservableCollection<Ticket> Tickets { get; } = new ObservableCollection<Ticket>();
         public ObservableCollection<String> daysOfWeek { get; } = new ObservableCollection<String>();
@@ -58,6 +61,12 @@ namespace MovieManagement.Views
         public User_Movie()
         {
             this.InitializeComponent();
+
+            // ############# INFORMATION TAB #############
+
+
+
+            // ############# SHOWTIME TAB #############
             this.SizeChanged += OnWindowSizeChanged;
             DateTime currentDate = DateTime.Today;
             for (int i = 0; i < 7; i++)
@@ -67,7 +76,7 @@ namespace MovieManagement.Views
 
             for (int i = 0; i < 7; i++)
             {
-                Showtimes.Add(new Showtime(i, i, new DateTime(2024, 3, 18+i, 19, 00, 15)));
+                Showtimes.Add(new Showtime(i, i, new DateTime(2024, 3, 18 + i, 19, 00, 15)));
                 Showtimes.Add(new Showtime(i, i, new DateTime(2024, 3, 18 + i, 09, 15, 15)));
                 Showtimes.Add(new Showtime(i, i, new DateTime(2024, 3, 18 + i, 17, 25, 15)));
                 Showtimes.Add(new Showtime(i, i, new DateTime(2024, 3, 18 + i, 19, 40, 15)));
@@ -75,10 +84,10 @@ namespace MovieManagement.Views
                 Showtimes.Add(new Showtime(i, i, new DateTime(2024, 3, 18 + i, 16, 35, 15)));
             }
             DateGridView.ItemsSource = daysOfWeek;
-            for (char j = 'A'; j <= 'C';  j++) 
-                for (int i = 0;i < 10;i++)
+            for (char j = 'A'; j <= 'C'; j++)
+                for (int i = 0; i < 10; i++)
                 {
-                    Tickets.Add(new Ticket(i, j.ToString(), i.ToString(),false));
+                    Tickets.Add(new Ticket(i, j.ToString(), i.ToString(), false));
                 }
             for (char j = 'D'; j <= 'G'; j++)
                 for (int i = 10; i < 20; i++)
@@ -87,6 +96,8 @@ namespace MovieManagement.Views
                 }
         }
 
+
+        // -- Event Window Size Changed
         private void OnWindowSizeChanged(object sender, SizeChangedEventArgs eventArgs)
         {
             double newWidth = eventArgs.NewSize.Width;
@@ -96,20 +107,15 @@ namespace MovieManagement.Views
             curve.Point3 = new Point(newWidth, 50);
         }
 
-        // Event Click for Back Button
-        private void BackButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
-        {
-            this.Frame.GoBack();
-        }
 
-
+        // -- Event Click for DateGridView
         private void DateGridView_ItemClick(object sender, ItemClickEventArgs e)
         {
             if (e.ClickedItem is string selectedDate)
             {
                 timesOfDay.Clear();
                 Debug.WriteLine(selectedDate);
-                var filteredShowtimes = Showtimes.Where(s => s.ShowDate.Date == DateTime.ParseExact(selectedDate,"dd/MM/yyyy",CultureInfo.InvariantCulture));
+                var filteredShowtimes = Showtimes.Where(s => s.ShowDate.Date == DateTime.ParseExact(selectedDate, "dd/MM/yyyy", CultureInfo.InvariantCulture));
                 foreach (var showtime in filteredShowtimes)
                 {
                     Debug.WriteLine($"Show time: {showtime.ShowDate.ToString("HH:mm")}");
@@ -119,16 +125,22 @@ namespace MovieManagement.Views
             }
             SeatsSelectionMap.Visibility = Visibility.Collapsed;
         }
+
+
+        // -- Event Click for TimeGridView
         private void ShowTimes_ItemClick(object sender, ItemClickEventArgs e)
         {
             SeatsSelectionMap.Visibility = Visibility.Visible;
         }
         string seats = "";
+
+
+        // -- Event Click for ToggleButton
         private void ToggleButton_Checked(object sender, RoutedEventArgs e)
         {
             var selectedToggleButton = sender as ToggleButton;
             TextBlock textBlock = SeatsSelection;
-            
+
             if (selectedToggleButton != null)
             {
                 seats += selectedToggleButton.Content.ToString() + " ";
@@ -136,16 +148,24 @@ namespace MovieManagement.Views
             }
         }
 
-        // Get AttachData when Navigate from User_Home.xaml
-        //protected override void OnNavigatedTo(NavigationEventArgs e)
-        //{
-        //    base.OnNavigatedTo(e);
 
-        //    if (e.Parameter != null)
-        //    {
-        //        string movieName = e.Parameter.ToString();
-        //        MovieTitle_TextBlock.Text = movieName;
-        //    }
-        //}
+        // -- Event Click for Back Button
+        private void BackButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+        {
+            this.Frame.GoBack();
+        }
+
+
+        // -- Get attached data when Navigate from User_Home.xaml
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            if (e.Parameter != null)
+            {
+                int movieId = (int)e.Parameter;
+                Debug.WriteLine("Movie : " + movieId);
+            }
+        }
     }
 }
