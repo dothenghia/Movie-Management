@@ -12,11 +12,46 @@ namespace MovieManagement.ViewModels
     {
         // Get database context
         private readonly DB_MovieManagementContext _context = new DB_MovieManagementContext();
-
+        public ObservableCollection<dynamic> FilmInfo { get; set; } = new ObservableCollection<dynamic>();
 
         public Admin_FilmInfo_ViewModel() 
         {
-
+            var allMovies = (from m in _context.Movies
+                             join a in _context.AgeCertificates on m.AgeCertificateId equals a.AgeCertificateId
+                             join g in _context.Genres on m.GenreId equals g.GenreId
+                             select new
+                             {
+                                 MovieId = m.MovieId,
+                                 Title = m.Title,
+                                 Duration = m.Duration,
+                                 PublishYear = m.PublishYear,
+                                 ImdbScore = m.ImdbScore,
+                                 AgeCertificateContent = a.DisplayContent,
+                                 AgeBackground = a.BackgroundColor,
+                                 AgeForeground = a.ForegroundColor,
+                                 PosterUrl = m.PosterUrl,
+                                 TrailerUrl = m.TrailerUrl,
+                                 Description = m.Description,
+                                 Genre = g.GenreName
+                             }).ToList();
+            foreach (var movie in allMovies)
+            {
+                    FilmInfo.Add(new
+                    {
+                        MovieId = movie.MovieId,
+                        Title = movie.Title,
+                        Duration = movie.Duration + "m",
+                        PublishYear = movie.PublishYear,
+                        ImdbScore = movie.ImdbScore,
+                        AgeCertificateContent = movie.AgeCertificateContent,
+                        PosterUrl = movie.PosterUrl,
+                        TrailerUrl = movie.TrailerUrl,
+                        Description = movie.Description,
+                        Genre = movie.Genre,
+                        AgeBackground = movie.AgeBackground,
+                        AgeForeground = movie.AgeForeground
+                    });      
+            }
         }
     }
 }
