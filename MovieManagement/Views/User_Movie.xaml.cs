@@ -100,6 +100,7 @@ namespace MovieManagement.Views
                 }
         }
 
+        // ####################### INFORMATION TAB #######################
         // ========== Get attached data when Navigate from User_Home.xaml
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -136,11 +137,21 @@ namespace MovieManagement.Views
             flyout.ShowAt(sender as FrameworkElement);
         }
 
+        // -- Event Click for Back Button
+        private void BackButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+        {
+            this.Frame.GoBack();
+        }
+
+        private void ShowTimeButton_Click(object sender, RoutedEventArgs e)
+        {
+            int showTimePivotIndex = 1;
+            MainPivot.SelectedIndex = showTimePivotIndex;
+        }
 
 
 
-
-
+        // ###################### SHOWTIME TAB ######################
         // -- Event Window Size Changed
         private void OnWindowSizeChanged(object sender, SizeChangedEventArgs eventArgs)
         {
@@ -193,11 +204,7 @@ namespace MovieManagement.Views
         }
 
 
-        // -- Event Click for Back Button
-        private void BackButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
-        {
-            this.Frame.GoBack();
-        }
+
 
 
     }
