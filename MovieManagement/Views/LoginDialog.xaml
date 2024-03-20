@@ -9,13 +9,26 @@
     mc:Ignorable="d"
     >
 
-    <StackPanel Width="400">
+    <StackPanel Width="360">
 
         <!-- Username TextBox -->
-        <TextBox Header="Username" PlaceholderText="Enter username" Margin="10"/>
+        <TextBlock Text="Username" FontSize="18" FontWeight="SemiBold" Margin="0, 0, 0, 8"/>
+        <TextBox x:Name="Username_TextBox" PlaceholderText="Enter username" Padding="8, 10" FontSize="16"/>
+
 
         <!-- Password TextBox -->
-        <PasswordBox Header="Password" PlaceholderText="Enter password" Margin="10"/>
+        <TextBlock Text="Password" FontSize="18" FontWeight="SemiBold" Margin="0, 20, 0, 8"/>
+        <PasswordBox  x:Name="Password_PasswordBox" PlaceholderText="Enter password" Padding="8, 10" FontSize="16"/>
 
+        <!-- Buttons -->
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Margin="0, 28, 0, 0">
+            <!-- Login Button -->
+            <Button Content="Login" Click="LoginButton_Click" HorizontalAlignment="Stretch"
+                    Padding="8, 10" FontSize="18" FontWeight="SemiBold" Background="{StaticResource SystemAccentColorLight1}"/>
+
+            <!-- Cancel Button -->
+            <Button Content="Cancel" Click="CancelButton_Click" Margin="0,24,0,0" HorizontalAlignment="Right"/>
+        </StackPanel>
+        
     </StackPanel>
 </Page>

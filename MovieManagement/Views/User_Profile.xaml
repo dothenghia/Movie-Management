@@ -19,6 +19,7 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
+        <!-- ==================== Illustration Image ==================== -->
         <StackPanel Grid.Row="0" Grid.Column="0"
                     HorizontalAlignment="Center" VerticalAlignment="Center">
             <Image Source="ms-appx:///Assets/watch_illustration.png" Stretch="Uniform"
@@ -26,14 +27,29 @@
         </StackPanel>
 
 
+        <!-- ==================== Access button control ==================== -->
         <StackPanel Grid.Row="0" Grid.Column="1"
                     HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock Text="Explore the amazing movie world !" Style="{StaticResource TitleTextBlockStyle}"/>
 
             <StackPanel Orientation="Horizontal" Margin="0, 20, 0, 0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Button Content="Log in" Click="LoginButton_Click"/>
+                <!-- Login Button -->
+                <Button Grid.Row="1" HorizontalAlignment="Stretch" Click="LoginButton_Click"
+                        Padding="20, 14" CornerRadius="8">
+                    <StackPanel Orientation="Horizontal">
+                        <FontIcon Glyph="&#xE899;" FontSize="28" Margin="0,0,10,0"/>
+                        <TextBlock Text="Log In" FontSize="24"/>
+                    </StackPanel>
+                </Button>
 
-                <Button Content="Sign up" Click="SignupButton_Click" Margin="20, 0, 0, 0"/>
+                <!-- Signup Button -->
+                <Button Grid.Row="1" HorizontalAlignment="Stretch" Click="SignupButton_Click"
+                        Margin="24, 0, 0, 0" Padding="20, 14" CornerRadius="8">
+                    <StackPanel Orientation="Horizontal">
+                        <FontIcon Glyph="&#xE70F;" FontSize="28" Margin="0,0,10,0"/>
+                        <TextBlock Text="Sign Up" FontSize="24"/>
+                    </StackPanel>
+                </Button>
             </StackPanel>
         </StackPanel>
 

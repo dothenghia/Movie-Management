@@ -7,25 +7,42 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
-
 namespace MovieManagement.Views
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
+    public delegate void DialogClosedEventHandler();
+
     public sealed partial class LoginDialog : Page
     {
+        public event DialogClosedEventHandler LoginDialogClosed;
+
         public LoginDialog()
         {
             this.InitializeComponent();
+        }
+
+        // ====== Event Click for Cancel button
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            ContentDialog parentDialog = this.Parent as ContentDialog;
+            if (parentDialog != null)
+            {
+                parentDialog.Hide();
+
+                LoginDialogClosed?.Invoke();
+            }
+        }
+
+        // ====== Event Click for Login button
+        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }
