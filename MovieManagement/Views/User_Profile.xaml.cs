@@ -31,58 +31,37 @@ namespace MovieManagement.Views
             dialog.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
             dialog.Title = "Log in";
             dialog.Content = new LoginDialog();
-            (dialog.Content as LoginDialog).LoginDialogClosed += OnLoginDialogClosed;
+            (dialog.Content as LoginDialog).LoginValid += OnLoginDialogSuccess;
             await dialog.ShowAsync();
         }
-
-        // ====== Listener for Login Dialog Closed event
-        private void OnLoginDialogClosed()
+        // ====== Listener for Login Dialog Success event
+        private void OnLoginDialogSuccess()
         {
-            Debug.WriteLine("Login Dialog Closed");
-            GlobalContext.SetGo2Setting(true);
-            GlobalContext.SetUserID(1);
-            Frame.Navigate(typeof(User_Setting));
+            var currentWindow = (Application.Current as App)?.m_window as MainWindow;
+            var adminWindow = new MainWindow(1);
+            adminWindow.Activate();
+            currentWindow.Close();
         }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        // ====== Event Click for Signup button
+        // ====== Event Click for Signup button => Show SignupDialog
         private async void SignupButton_Click(object sender, RoutedEventArgs e)
         {
             ContentDialog dialog = new ContentDialog();
-
-            // XamlRoot must be set in the case of a ContentDialog running in a Desktop app
             dialog.XamlRoot = this.XamlRoot;
             dialog.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
             dialog.Title = "Sign up";
-            dialog.PrimaryButtonText = "Sign up";
-            dialog.CloseButtonText = "Cancel";
-            dialog.DefaultButton = ContentDialogButton.Primary;
             dialog.Content = new SignupDialog();
-
-            var result = await dialog.ShowAsync();
-
-            if (result == ContentDialogResult.Primary)
-            {
-                var currentWindow = (Application.Current as App)?.m_window as MainWindow;
-                var adminWindow = new MainWindow(1);
-                adminWindow.Activate();
-                currentWindow.Close();
-            }
+            (dialog.Content as SignupDialog).SignupValid += OnSignupDialogSuccess;
+            await dialog.ShowAsync();
+        }
+        // ====== Listener for Login Dialog Closed event
+        private void OnSignupDialogSuccess()
+        {
+            GlobalContext.SetGo2Setting(true);
+            GlobalContext.SetUserID(1);
+            Frame.Navigate(typeof(User_Setting));
         }
     }
 }

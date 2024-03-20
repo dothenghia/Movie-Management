@@ -16,11 +16,11 @@ using Windows.Foundation.Collections;
 
 namespace MovieManagement.Views
 {
-    public delegate void DialogClosedEventHandler();
+    public delegate void LoginDialogClosedEventHandler();
 
     public sealed partial class LoginDialog : Page
     {
-        public event DialogClosedEventHandler LoginDialogClosed;
+        public event LoginDialogClosedEventHandler LoginValid;
 
         public LoginDialog()
         {
@@ -31,18 +31,24 @@ namespace MovieManagement.Views
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             ContentDialog parentDialog = this.Parent as ContentDialog;
-            if (parentDialog != null)
-            {
+            if (parentDialog != null) {
                 parentDialog.Hide();
-
-                LoginDialogClosed?.Invoke();
             }
         }
 
         // ====== Event Click for Login button
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            ContentDialog parentDialog = this.Parent as ContentDialog;
+            if (parentDialog != null)
+            {
+                parentDialog.Hide();
+
+                // ====== Check if login is valid
+                LoginValid?.Invoke();
+
+                
+            }
         }
     }
 }

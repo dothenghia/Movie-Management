@@ -13,19 +13,38 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
-
 namespace MovieManagement.Views
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
+    public delegate void SignupDialogClosedEventHandler();
+
     public sealed partial class SignupDialog : Page
     {
+        public event SignupDialogClosedEventHandler SignupValid;
+
         public SignupDialog()
         {
             this.InitializeComponent();
+        }
+
+        // ====== Event Click for Cancel button
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            ContentDialog parentDialog = this.Parent as ContentDialog;
+            if (parentDialog != null) {
+                parentDialog.Hide();
+            }
+        }
+
+        // ====== Event Click for Signup button
+        private void SignupButton_Click(object sender, RoutedEventArgs e)
+        {
+            ContentDialog parentDialog = this.Parent as ContentDialog;
+            if (parentDialog != null)
+            {
+                parentDialog.Hide();
+
+                SignupValid?.Invoke();
+            }
         }
     }
 }

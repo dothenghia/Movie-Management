@@ -19,15 +19,15 @@
 
             <NavigationView.MenuItems>
                 <!-- ====== Home Tag ====== -->
-                <NavigationViewItem Content="Home" Tag="Home_NavgationTag" x:Name="Home_NavgationItem" Icon="Home"/>
+                <NavigationViewItem Content="Home" Tag="Home_NavgationTag" Icon="Home"/>
 
                 <!-- ====== My Tickets Tag ====== -->
-                <NavigationViewItem Content="My Tickets" Tag="Ticket_NavgationTag" x:Name="Ticket_NavgationItem" Icon="Calendar" />
+                <NavigationViewItem Content="My Tickets" Tag="Ticket_NavgationTag" Icon="Calendar" />
 
 
                 <!-- ====== TEMPTEMPTEMP ====== -->
-                <NavigationViewItem Content="Xuất Vé (Temp)" Tag="ExportTicket_NavgationTag" x:Name="ExportTicket_NavgationItem" Icon="Calendar" />
-                <NavigationViewItem Content="Open Admin (Temp)" Tag="Admin_NavgationTag" x:Name="Admin_NavgationItem" Icon="Calendar" />
+                <NavigationViewItem Content="Xuất Vé (Temp)" Tag="ExportTicket_NavgationTag" Icon="Calendar" />
+                <NavigationViewItem Content="Open Admin (Temp)" Tag="Admin_NavgationTag" Icon="Calendar" />
 
                 
                 
@@ -42,7 +42,7 @@
 
             <!-- ====== Profile Tag ====== -->
             <NavigationView.FooterMenuItems>
-                <NavigationViewItem Tag="Profile_NavgationTag" x:Name="Profile_NavgationItem">
+                <NavigationViewItem Tag="Profile_NavgationTag">
                     <StackPanel Orientation="Horizontal">
                         <FontIcon Glyph="&#xE776;" Margin="0,0,8,0"/>
                         <TextBlock Text="Profile"/>
