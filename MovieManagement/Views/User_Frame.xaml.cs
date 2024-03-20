@@ -29,6 +29,14 @@ namespace MovieManagement.Views
         // Navigate to the page corresponding to selected item
         private void NavigationBar_User_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
+            // Fix navigation to Setting page after login bug
+            if (GlobalContext.Go2Setting) {
+                MainContent.Navigate(typeof(Views.User_Setting));
+                GlobalContext.SetGo2Setting(false);
+                return;
+            }
+
+
             NavigationViewItem selectedItem = args.SelectedItem as NavigationViewItem;
             if (selectedItem != null)
             {
@@ -41,17 +49,16 @@ namespace MovieManagement.Views
                         MainContent.Navigate(typeof(Views.User_Ticket));
                         break;
                     case "Profile_NavgationTag":
-                        MainContent.Navigate(typeof(Views.User_Profile));
+                        if (GlobalContext.UserID == 0) { // If user is not logged in
+                            MainContent.Navigate(typeof(Views.User_Profile));
+                        }
+                        else { // If user is logged in
+                            MainContent.Navigate(typeof(Views.User_Setting));
+                        }
                         break;
 
 
                     // Temp Navigation for Test UI
-                    case "Movie_NavgationTag":
-                        MainContent.Navigate(typeof(Views.User_Movie));
-                        break;
-                    case "Setting_NavgationTag":
-                        MainContent.Navigate(typeof(Views.User_Setting));
-                        break;
                     case "Admin_NavgationTag":
                         var currentWindow = (Application.Current as App)?.m_window as MainWindow;
                         var adminWindow = new MainWindow(1);
