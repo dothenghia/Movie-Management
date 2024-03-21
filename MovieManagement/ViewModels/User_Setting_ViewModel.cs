@@ -23,6 +23,7 @@ namespace MovieManagement.ViewModels
                                select a).FirstOrDefault();
         }
 
+        // -- Update Fullname
         public void UpdateFullName(string newFullName)
         {
             if (UserInformation != null)
@@ -31,6 +32,37 @@ namespace MovieManagement.ViewModels
                 if (user != null)
                 {
                     user.Fullname = newFullName;
+                    _context.SaveChanges();
+                }
+            }
+        }
+
+        // -- Check Password
+        public bool CheckPassword(string hashedPassword)
+        {
+            if (UserInformation != null)
+            {
+                var user = _context.Accounts.Where(a => a.AccountId == UserInformation.AccountId).FirstOrDefault();
+                if (user != null)
+                {
+                    if (user.Password == hashedPassword)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        // -- Update Password
+        public void UpdatePassword(string newPassword)
+        {
+            if (UserInformation != null)
+            {
+                var user = _context.Accounts.Where(a => a.AccountId == UserInformation.AccountId).FirstOrDefault();
+                if (user != null)
+                {
+                    user.Password = newPassword;
                     _context.SaveChanges();
                 }
             }
