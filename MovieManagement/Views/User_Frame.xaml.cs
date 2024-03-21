@@ -33,6 +33,13 @@ namespace MovieManagement.Views
             if (GlobalContext.Go2Setting) {
                 MainContent.Navigate(typeof(Views.User_Setting));
                 GlobalContext.SetGo2Setting(false);
+
+                // Set NavigationViewItem to Profile
+                NavigationViewItem profileItem = NavigationBar_User.FooterMenuItems[0] as NavigationViewItem;
+                if (profileItem != null) {
+                    NavigationBar_User.SelectedItem = profileItem;
+                }
+
                 return;
             }
 

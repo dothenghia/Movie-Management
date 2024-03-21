@@ -125,6 +125,7 @@ namespace MovieManagement.Views
             await contentDialog.ShowAsync();
         }
 
+
         // ====== Hash password using SHA256 algorithm
         private string HashPassword(string password)
         {
@@ -142,5 +143,14 @@ namespace MovieManagement.Views
                 return builder.ToString();
             }
         }
+    
+        
+        // ========== Event Click for Logout button
+        private void Logout_Click(object sender, RoutedEventArgs e)
+        {
+            GlobalContext.SetUserID(0);
+            Frame.Navigate(typeof(User_Home));
+        }
+    
     }
 }
