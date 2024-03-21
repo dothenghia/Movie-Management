@@ -268,10 +268,11 @@
                             SelectionMode="Single"
                             Margin="0"
                             HorizontalAlignment="Center"
+                            ItemsSource="{Binding DateInWeek}"
                             ItemClick="DateGridView_ItemClick">
                             <GridView.ItemTemplate>
-                                <DataTemplate x:Name="DateShowtimes" >
-                                    <TextBlock Text="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" Style="{ThemeResource SubtitleTextBlockStyle}"/>
+                                <DataTemplate x:Name="DateShowtimes" x:DataType="x:String" >
+                                    <TextBlock Text="{Binding date}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" Style="{ThemeResource SubtitleTextBlockStyle}"/>
                                 </DataTemplate>
                             </GridView.ItemTemplate>
                             <GridView.ItemContainerStyle>
@@ -297,10 +298,10 @@
                             </GridView.ItemContainerStyle>
                         </GridView>
 
-                        <GridView  x:Name="TimeGridView" IsItemClickEnabled="True" SelectionMode="Single" Margin="10" HorizontalAlignment="Center" ItemClick="ShowTimes_ItemClick">
+                        <GridView  x:Name="TimeGridView" IsItemClickEnabled="True" SelectionMode="Single" Margin="10" HorizontalAlignment="Center" ItemClick="ShowTimes_ItemClick" ItemsSource="{Binding TimesOfDay}">
                             <GridView.ItemTemplate>
                                 <DataTemplate x:Name="TimeShowtimes" x:DataType="x:String" >
-                                    <TextBlock Text="{x:Bind}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" Style="{ThemeResource SubtitleTextBlockStyle}" />
+                                    <TextBlock Text="{Binding time}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" Style="{ThemeResource SubtitleTextBlockStyle}" />
                                 </DataTemplate>
                             </GridView.ItemTemplate>
                             <GridView.ItemContainerStyle>
@@ -340,10 +341,10 @@
                             </Grid>
                             <TextBlock Text="S C R E E N" FontSize="20" HorizontalAlignment="Center" Foreground="Orange" Style="{StaticResource SubtitleTextBlockStyle}"/>
 
-                            <ItemsRepeater ItemsSource="{x:Bind Tickets}" Margin="30">
+                            <ItemsRepeater ItemsSource="{Binding Seats}" Margin="30">
                                 <ItemsRepeater.ItemTemplate>
                                     <DataTemplate x:DataType="local:Ticket">
-                                        <ToggleButton Content="{x:Bind position}" IsEnabled="{x:Bind isAvailable}" MinHeight="50" MaxHeight="100" MinWidth="50" MaxWidth="100" Checked="ToggleButton_Checked" />
+                                        <ToggleButton Content="{Binding position}" IsEnabled="{Binding isAvailable}" MinHeight="50" MaxHeight="100" MinWidth="50" MaxWidth="100" Checked="ToggleButton_Checked" />
                                     </DataTemplate>
                                 </ItemsRepeater.ItemTemplate>
                                 <ItemsRepeater.Layout>

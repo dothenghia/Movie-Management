@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0-windows10.0.19041.0</TargetFramework>
@@ -11,9 +11,6 @@
     <UseWinUI>true</UseWinUI>
     <EnableMsixTooling>true</EnableMsixTooling>
   </PropertyGroup>
-  <ItemGroup>
-    <Compile Remove="RelayCommand.cs" />
-  </ItemGroup>
   <ItemGroup>
     <None Remove="Views\Admin_FilmCerti.xaml" />
     <None Remove="Views\Admin_FilmDirector.xaml" />
@@ -50,7 +47,11 @@
   </ItemGroup>
 
   <ItemGroup>
+<<<<<<< Updated upstream
     <PackageReference Include="CommunityToolkit.WinUI.UI.Controls.DataGrid" Version="7.1.2" />
+=======
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+>>>>>>> Stashed changes
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.28" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.28" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.28">
@@ -72,9 +73,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="RelayCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Update="Assets\avatar.jpg">

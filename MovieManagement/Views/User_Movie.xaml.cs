@@ -87,7 +87,7 @@ namespace MovieManagement.Views
                 Showtimes.Add(new Showtime(i, i, new DateTime(2024, 3, 18 + i, 13, 55, 15)));
                 Showtimes.Add(new Showtime(i, i, new DateTime(2024, 3, 18 + i, 16, 35, 15)));
             }
-            DateGridView.ItemsSource = daysOfWeek;
+            //DateGridView.ItemsSource = daysOfWeek;
             for (char j = 'A'; j <= 'C'; j++)
                 for (int i = 0; i < 10; i++)
                 {
@@ -166,19 +166,12 @@ namespace MovieManagement.Views
         // -- Event Click for DateGridView
         private void DateGridView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            if (e.ClickedItem is string selectedDate)
+            var clickItem = e.ClickedItem ;
+            if (clickItem != null&& DataContext is User_Movie_ViewModel viewModel)
             {
-                timesOfDay.Clear();
-                Debug.WriteLine(selectedDate);
-                var filteredShowtimes = Showtimes.Where(s => s.ShowDate.Date == DateTime.ParseExact(selectedDate, "dd/MM/yyyy", CultureInfo.InvariantCulture));
-                foreach (var showtime in filteredShowtimes)
-                {
-                    Debug.WriteLine($"Show time: {showtime.ShowDate.ToString("HH:mm")}");
-                    timesOfDay.Add(new String(showtime.ShowDate.ToString("HH:mm")));
-                }
-                TimeGridView.ItemsSource = timesOfDay;
+                viewModel.DateSelectionCommand.Execute(clickItem.ToString());
             }
-            SeatsSelectionMap.Visibility = Visibility.Collapsed;
+            //SeatsSelectionMap.Visibility = Visibility.Collapsed;
         }
 
 
@@ -186,6 +179,14 @@ namespace MovieManagement.Views
         private void ShowTimes_ItemClick(object sender, ItemClickEventArgs e)
         {
             SeatsSelectionMap.Visibility = Visibility.Visible;
+            seats = "";
+            TextBlock textBlock = SeatsSelection;
+            SeatsSelection.Text = "";
+            var clickItem = e.ClickedItem;
+            if (clickItem != null &&  DataContext is User_Movie_ViewModel viewModel)
+            {
+                viewModel.ShowtimeSelectionCommand.Execute(clickItem.ToString());
+            }
         }
         string seats = "";
 
@@ -195,7 +196,6 @@ namespace MovieManagement.Views
         {
             var selectedToggleButton = sender as ToggleButton;
             TextBlock textBlock = SeatsSelection;
-
             if (selectedToggleButton != null)
             {
                 seats += selectedToggleButton.Content.ToString() + " ";
