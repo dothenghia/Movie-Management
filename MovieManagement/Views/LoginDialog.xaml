@@ -20,7 +20,7 @@
         <PasswordBox  x:Name="Password_PasswordBox" PlaceholderText="Enter password" Padding="8, 10" FontSize="16"/>
 
         <!-- Buttons -->
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Margin="0, 28, 0, 0">
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Margin="0, 32, 0, 0">
             <!-- Login Button -->
             <Button Content="Log in" Click="LoginButton_Click" HorizontalAlignment="Stretch"
                     Padding="8, 10" FontSize="18" FontWeight="SemiBold" Background="{StaticResource SystemAccentColorLight1}"/>

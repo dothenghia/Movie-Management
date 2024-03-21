@@ -13,26 +13,35 @@
 
         <!-- Username TextBox -->
         <TextBlock Text="Username" FontSize="18" FontWeight="SemiBold" Margin="0, 0, 0, 8"/>
-        <TextBox x:Name="Username_TextBox" PlaceholderText="Enter username" Padding="8, 10" FontSize="16"/>
+        <TextBox x:Name="Username_TextBox" 
+                 PlaceholderText="Enter username" Padding="8, 8" FontSize="16"/>
         
         <!-- Password TextBox -->
         <TextBlock Text="Password" FontSize="18" FontWeight="SemiBold" Margin="0, 20, 0, 8"/>
-        <PasswordBox  x:Name="Password_PasswordBox" PlaceholderText="Enter password" Padding="8, 10" FontSize="16"/>
+        <PasswordBox  x:Name="Password_PasswordBox" 
+                      PlaceholderText="Enter password" Padding="8, 8" FontSize="16"/>
 
-        <!-- Confirm Password TextBox -->
-        <PasswordBox Header="Confirm Password" PlaceholderText="Confirm password" Margin="10"/>
+        <!-- Fullname TextBox -->
+        <TextBlock Text="Fullname" FontSize="18" FontWeight="SemiBold" Margin="0, 20, 0, 8"/>
+        <TextBox x:Name="Fullname_TextBox" 
+                 PlaceholderText="Enter full name" Padding="8, 8" FontSize="16"/>
+        
+        <!-- DOB CalendarDatePicker -->
+        <TextBlock Text="Date of Birth" FontSize="18" FontWeight="SemiBold" Margin="0, 20, 0, 8"/>
+        <DatePicker x:Name="DOB_DatePicker" FontSize="16"/>
 
         <!-- Gender RadioButtons -->
-        <RadioButtons Header="Gender">
-            <RadioButton Content="Male" Margin="10, 4, 0, 0"/>
-            <RadioButton Content="Female" Margin="10, 4, 0, 0"/>
+        <TextBlock Text="Gender" FontSize="18" FontWeight="SemiBold" Margin="0, 20, 0, 8"/>
+        <RadioButtons>
+            <RadioButton Content="Male" Margin="0, -14, 0, 0"/>
+            <RadioButton Content="Female" Margin="0, -10, 0, 0"/>
         </RadioButtons>
 
         <!-- Buttons -->
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Margin="0, 28, 0, 0">
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Margin="0, 16, 0, 0">
             <!-- Signup Button -->
             <Button Content="Sign up" Click="SignupButton_Click" HorizontalAlignment="Stretch"
-                    Padding="8, 10" FontSize="18" FontWeight="SemiBold" Background="{StaticResource SystemAccentColorLight1}"/>
+                    Padding="8, 8" FontSize="18" FontWeight="SemiBold" Background="{StaticResource SystemAccentColorLight1}"/>
 
             <!-- Cancel Button -->
             <Button Content="Cancel" Click="CancelButton_Click" Margin="0,24,0,0" HorizontalAlignment="Right"/>

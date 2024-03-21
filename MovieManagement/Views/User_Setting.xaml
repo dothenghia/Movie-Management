@@ -9,16 +9,57 @@
     mc:Ignorable="d"
     >
 
-    <!-- CODE VAO DAY -->
+    <!-- ==================== PAGE CONTENT ==================== -->
     <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <StackPanel Margin="32,0,32, 60">
-            <TextBlock Text="Change your name" Style ="{StaticResource TitleTextBlockStyle}"/>
-            <TextBox Width ="300" Header="Enter your name:" PlaceholderText="Name" />
-            <TextBlock Text="Change your password" Style ="{StaticResource TitleTextBlockStyle}" />
-            <PasswordBox Width="300" Header="Your recent password" PlaceholderText="*********" PasswordChar="*"  />
-            <PasswordBox Width="300" Header="Type new password" PlaceholderText="*********" PasswordChar="*"  />
-            <PasswordBox Width="300" Header="Retype new password" PlaceholderText="*********" PasswordChar="*" />
-            <Button Content="Save changes" Background="Cyan" HorizontalAlignment ="Right"/>
+        <StackPanel Margin="32,20,32, 60" Width="600" HorizontalAlignment="Center">
+            
+            <TextBlock Text="My Profile" Style ="{StaticResource TitleTextBlockStyle}"/>
+
+            <StackPanel CornerRadius="12" Padding="20, 16, 20, 22" Margin="0, 20, 0, 0"
+                        Background="{StaticResource AcrylicBackgroundFillColorDefaultBrush}">
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon Glyph="&#xE77B;" FontSize="26" Margin="0,0,8,0"/>
+                    <TextBlock Text="Profile Details" FontSize="22" FontWeight="SemiBold"/>
+                </StackPanel>
+                
+                <!-- User name -->
+                <TextBlock Text="Username" FontSize="18" FontWeight="SemiBold" Margin="0, 12, 0, 8"/>
+                <TextBox x:Name="Username_TextBox" IsReadOnly="True" Text="123" Background="{StaticResource AcrylicBackgroundFillColorDefaultBrush}"
+                         PlaceholderText="Enter username" Padding="8, 10" FontSize="16"/>
+
+                <!-- Full name -->
+                <TextBlock Text="Full Name" FontSize="18" FontWeight="SemiBold" Margin="0, 20, 0, 8"/>
+                <TextBox x:Name="Fullname_TextBox" 
+                         PlaceholderText="Enter full name" Padding="8, 10" FontSize="16"/>
+
+                <Button Content="Save changes" 
+                        HorizontalAlignment ="Right"  Margin="0, 20, 0, 0" Padding="14, 10" FontSize="16"/>
+            </StackPanel>
+
+            <StackPanel CornerRadius="12" Padding="20, 16, 20, 22" Margin="0, 24, 0, 0"
+                        Background="{StaticResource AcrylicBackgroundFillColorDefaultBrush}">
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon Glyph="&#xE755;" FontSize="28" Margin="0,0,8,0"/>
+                    <TextBlock Text="Change Password" FontSize="22" FontWeight="SemiBold"/>
+                </StackPanel>
+
+                <!-- Full name -->
+                <TextBlock Text="Current Password" FontSize="18" FontWeight="SemiBold" Margin="0, 20, 0, 8"/>
+                <PasswordBox  x:Name="Currentpass_PasswordBox" 
+                              PlaceholderText="Enter Current password" Padding="8, 10" FontSize="16"/>
+
+                <TextBlock Text="New Password" FontSize="18" FontWeight="SemiBold" Margin="0, 20, 0, 8"/>
+                <PasswordBox  x:Name="Newpass_PasswordBox" 
+                              PlaceholderText="Enter Current password" Padding="8, 10" FontSize="16"/>
+
+                <TextBlock Text="Confirm New Password" FontSize="18" FontWeight="SemiBold" Margin="0, 20, 0, 8"/>
+                <PasswordBox  x:Name="Confirmpass_PasswordBox" 
+                              PlaceholderText="Enter Current password" Padding="8, 10" FontSize="16"/>
+
+                <Button Content="Save changes" 
+                        HorizontalAlignment ="Right"  Margin="0, 20, 0, 0" Padding="14, 10" FontSize="16"/>
+            </StackPanel>
+
         </StackPanel>
 
 
