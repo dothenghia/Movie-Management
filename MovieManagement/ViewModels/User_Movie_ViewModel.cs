@@ -19,9 +19,8 @@ namespace MovieManagement.ViewModels
     public class User_Movie_ViewModel : ViewModelBase
     {
         // Get database context
-        private readonly DB_MovieManagementContext _context = new DB_MovieManagementContext();
+        private DB_MovieManagementContext _context = new DB_MovieManagementContext();
 
-        // 
         public dynamic MovieInformation { get; set; }
         public ObservableCollection<dynamic> TimesOfDay { get; set;} = new ObservableCollection<dynamic>();
         public ObservableCollection<dynamic> MovieDirectors { get; set; }

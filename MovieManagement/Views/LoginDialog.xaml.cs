@@ -51,17 +51,17 @@ namespace MovieManagement.Views
             string password = Password_PasswordBox.Password;
 
             // -- Validate username and password
-            Regex regex = new Regex(@"^[A-Za-z0-9]{3,10}$");
+            Regex regex = new Regex(@"^[A-Za-z0-9]{3,20}$");
             if (!regex.IsMatch(username))
             {
-                MessageBox.Text = "Username must contain only letters and numbers \nAnd have length of 3 to 10 characters.";
+                MessageBox.Text = "Username must contain only letters and numbers \nAnd have length of 3 to 20 characters.";
                 Flyout flyout = FlyoutBase.GetAttachedFlyout(Username_TextBox) as Flyout;
                 flyout.ShowAt(Username_TextBox);
                 return;
             }
             if (!regex.IsMatch(password))
             {
-                MessageBox.Text = "Password must contain only letters and numbers \nAnd have length of 3 to 10 characters.";
+                MessageBox.Text = "Password must contain only letters and numbers \nAnd have length of 3 to 20 characters.";
                 Flyout flyout = FlyoutBase.GetAttachedFlyout(Password_PasswordBox) as Flyout;
                 flyout.ShowAt(Password_PasswordBox);
                 return;

@@ -10,48 +10,76 @@
     >
 
     <!-- ==================== PAGE CONTENT ==================== -->
-    <Grid Margin="20, 10">
-        <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
+    <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <StackPanel Margin="32, 20, 32, 0">
+            <Grid Margin="20, 10">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
 
-        <!-- ==================== Illustration Image ==================== -->
-        <StackPanel Grid.Row="0" Grid.Column="0"
-                    HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Image Source="ms-appx:///Assets/watch_illustration.png" Stretch="Uniform"
-                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        </StackPanel>
+                <!-- ==================== Illustration Image ==================== -->
+                <StackPanel Grid.Row="0" Grid.Column="0"
+                            HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Image Source="ms-appx:///Assets/watch_illustration.png" Stretch="Uniform"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </StackPanel>
 
 
-        <!-- ==================== Access button control ==================== -->
-        <StackPanel Grid.Row="0" Grid.Column="1"
-                    HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock Text="Explore the amazing movie world !" Style="{StaticResource TitleTextBlockStyle}"/>
+                <!-- ==================== Access button control ==================== -->
+                <StackPanel Grid.Row="0" Grid.Column="1"
+                            HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="Explore the amazing movie world !" Style="{StaticResource TitleTextBlockStyle}"/>
 
-            <StackPanel Orientation="Horizontal" Margin="0, 20, 0, 0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <!-- Login Button -->
-                <Button Grid.Row="1" HorizontalAlignment="Stretch" Click="LoginButton_Click"
-                        Padding="20, 14" CornerRadius="8">
-                    <StackPanel Orientation="Horizontal">
-                        <FontIcon Glyph="&#xE899;" FontSize="28" Margin="0,0,10,0"/>
-                        <TextBlock Text="Log In" FontSize="24"/>
+                    <StackPanel Orientation="Horizontal" Margin="0, 20, 0, 0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <!-- Login Button -->
+                        <Button Grid.Row="1" HorizontalAlignment="Stretch" Click="LoginButton_Click"
+                                Padding="20, 14" CornerRadius="8">
+                            <StackPanel Orientation="Horizontal">
+                                <FontIcon Glyph="&#xE899;" FontSize="28" Margin="0,0,10,0"/>
+                                <TextBlock Text="Log In" FontSize="24"/>
+                            </StackPanel>
+                        </Button>
+
+                        <!-- Signup Button -->
+                        <Button Grid.Row="1" HorizontalAlignment="Stretch" Click="SignupButton_Click"
+                                Margin="24, 0, 0, 0" Padding="20, 14" CornerRadius="8">
+                            <StackPanel Orientation="Horizontal">
+                                <FontIcon Glyph="&#xE70F;" FontSize="28" Margin="0,0,10,0"/>
+                                <TextBlock Text="Sign Up" FontSize="24"/>
+                            </StackPanel>
+                        </Button>
                     </StackPanel>
-                </Button>
+                </StackPanel>
 
-                <!-- Signup Button -->
-                <Button Grid.Row="1" HorizontalAlignment="Stretch" Click="SignupButton_Click"
-                        Margin="24, 0, 0, 0" Padding="20, 14" CornerRadius="8">
-                    <StackPanel Orientation="Horizontal">
-                        <FontIcon Glyph="&#xE70F;" FontSize="28" Margin="0,0,10,0"/>
-                        <TextBlock Text="Sign Up" FontSize="24"/>
+            </Grid>
+
+            <!-- ==================== Footer ==================== -->
+            <Grid Margin="-32, 40, -32, 0" Padding="68, 20, 68, 20" Background="{StaticResource AcrylicBackgroundFillColorBaseBrush}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                    <Image Source="ms-appx:///Assets/logo.png"/>
+                    <TextBlock Text="Heart Steel Movie" Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Center" Margin="20, 0, 0, 0"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Orientation="Vertical" Spacing="8">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <FontIcon Glyph="&#xE899;" FontSize="18"/>
+                        <TextBlock Text="Team Members" FontSize="18" Margin="8, 0, 0, 0"/>
                     </StackPanel>
-                </Button>
-            </StackPanel>
-        </StackPanel>
+                    <TextBlock Text="21127367 - Đỗ Thế Nghĩa" FontSize="17" HorizontalAlignment="Right"/>
+                    <TextBlock Text="21127384 - Dương Hạnh Nhi" FontSize="17" HorizontalAlignment="Right"/>
+                    <TextBlock Text="21127461 - Lê Thành Trung" FontSize="17" HorizontalAlignment="Right"/>
 
-    </Grid>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+    </ScrollViewer>
 </Page>
