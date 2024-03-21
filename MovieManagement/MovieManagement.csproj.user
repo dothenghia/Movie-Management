@@ -11,7 +11,10 @@
     <None Update="Package.appxmanifest">
       <SubType>Designer</SubType>
     </None>
-    <Page Update="Views\ContentDialogContent.xaml">
+    <Page Update="Views\ConfirmDeleteDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\MovieInfoDialog.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Themes\Generic.xaml">

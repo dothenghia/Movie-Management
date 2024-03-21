@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="MovieManagement.Views.MovieInfoDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" >
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <!-- Content body -->
+        <StackPanel Grid.Column="0" Margin="0,0,20,0">
+            <TextBlock Text="Poster" Margin="0,0,0,10"/>
+            <Image x:Name="PosterImage" Source="{Binding PosterUrl}" Stretch="Uniform"/>
+            <Button Content="Upload Photo" Click="UploadPhotoButton_Click"/>
+            <TextBox Header="Enter Movie Title:" Text="{Binding Title}"/>
+            <TextBox Header="Description: " Text="{Binding Description}" />
+        </StackPanel>
+        <StackPanel Grid.Column="1">
+            <ComboBox Header="Select Genre" PlaceholderText="Genre" ItemsSource="{x:Bind GenresList}" SelectedItem="{Binding Genre}"/>
+            <TextBox Header="Enter Duration:" Text="{Binding Duration}"/>
+            <TextBox Header="Enter Published Year:" Text="{Binding PublishYear}"/>
+            <TextBox Header="Enter iMDB Score:" Text="{Binding ImdbScore}"/>
+            <ComboBox Header="Select Age Certificate:" PlaceholderText="Age Certification" ItemsSource="{x:Bind AgeCertificatesList}" SelectedItem="{Binding AgeCertificateContent}"/>
+        </StackPanel>
+    </Grid>
+
+</Page>

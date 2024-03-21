@@ -45,9 +45,9 @@
                     <Setter Property="FontWeight" Value="Bold" />
                     <Setter Property="HorizontalContentAlignment" Value="Center" />
                 </Style>
-                <Style TargetType="controls:DataGridCell">
+                <!--<Style TargetType="controls:DataGridCell">
                     <Setter Property="IsHitTestVisible" Value="False"/>
-                </Style>
+                </Style>-->
 
             </controls:DataGrid.Resources>
             <controls:DataGrid.Columns>
@@ -75,7 +75,7 @@
                 <controls:DataGridTextColumn Header="Duration" Width="*" Binding="{Binding Duration}" />
                 <controls:DataGridTextColumn Header="Publish&#x0a;Year" Width="*" Binding="{Binding PublishYear}" />
                 <controls:DataGridTextColumn Header="iMDB&#x0a;Score" Width="*" Binding="{Binding ImdbScore}" />
-                <controls:DataGridTextColumn Header="Age&#x0a;Certification" Width="*" Binding="{Binding AgeCertificateContent}" />
+                <controls:DataGridTextColumn Header="Age&#x0a;Certification" Width="SizeToHeader" Binding="{Binding AgeCertificateContent}" />
 
                 <controls:DataGridTemplateColumn Width="SizeToCells">
                     <controls:DataGridTemplateColumn.CellTemplate >

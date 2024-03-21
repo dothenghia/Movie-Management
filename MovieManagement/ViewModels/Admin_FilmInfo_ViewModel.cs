@@ -13,8 +13,11 @@ namespace MovieManagement.ViewModels
         // Get database context
         private readonly DB_MovieManagementContext _context = new DB_MovieManagementContext();
         public ObservableCollection<dynamic> FilmInfo { get; set; } = new ObservableCollection<dynamic>();
-
-        public Admin_FilmInfo_ViewModel() 
+        public ObservableCollection<dynamic> Genres { get; set; }
+        public List<string> GenresList { get; set; } = new List<string>();
+        public ObservableCollection<dynamic> AgeCertificates { get; set; }
+        public List<string> AgeCertificatesList { get; set; } = new List<string>();
+        public Admin_FilmInfo_ViewModel()
         {
             var allMovies = (from m in _context.Movies
                              join a in _context.AgeCertificates on m.AgeCertificateId equals a.AgeCertificateId
@@ -36,21 +39,41 @@ namespace MovieManagement.ViewModels
                              }).ToList();
             foreach (var movie in allMovies)
             {
-                    FilmInfo.Add(new
-                    {
-                        MovieId = movie.MovieId,
-                        Title = movie.Title,
-                        Duration = movie.Duration + "m",
-                        PublishYear = movie.PublishYear,
-                        ImdbScore = movie.ImdbScore,
-                        AgeCertificateContent = movie.AgeCertificateContent,
-                        PosterUrl = movie.PosterUrl,
-                        TrailerUrl = movie.TrailerUrl,
-                        Description = movie.Description,
-                        Genre = movie.Genre,
-                        AgeBackground = movie.AgeBackground,
-                        AgeForeground = movie.AgeForeground
-                    });      
+                FilmInfo.Add(new
+                {
+                    MovieId = movie.MovieId,
+                    Title = movie.Title,
+                    Duration = movie.Duration + "m",
+                    PublishYear = movie.PublishYear,
+                    ImdbScore = movie.ImdbScore,
+                    AgeCertificateContent = movie.AgeCertificateContent,
+                    PosterUrl = movie.PosterUrl,
+                    TrailerUrl = movie.TrailerUrl,
+                    Description = movie.Description,
+                    Genre = movie.Genre,
+                    AgeBackground = movie.AgeBackground,
+                    AgeForeground = movie.AgeForeground
+                });
+            }
+            Genres = new ObservableCollection<dynamic> ((from g in _context.Genres
+                                                        select new 
+                                                        {
+                                                           g.GenreName
+                                                        }).ToList());
+            foreach (var g in Genres)
+            {
+                string genreName = g.GenreName;
+                GenresList.Add(genreName);
+            }
+            AgeCertificates = new ObservableCollection<dynamic>((from a in _context.AgeCertificates
+                                                        select new
+                                                        {
+                                                            a.DisplayContent
+                                                        }).ToList());
+            foreach (var a in AgeCertificates)
+            {
+                string content = a.DisplayContent;
+                AgeCertificatesList.Add(content);
             }
         }
     }
