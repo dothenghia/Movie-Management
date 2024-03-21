@@ -9,32 +9,55 @@
     mc:Ignorable="d"
     >
 
+    <!-- ==================== Define Page Resources ==================== -->
+    <Page.Resources>
+        <!-- Define a Flyout for displaying error message -->
+        <Flyout x:Key="ErrorMessage_Flyout" x:Name="ErrorMessage_Flyout" Placement="Bottom">
+            <Flyout.FlyoutPresenterStyle>
+                <Style TargetType="FlyoutPresenter">
+                    <Setter Property="Background" Value="{StaticResource AcrylicBackgroundFillColorBaseBrush}"/>
+                    <Setter Property="BorderBrush" Value="{StaticResource AccentAAFillColorDefaultBrush}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="Padding" Value="12, 8, 12, 12"/>
+                    <Setter Property="CornerRadius" Value="6"/>
+                </Style>
+            </Flyout.FlyoutPresenterStyle>
+            <!-- Flyout Content -->
+            <StackPanel MaxWidth="340">
+                <TextBlock x:Name="MessageBox" TextWrapping="WrapWholeWords" Style="{StaticResource BodyTextBlockStyle}"/>
+            </StackPanel>
+        </Flyout>
+    </Page.Resources>
+    
+    
+    <!-- ==================== PAGE CONTENT ==================== -->
     <StackPanel Width="360">
 
         <!-- Username TextBox -->
         <TextBlock Text="Username" FontSize="18" FontWeight="SemiBold" Margin="0, 0, 0, 8"/>
-        <TextBox x:Name="Username_TextBox" 
-                 PlaceholderText="Enter username" Padding="8, 8" FontSize="16"/>
+        <TextBox x:Name="Username_TextBox" PlaceholderText="Enter username" Padding="8, 8" FontSize="16"
+                 FlyoutBase.AttachedFlyout="{StaticResource ErrorMessage_Flyout}"/>
         
         <!-- Password TextBox -->
         <TextBlock Text="Password" FontSize="18" FontWeight="SemiBold" Margin="0, 20, 0, 8"/>
-        <PasswordBox  x:Name="Password_PasswordBox" 
-                      PlaceholderText="Enter password" Padding="8, 8" FontSize="16"/>
+        <PasswordBox  x:Name="Password_PasswordBox" PlaceholderText="Enter password" Padding="8, 8" FontSize="16"
+                      FlyoutBase.AttachedFlyout="{StaticResource ErrorMessage_Flyout}"/>
 
         <!-- Fullname TextBox -->
         <TextBlock Text="Fullname" FontSize="18" FontWeight="SemiBold" Margin="0, 20, 0, 8"/>
-        <TextBox x:Name="Fullname_TextBox" 
-                 PlaceholderText="Enter full name" Padding="8, 8" FontSize="16"/>
+        <TextBox x:Name="Fullname_TextBox" PlaceholderText="Enter full name" Padding="8, 8" FontSize="16"
+                 FlyoutBase.AttachedFlyout="{StaticResource ErrorMessage_Flyout}"/>
         
         <!-- DOB CalendarDatePicker -->
         <TextBlock Text="Date of Birth" FontSize="18" FontWeight="SemiBold" Margin="0, 20, 0, 8"/>
-        <DatePicker x:Name="DOB_DatePicker" FontSize="16"/>
+        <DatePicker x:Name="DOB_DatePicker" FontSize="16"
+                    FlyoutBase.AttachedFlyout="{StaticResource ErrorMessage_Flyout}"/>
 
         <!-- Gender RadioButtons -->
         <TextBlock Text="Gender" FontSize="18" FontWeight="SemiBold" Margin="0, 20, 0, 8"/>
-        <RadioButtons>
-            <RadioButton Content="Male" Margin="0, -14, 0, 0"/>
-            <RadioButton Content="Female" Margin="0, -10, 0, 0"/>
+        <RadioButtons x:Name="Gender_RadioButtons">
+            <RadioButton x:Name="Male_RadioButton" Content="Male" Margin="0, -14, 0, 0" IsChecked="True"/>
+            <RadioButton x:Name="Female_RadioButton" Content="Female" Margin="0, -10, 0, 0"/>
         </RadioButtons>
 
         <!-- Buttons -->

@@ -37,10 +37,7 @@ namespace MovieManagement.Views
         // ====== Listener for Login Dialog Success event
         private void OnLoginDialogSuccess()
         {
-            var currentWindow = (Application.Current as App)?.m_window as MainWindow;
-            var adminWindow = new MainWindow(1);
-            adminWindow.Activate();
-            currentWindow.Close();
+            Frame.Navigate(typeof(User_Setting));
         }
 
 
@@ -59,8 +56,6 @@ namespace MovieManagement.Views
         // ====== Listener for Login Dialog Closed event
         private void OnSignupDialogSuccess()
         {
-            GlobalContext.SetGo2Setting(true);
-            GlobalContext.SetUserID(1);
             Frame.Navigate(typeof(User_Setting));
         }
     }
