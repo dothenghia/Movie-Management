@@ -53,6 +53,7 @@ namespace MovieManagement.Views
 
     public sealed partial class User_Movie : Page
     {
+        
         public int MovieID;
         public FrameworkElement ParentFrame;
 
@@ -174,7 +175,7 @@ namespace MovieManagement.Views
             //SeatsSelectionMap.Visibility = Visibility.Collapsed;
         }
 
-
+        
         // -- Event Click for TimeGridView
         private void ShowTimes_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -188,24 +189,34 @@ namespace MovieManagement.Views
                 viewModel.ShowtimeSelectionCommand.Execute(clickItem.ToString());
             }
         }
-        string seats = "";
 
+        string seats = "";
 
         // -- Event Click for ToggleButton
         private void ToggleButton_Checked(object sender, RoutedEventArgs e)
         {
             var selectedToggleButton = sender as ToggleButton;
             TextBlock textBlock = SeatsSelection;
-            if (selectedToggleButton != null)
+            string substring = selectedToggleButton.Content.ToString();
+            if (selectedToggleButton.IsChecked == true && !seats.Contains(substring))
             {
                 seats += selectedToggleButton.Content.ToString() + " ";
                 SeatsSelection.Text = "Your selection: " + seats;
             }
+            Debug.WriteLine(seats);
         }
 
+        private void ToggleButton_Unchecked(object sender, RoutedEventArgs e)
+        {
+            var unselectedToggleButton = sender as ToggleButton;
+            string substring = unselectedToggleButton.Content.ToString();
 
-
-
+            if (seats.Contains(substring+ " "))
+            {
+                seats = seats.Replace(substring+ " ", "");
+                SeatsSelection.Text = "Your selection: " + seats;
+            }
+        }
 
     }
 }

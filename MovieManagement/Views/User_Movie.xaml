@@ -344,7 +344,7 @@
                             <ItemsRepeater ItemsSource="{Binding Seats}" Margin="30">
                                 <ItemsRepeater.ItemTemplate>
                                     <DataTemplate x:DataType="local:Ticket">
-                                        <ToggleButton Content="{Binding position}" IsEnabled="{Binding isAvailable}" MinHeight="50" MaxHeight="100" MinWidth="50" MaxWidth="100" Checked="ToggleButton_Checked" />
+                                        <ToggleButton Content="{Binding position}" IsEnabled="{Binding isAvailable}" MinHeight="50" MaxHeight="100" MinWidth="50" MaxWidth="100" Checked="ToggleButton_Checked" Unchecked="ToggleButton_Unchecked" />
                                     </DataTemplate>
                                 </ItemsRepeater.ItemTemplate>
                                 <ItemsRepeater.Layout>
@@ -356,7 +356,7 @@
 
                                 <TextBlock x:Name ="SeatsSelection" Text="Your selection: " Style="{StaticResource SubtitleTextBlockStyle}"/>
 
-                                <Button Content="Booking" HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="DarkSeaGreen"/>
+                                <Button Content="Booking" HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="DarkSeaGreen" />
 
                             </StackPanel>
                         </StackPanel>
