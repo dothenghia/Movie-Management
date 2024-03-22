@@ -16,9 +16,16 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+
         <TextBlock Grid.Row="0" Margin="20, 10" Style="{StaticResource TitleTextBlockStyle}" Text="Admin Dashboard"/>
-        <Grid Grid.Row="1" x:Name="MainGrid" Margin="20, 0, 0, 0" VerticalAlignment="Top">
+        <ComboBox PlaceholderText="Daily" Width="200" Grid.Row="1" Margin="20,10">
+            <x:String>Daily</x:String>
+            <x:String>Weekly</x:String>
+            <x:String>Monthly</x:String>
+        </ComboBox>
+        <Grid Grid.Row="2" x:Name="MainGrid" Margin="20, 0, 0, 0" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
@@ -36,8 +43,8 @@
                 <TextBlock Style="{StaticResource TitleLargeTextBlockStyle}" Text="3,265" Margin="20,10" />
             </StackPanel>
         </Grid>
-        <TextBlock Grid.Row="2" Margin="20, 10" Style="{StaticResource SubtitleTextBlockStyle}" Text="Best Seller Movies"/>
-        <ListView Grid.Row="3" ItemsSource="{x:Bind myList}" Margin="20, 0">
+        <TextBlock Grid.Row="3" Margin="20, 10" Style="{StaticResource SubtitleTextBlockStyle}" Text="Best Seller Movies"/>
+        <ListView Grid.Row="4" ItemsSource="{Binding Movies}" Margin="20, 0">
             <ListView.HeaderTemplate>
                 <DataTemplate>
                     <Grid Padding="12" Background="{ThemeResource SystemColorButtonTextColor}">
@@ -47,14 +54,14 @@
                             <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Movie" Style="{ThemeResource BodyStrongTextBlockStyle}"/>
-                        <TextBlock Grid.Column="1" Text="Director" Style="{ThemeResource BodyStrongTextBlockStyle}"/>
-                        <TextBlock Grid.Column="2" Text="No. of tickets sold" Style="{ThemeResource BodyStrongTextBlockStyle}"/>
+                        <TextBlock Grid.Column="1" Text="Genre" Style="{ThemeResource BodyStrongTextBlockStyle}"/>
+                        <TextBlock Grid.Column="2" Text="Age Certificate" Style="{ThemeResource BodyStrongTextBlockStyle}"/>
                     </Grid>
                 </DataTemplate>
             </ListView.HeaderTemplate>
             <ListView.ItemTemplate>
-                <DataTemplate x:Name="TableDataTemplate" x:DataType="local:TopTen">
-                    <Grid Height="48" AutomationProperties.Name="{x:Bind Title}">
+                <DataTemplate x:Name="TableDataTemplate">
+                    <Grid Height="48">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="1*"/>
@@ -63,12 +70,12 @@
                         </Grid.ColumnDefinitions>
                         <Rectangle Height="32" Width="64" VerticalAlignment="Center">
                             <Rectangle.Fill>
-                                <ImageBrush ImageSource="{x:Bind ImageLocation}"/>
+                                <ImageBrush ImageSource="{Binding PosterUrl}"/>
                             </Rectangle.Fill>
                         </Rectangle>
-                        <TextBlock Grid.Column="1" VerticalAlignment="Center" Style="{ThemeResource BaseTextBlockStyle}" Text="{x:Bind Title}" />
-                        <TextBlock Grid.Column="2" VerticalAlignment="Center" Style="{ThemeResource BaseTextBlockStyle}" Text="{x:Bind Title}" />
-                        <TextBlock Grid.Column="3" VerticalAlignment="Center" Text="{x:Bind TicketCount}"/>
+                        <TextBlock Grid.Column="1" VerticalAlignment="Center" Style="{ThemeResource BaseTextBlockStyle}" Text="{Binding Title}" />
+                        <TextBlock Grid.Column="2" VerticalAlignment="Center" Style="{ThemeResource BaseTextBlockStyle}" Text="{Binding GenreName}" />
+                        <TextBlock Grid.Column="3" VerticalAlignment="Center" Style="{ThemeResource BaseTextBlockStyle}" Text="{Binding DisplayContent}"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

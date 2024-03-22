@@ -12,11 +12,15 @@ namespace MovieManagement.ViewModels
     {
         // Get database context
         private readonly DB_MovieManagementContext _context = new DB_MovieManagementContext();
-
-
+        public ObservableCollection<dynamic> Genres { get; set; }
         public Admin_FilmGenre_ViewModel() 
         {
-
+            Genres = new ObservableCollection<dynamic>((from g in _context.Genres
+                                                         select new
+                                                         {
+                                                             g.GenreId,
+                                                             g.GenreName
+                                                         }).ToList());
         }
     }
 }

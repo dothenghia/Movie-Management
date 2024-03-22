@@ -12,11 +12,20 @@ namespace MovieManagement.ViewModels
     {
         // Get database context
         private readonly DB_MovieManagementContext _context = new DB_MovieManagementContext();
-
+        public ObservableCollection<dynamic> MovieStars { get; set; }
 
         public Admin_FilmStars_ViewModel() 
         {
-
+            MovieStars = new ObservableCollection<dynamic>((from c in _context.Contributors
+                                                                join p in _context.People on c.PersonId equals p.PersonId
+                                                                join r in _context.Roles on c.RoleId equals r.RoleId
+                                                                where r.RoleName == "Actor"
+                                                                select new
+                                                                {
+                                                                    p.Fullname,
+                                                                    p.AvatarUrl,
+                                                                    p.Biography,
+                                                                }).Distinct().ToList());
         }
     }
 }

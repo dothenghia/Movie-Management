@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using Windows.Graphics.Printing;
 
 namespace MovieManagement.ViewModels
 {
@@ -12,11 +13,16 @@ namespace MovieManagement.ViewModels
     {
         // Get database context
         private readonly DB_MovieManagementContext _context = new DB_MovieManagementContext();
-
+        public ObservableCollection<dynamic> Certificates { get; set; }
 
         public Admin_FilmCerti_ViewModel() 
         {
-
+            Certificates = new ObservableCollection<dynamic>((from a in _context.AgeCertificates
+                                                                select new
+                                                                {
+                                                                    a.DisplayContent,
+                                                                    a.RequireAge
+                                                                }).ToList());
         }
     }
 }

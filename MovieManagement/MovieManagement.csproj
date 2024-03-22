@@ -25,6 +25,9 @@
     <None Remove="Views\Admin_Voucher.xaml" />
     <None Remove="Views\ConfirmDeleteDialog.xaml" />
     <None Remove="Views\LoginDialog.xaml" />
+    <None Remove="Views\MovieCertiDialog.xaml" />
+    <None Remove="Views\MovieDirectorDialog.xaml" />
+    <None Remove="Views\MovieGenreDialog.xaml" />
     <None Remove="Views\MovieInfoDialog.xaml" />
     <None Remove="Views\SignupDialog.xaml" />
     <None Remove="Views\User_ExportTicket.xaml" />
@@ -91,6 +94,21 @@
     <Content Update="Assets\watch_illustration.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\MovieGenreDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\MovieCertiDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\MovieDirectorDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\ConfirmDeleteDialog.xaml">

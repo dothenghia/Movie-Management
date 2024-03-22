@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="MovieManagement.Views.MovieCertiDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <StackPanel VerticalAlignment="Stretch">
+        <TextBox Header="Certificate Name" Text="{Binding DisplayContent}"/>
+        <TextBox Header="Require Age" Text="{Binding RequireAge}"/>
+    </StackPanel>
+</Page>

@@ -5,10 +5,8 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
-//using MovieManagement.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -24,16 +22,14 @@ namespace MovieManagement.Views
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    /// 
-    public sealed partial class Admin_Main : Page
+    public sealed partial class MovieDirectorDialog : Page
     {
-        
-        // Other properties and methods
-
-        public Admin_Main()
+        public MovieDirectorDialog()
         {
             this.InitializeComponent();
-            DataContext = new Admin_Main_ViewModel();
+        }
+        private async void UploadPhotoButton_Click(object sender, RoutedEventArgs e)
+        {
         }
     }
 }

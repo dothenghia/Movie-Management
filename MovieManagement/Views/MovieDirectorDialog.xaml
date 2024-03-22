@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="MovieManagement.Views.MovieDirectorDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" >
+
+    <StackPanel VerticalAlignment="Stretch">
+        <TextBlock Text="Avatar" Margin="0,0,0,10"/>
+        <PersonPicture x:Name="AvatarImage" ProfilePicture="{Binding AvatarUrl}"/>
+        <Button Content="Upload Photo" Click="UploadPhotoButton_Click"/>
+        <TextBox Header="Full name:" Text="{Binding Fullname}"/>
+        <TextBox Header="Biography:" Text="{Binding Biography}" Height="200" TextWrapping="Wrap"/>
+    </StackPanel>
+
+</Page>
