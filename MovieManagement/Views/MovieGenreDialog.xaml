@@ -2,9 +2,36 @@
 <Page
     x:Class="MovieManagement.Views.MovieGenreDialog"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Loaded="DialogPage_Loaded">
+
+    <Page.Resources>
+        <!-- Define a Flyout for displaying error message -->
+        <Flyout x:Key="ErrorMessage_Flyout" x:Name="ErrorMessage_Flyout" Placement="Bottom">
+            <Flyout.FlyoutPresenterStyle>
+                <Style TargetType="FlyoutPresenter">
+                    <Setter Property="Background" Value="{StaticResource AcrylicBackgroundFillColorBaseBrush}"/>
+                    <Setter Property="BorderBrush" Value="{StaticResource AccentAAFillColorDefaultBrush}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="Padding" Value="12, 8, 12, 12"/>
+                    <Setter Property="CornerRadius" Value="6"/>
+                </Style>
+            </Flyout.FlyoutPresenterStyle>
+            <!-- Flyout Content -->
+            <StackPanel MaxWidth="340">
+                <TextBlock x:Name="MessageBox" TextWrapping="WrapWholeWords" Style="{StaticResource BodyTextBlockStyle}"/>
+            </StackPanel>
+        </Flyout>
+    </Page.Resources>
+
     <StackPanel VerticalAlignment="Stretch">
-        <TextBox Header="Genre Name" Text="{Binding GenreName}"/>
+        <TextBox x:Name="GenreName_TextBox" Header="Genre Name" Text="{Binding GenreName}" FlyoutBase.AttachedFlyout="{StaticResource ErrorMessage_Flyout}"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0, 16, 0, 0">
+            <!-- Save Button -->
+            <Button Content="Save" Click="SaveButton_Click" Background="{StaticResource SystemAccentColorLight1}" Margin="0,0,20,0"/>
+            <!-- Cancel Button -->
+            <Button Content="Cancel" Click="CancelButton_Click" />
+        </StackPanel>
+        <TextBlock x:Name="InvisibleTextBlock" Text="{Binding GenreId}" Visibility="Collapsed"/>
     </StackPanel>
 </Page>

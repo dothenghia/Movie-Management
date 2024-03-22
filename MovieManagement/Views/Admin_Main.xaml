@@ -9,7 +9,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -20,12 +19,8 @@
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Row="0" Margin="20, 10" Style="{StaticResource TitleTextBlockStyle}" Text="Admin Dashboard"/>
-        <ComboBox PlaceholderText="Daily" Width="200" Grid.Row="1" Margin="20,10">
-            <x:String>Daily</x:String>
-            <x:String>Weekly</x:String>
-            <x:String>Monthly</x:String>
-        </ComboBox>
-        <Grid Grid.Row="2" x:Name="MainGrid" Margin="20, 0, 0, 0" VerticalAlignment="Top">
+        
+        <Grid Grid.Row="1" x:Name="MainGrid" Margin="20, 0, 0, 0" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
@@ -34,31 +29,36 @@
             <StackPanel Grid.Column="0" CornerRadius="16" Background="{ThemeResource SystemColorWindowTextColor}"
                 VerticalAlignment="Center" Margin="20,0,20,0">
                 <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}" Text="Onsale Movie" Margin="20,10"/>
-                <TextBlock Style="{StaticResource TitleLargeTextBlockStyle}" Text="7,265" Margin="20,10" />
+                <TextBlock Style="{StaticResource TitleLargeTextBlockStyle}" Text="{Binding moviesCount}" Margin="20,10" />
             </StackPanel>
 
             <StackPanel Grid.Column="1" CornerRadius="16" Background="{ThemeResource AccentAcrylicBackgroundFillColorDefaultBrush}"
                 VerticalAlignment="Center" Margin="20,0,20,0">
-                <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}" Text="Onsale Showtime" Margin="20,10"/>
-                <TextBlock Style="{StaticResource TitleLargeTextBlockStyle}" Text="3,265" Margin="20,10" />
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch">
+                    <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}" Text="Onsale Showtime" Margin="20,10"/>
+                    <ComboBox PlaceholderText="Daily" Margin="5,5" SelectionChanged="ShowtimeComboBox_SelectionChanged">
+                        <x:String>Daily</x:String>
+                        <x:String>Weekly</x:String>
+                        <x:String>Monthly</x:String>
+                    </ComboBox>
+                </StackPanel>
+                <TextBlock x:Name="showtimesCountDisplay" Style="{StaticResource TitleLargeTextBlockStyle}" Text="{Binding showtimesDaily}" Margin="20,10" />
             </StackPanel>
         </Grid>
-        <TextBlock Grid.Row="3" Margin="20, 10" Style="{StaticResource SubtitleTextBlockStyle}" Text="Best Seller Movies"/>
-        <ListView Grid.Row="4" ItemsSource="{Binding Movies}" Margin="20, 0">
-            <ListView.HeaderTemplate>
-                <DataTemplate>
-                    <Grid Padding="12" Background="{ThemeResource SystemColorButtonTextColor}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="1*"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="Movie" Style="{ThemeResource BodyStrongTextBlockStyle}"/>
-                        <TextBlock Grid.Column="1" Text="Genre" Style="{ThemeResource BodyStrongTextBlockStyle}"/>
-                        <TextBlock Grid.Column="2" Text="Age Certificate" Style="{ThemeResource BodyStrongTextBlockStyle}"/>
-                    </Grid>
-                </DataTemplate>
-            </ListView.HeaderTemplate>
+        <TextBlock Grid.Row="2" Margin="20, 10" Style="{StaticResource SubtitleTextBlockStyle}" Text="Best Seller Movies"/>
+        <ListView Grid.Row="3" ItemsSource="{Binding Movies}" Margin="20, 0" HorizontalAlignment="Stretch" Height="500">
+            <ListView.Header>
+                <Grid Padding="12" Background="{ThemeResource SystemColorButtonTextColor}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Movie" Style="{ThemeResource BodyStrongTextBlockStyle}"/>
+                    <TextBlock Grid.Column="1" Text="Genre" Style="{ThemeResource BodyStrongTextBlockStyle}"/>
+                    <TextBlock Grid.Column="2" Text="Age Certificate" Style="{ThemeResource BodyStrongTextBlockStyle}"/>
+                </Grid>
+            </ListView.Header>
             <ListView.ItemTemplate>
                 <DataTemplate x:Name="TableDataTemplate">
                     <Grid Height="48">
@@ -68,7 +68,7 @@
                             <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
-                        <Rectangle Height="32" Width="64" VerticalAlignment="Center">
+                        <Rectangle VerticalAlignment="Center" Width="120" Height="80">
                             <Rectangle.Fill>
                                 <ImageBrush ImageSource="{Binding PosterUrl}"/>
                             </Rectangle.Fill>
@@ -81,33 +81,5 @@
             </ListView.ItemTemplate>
         </ListView>
     </Grid>
-
-
-    <VisualStateManager.VisualStateGroups>
-        <VisualStateGroup>
-            <VisualState x:Name="NarrowView">
-                <VisualState.StateTriggers>
-                    <AdaptiveTrigger MinWindowWidth="0"/>
-                </VisualState.StateTriggers>
-                <VisualState.Setters>
-                    <Setter Target="MainGrid.ColumnDefinitions[0].Width" Value="*"/>
-                    <Setter Target="MainGrid.ColumnDefinitions[1].Width" Value="0"/>
-                    <Setter Target="SecondStackPanel.Visibility" Value="Collapsed"/>
-                </VisualState.Setters>
-            </VisualState>
-
-            <VisualState x:Name="WideView">
-                <VisualState.StateTriggers>
-                    <AdaptiveTrigger MinWindowWidth="720"/>
-                </VisualState.StateTriggers>
-                <VisualState.Setters>
-                    <Setter Target="MainGrid.ColumnDefinitions[0].Width" Value="1*"/>
-                    <Setter Target="MainGrid.ColumnDefinitions[1].Width" Value="1*"/>
-                    <Setter Target="SecondStackPanel.Visibility" Value="Visible"/>
-                </VisualState.Setters>
-            </VisualState>
-        </VisualStateGroup>
-    </VisualStateManager.VisualStateGroups>
-
 
 </Page>

@@ -22,6 +22,7 @@ namespace MovieManagement.ViewModels
                                                                 where r.RoleName == "Director"
                                                                 select new
                                                                 {
+                                                                    p.PersonId,
                                                                     p.Fullname,
                                                                     p.AvatarUrl,
                                                                     p.Biography,

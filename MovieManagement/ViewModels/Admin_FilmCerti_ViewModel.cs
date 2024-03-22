@@ -20,6 +20,7 @@ namespace MovieManagement.ViewModels
             Certificates = new ObservableCollection<dynamic>((from a in _context.AgeCertificates
                                                                 select new
                                                                 {
+                                                                    a.AgeCertificateId,
                                                                     a.DisplayContent,
                                                                     a.RequireAge
                                                                 }).ToList());

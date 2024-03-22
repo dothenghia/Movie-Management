@@ -19,8 +19,7 @@
                 <TextBlock Text="  Add New Genre"/>
             </StackPanel>
         </Button>
-        <controls:DataGrid x:Name="FilmGenre_DataGrid" 
-    Height="600" CanUserResizeColumns="False" CanUserReorderColumns="False" 
+        <controls:DataGrid x:Name="FilmGenre_DataGrid" CanUserResizeColumns="False" CanUserReorderColumns="False" 
     AutoGenerateColumns="False"
     ItemsSource="{Binding Genres}"
     IsReadOnly="True" HorizontalAlignment="Left">
@@ -61,7 +60,7 @@
                 <controls:DataGridTemplateColumn Width="SizeToCells">
                     <controls:DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Click="DeleteButton_Click" Padding="5" Margin="5">
+                            <Button Click="DeleteButton_Click" Padding="5" Margin="5" Tag="{Binding}">
                                 <FontIcon Glyph="&#xE74D;" FontSize="15" />
                             </Button>
                         </DataTemplate>

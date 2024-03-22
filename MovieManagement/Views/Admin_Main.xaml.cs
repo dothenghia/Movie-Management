@@ -35,5 +35,30 @@ namespace MovieManagement.Views
             this.InitializeComponent();
             DataContext = new Admin_Main_ViewModel();
         }
+        private void ShowtimeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (sender is ComboBox comboBox && comboBox.SelectedItem is string selectedItem)
+            {
+                Binding binding = new Binding();  
+                binding.Source = this.DataContext;  
+
+                if (selectedItem == "Daily")
+                {
+                    binding.Path = new PropertyPath("showtimesDaily"); 
+                }
+                else if (selectedItem == "Weekly")
+                {
+                    binding.Path = new PropertyPath("showtimesWeekly");  
+                }
+                else if (selectedItem == "Monthly")
+                {
+                    binding.Path = new PropertyPath("showtimesMonthly");
+                }
+
+                showtimesCountDisplay.SetBinding(TextBlock.TextProperty, binding);  
+            }
+        }
+
+
     }
 }
