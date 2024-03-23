@@ -16,7 +16,6 @@ namespace MovieManagement.ViewModels
         private readonly DB_MovieManagementContext _context = new DB_MovieManagementContext();
 
         public ObservableCollection<dynamic> Movies { get; set; }
-        public ObservableCollection<dynamic> Dashboard { get; set; }
         string _moviesCount;
         public string moviesCount
         {
@@ -46,7 +45,7 @@ namespace MovieManagement.ViewModels
             Movies = new ObservableCollection<dynamic>((from m in _context.Movies
                                                         join a in _context.AgeCertificates on m.AgeCertificateId equals a.AgeCertificateId
                                                         join g in _context.Genres on m.GenreId equals g.GenreId
-                                                        where m.IsBlockbuster == true
+                                                        where m.IsBlockbuster == true 
                                                         select new
                                                         {
                                                             m.MovieId,
@@ -56,23 +55,26 @@ namespace MovieManagement.ViewModels
                                                             g.GenreName,
                                                             m.PosterUrl,
                                                         }).ToList());
-            _moviesCount = _context.Movies.Count().ToString();
+            _moviesCount = (from m in _context.Movies
+                            join s in _context.ShowTimes on m.MovieId equals s.MovieId
+                            select m).Distinct().Count().ToString();
 
-            DateTime currentDate = DateTime.Now;
+            DateTime currentDate = DateTime.Now.Date;
             _showtimesDaily = _context.ShowTimes
-                .Where(st => st.ShowDate == currentDate)
+                .Where(st => st.ShowDate.Value.Date == currentDate)
                 .Count().ToString();
 
-            DateTime startOfWeek = currentDate.Date.AddDays(-(int)currentDate.DayOfWeek);
-            DateTime endOfWeek = startOfWeek.AddDays(6);
+            DateTime startOfWeek = currentDate.Date.AddDays(-(int)currentDate.DayOfWeek + 1).Date;
+            DateTime endOfWeek = startOfWeek.AddDays(6).Date;
+
             _showtimesWeekly = _context.ShowTimes
-                .Where(st => st.ShowDate >= startOfWeek && st.ShowDate <= endOfWeek)
+                .Where(st => st.ShowDate.Value.Date >= startOfWeek && st.ShowDate.Value.Date <= endOfWeek)
                 .Count().ToString();
 
-            DateTime startOfMonth = new DateTime(currentDate.Year, currentDate.Month, 1);
-            DateTime endOfMonth = startOfMonth.AddMonths(1).AddDays(-1);
+            DateTime startOfMonth = new DateTime(currentDate.Year, currentDate.Month, 1).Date;
+            DateTime endOfMonth = startOfMonth.AddMonths(1).AddDays(-1).Date;
             _showtimesMonthly = _context.ShowTimes
-                .Where(st => st.ShowDate >= startOfMonth && st.ShowDate <= endOfMonth)
+                .Where(st => st.ShowDate.Value.Date >= startOfMonth && st.ShowDate <= endOfMonth)
                 .Count().ToString();
         }
     }
