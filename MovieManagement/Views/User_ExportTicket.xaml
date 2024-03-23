@@ -9,7 +9,40 @@
     mc:Ignorable="d"
     >
 
-    <Grid>
-
-    </Grid>
+    <StackPanel VerticalAlignment="Stretch" Margin="32, 20, 32, 0">
+        
+        <Button Click="BackButton_Click">
+            <StackPanel Orientation="Horizontal">
+                <FontIcon Glyph="&#xE72B;" FontSize="15" Margin="0,0,6,0"/>
+                <TextBlock Text="Back" FontSize="15"/>
+            </StackPanel>
+        </Button>
+        
+        <TextBlock Text="Movie name" FontSize="24"/>
+        <TextBlock x:Name="MovieName" FontSize="16" Text="{Binding Bill.Title }"/>
+        <TextBlock Text="Quantity" FontSize="24"/>
+        <TextBlock x:Name="Quantity" FontSize="16" Text="{Binding Bill.Quantity}"/>
+        <TextBlock Text="Position" FontSize="24"/>
+        <TextBlock x:Name="Positio" FontSize="16" Text="{Binding Bill.Seat}"/>
+        <TextBlock Text="Showtime" FontSize="24"/>
+        <TextBlock x:Name="Showtime" FontSize="16" Text="{Binding Bill.ShowDate}"/>
+        <StackPanel>
+            <TextBlock Text="Voucher" FontSize="20"/>
+            <ItemsRepeater ItemsSource="{Binding AllVoucher}" Margin="0,15,0,0">
+                <ItemsRepeater.ItemTemplate>
+                    <DataTemplate>
+                        <ToggleButton Content="{Binding VoucherCode}" IsEnabled="{Binding isAvailable}" Checked="ToggleButton_Checked" Unchecked="ToggleButton_Unchecked"/>
+                    </DataTemplate>
+                </ItemsRepeater.ItemTemplate>
+                <ItemsRepeater.Layout>
+                    <StackLayout Orientation="Horizontal" Spacing="10"/>
+                </ItemsRepeater.Layout>
+            </ItemsRepeater>
+            <Button Click="ApplyButton_Click" Margin="0,15,0,0">
+                <TextBlock Text="Apply" FontSize="15"/>
+            </Button>
+        </StackPanel>
+        <TextBlock x:Name="Price" VerticalAlignment="Bottom" Text="{Binding Price}" HorizontalAlignment="Right" Margin="0,0,50,0" FontSize="20"/>
+        <Button Content="Save" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,20,0,0"/>
+    </StackPanel>
 </Page>

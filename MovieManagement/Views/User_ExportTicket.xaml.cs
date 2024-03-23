@@ -5,8 +5,11 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using MovieManagement.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -26,6 +29,42 @@ namespace MovieManagement.Views
         public User_ExportTicket()
         {
             this.InitializeComponent();
+            DataContext = new ViewModels.User_ExportTicket_ViewModel();
+        }
+
+        private void BackButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+        {
+            this.Frame.GoBack();
+        }
+
+        private void ToggleButton_Checked(object sender, RoutedEventArgs e)
+        {
+            var selected = sender as ToggleButton;
+            string substring = selected.Content.ToString();
+            if (selected.IsChecked == true && !GlobalContext.seats.Contains(substring))
+            {
+                GlobalContext.setVoucher(substring);
+            }
+            Debug.WriteLine(GlobalContext.voucher);
+        }
+
+        private void ToggleButton_Unchecked(object sender, RoutedEventArgs e)
+        {
+            var unselectedToggleButton = sender as ToggleButton;
+            string substring = unselectedToggleButton.Content.ToString();
+
+            if (GlobalContext.voucher.Contains(substring))
+            {
+                GlobalContext.removeVoucher(substring);
+            }
+        }
+
+        private void ApplyButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is User_ExportTicket_ViewModel viewModel)
+            {
+                viewModel.ApplyCommand.Execute(this);
+            }
         }
     }
 }

@@ -38,15 +38,8 @@ namespace MovieManagement.Views
         //check mode add/edit
         private void DialogPage_Loaded(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(InvisibleTextBlock.Text))
-            {
-                isAdd = true; isEdit = false;
-                
-            }
-            else
-            {
-                isAdd = false; isEdit = true;
-            }
+            if (string.IsNullOrEmpty(InvisibleTextBlock.Text)) { isAdd = true; isEdit = false; }
+            else { isAdd = false; isEdit = true; }
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)

@@ -2,10 +2,114 @@
 <Page
     x:Class="MovieManagement.Views.MovieCertiDialog"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Loaded="DialogPage_Loaded">
+    <Page.Resources>
+        <x:Double x:Key="SwatchSize">32</x:Double>
+        <Flyout x:Key="ErrorMessage_Flyout" x:Name="ErrorMessage_Flyout" Placement="Bottom">
+            <Flyout.FlyoutPresenterStyle>
+                <Style TargetType="FlyoutPresenter">
+                    <Setter Property="Background" Value="{StaticResource AcrylicBackgroundFillColorBaseBrush}"/>
+                    <Setter Property="BorderBrush" Value="{StaticResource AccentAAFillColorDefaultBrush}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="Padding" Value="12, 8, 12, 12"/>
+                    <Setter Property="CornerRadius" Value="6"/>
+                </Style>
+            </Flyout.FlyoutPresenterStyle>
+            <!-- Flyout Content -->
+            <StackPanel MaxWidth="340">
+                <TextBlock x:Name="MessageBox" TextWrapping="WrapWholeWords" Style="{StaticResource BodyTextBlockStyle}"/>
+            </StackPanel>
+        </Flyout>
+    </Page.Resources>
 
     <StackPanel VerticalAlignment="Stretch">
-        <TextBox Header="Certificate Name" Text="{Binding DisplayContent}"/>
-        <TextBox Header="Require Age" Text="{Binding RequireAge}"/>
+        <TextBox Header="Certificate Name" Text="{Binding DisplayContent}" x:Name="CertificateName_TextBox" FlyoutBase.AttachedFlyout="{StaticResource ErrorMessage_Flyout}"/>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,10,0,0">
+            <TextBlock Text="Background Color" Margin="0,0,20,0"/>
+            <SplitButton x:Name="BackgroundColorButton" FlyoutBase.AttachedFlyout="{StaticResource ErrorMessage_Flyout}" AutomationProperties.Name="Font color" Padding="0" MinHeight="0" MinWidth="0" VerticalAlignment="Top" Click="BackgroundColorButton_Click">
+                <Border x:Name="CurrentBackgroundColor" Width="{StaticResource SwatchSize}" Height="{StaticResource SwatchSize}" Background="{Binding BackgroundColor}" AutomationProperties.Name="{Binding BackgroundColor}" Margin="0" CornerRadius="4,0,0,4"/>
+                <SplitButton.Flyout>
+                    <Flyout Placement="Bottom">
+                        <GridView ItemClick="GridView1_ItemClick" IsItemClickEnabled="True">
+                            <GridView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <ItemsWrapGrid MaximumRowsOrColumns="3" Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </GridView.ItemsPanel>
+                            <GridView.Resources>
+                                <Style TargetType="Rectangle">
+                                    <Setter Property="Width" Value="{StaticResource SwatchSize}"/>
+                                    <Setter Property="Height" Value="{StaticResource SwatchSize}"/>
+                                    <Setter Property="RadiusX" Value="4"/>
+                                    <Setter Property="RadiusY" Value="4"/>
+                                </Style>
+                            </GridView.Resources>
+                            <GridView.Items>
+                                <Rectangle Fill="Red" AutomationProperties.Name="red" />
+                                <Rectangle Fill="Orange" AutomationProperties.Name="orange" />
+                                <Rectangle Fill="Yellow" AutomationProperties.Name="yellow" />
+                                <Rectangle Fill="Green" AutomationProperties.Name="green" />
+                                <Rectangle Fill="Blue" AutomationProperties.Name="blue" />
+                                <Rectangle Fill="Indigo" AutomationProperties.Name="indigo" />
+                                <Rectangle Fill="Purple" AutomationProperties.Name="purple" />
+                                <Rectangle Fill="White" AutomationProperties.Name="white" />
+                                <Rectangle Fill="Black" AutomationProperties.Name="black" />
+                            </GridView.Items>
+                        </GridView>
+
+                    </Flyout>
+                </SplitButton.Flyout>
+            </SplitButton>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,10,0,0">
+            <TextBlock Text="Foreground Color" Margin="0,0,20,0"/>
+            <SplitButton x:Name="ForegroundColorButton" FlyoutBase.AttachedFlyout="{StaticResource ErrorMessage_Flyout}" AutomationProperties.Name="Color" Padding="0" MinHeight="0" MinWidth="0" VerticalAlignment="Top" Click="ForegroundColorButton_Click">
+                <Border x:Name="CurrentForegroundColor" Width="{StaticResource SwatchSize}" Height="{StaticResource SwatchSize}" Background="{Binding ForegroundColor}" AutomationProperties.Name="{Binding ForegroundColor}" Margin="0" CornerRadius="4,0,0,4"/>
+                <SplitButton.Flyout>
+                    <Flyout Placement="Bottom">
+                        <GridView ItemClick="GridView2_ItemClick" IsItemClickEnabled="True">
+                            <GridView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <ItemsWrapGrid MaximumRowsOrColumns="3" Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </GridView.ItemsPanel>
+                            <GridView.Resources>
+                                <Style TargetType="Rectangle">
+                                    <Setter Property="Width" Value="{StaticResource SwatchSize}"/>
+                                    <Setter Property="Height" Value="{StaticResource SwatchSize}"/>
+                                    <Setter Property="RadiusX" Value="4"/>
+                                    <Setter Property="RadiusY" Value="4"/>
+                                </Style>
+                            </GridView.Resources>
+                            <GridView.Items>
+                                <Rectangle Fill="Red" AutomationProperties.Name="red" />
+                                <Rectangle Fill="Orange" AutomationProperties.Name="orange" />
+                                <Rectangle Fill="Yellow" AutomationProperties.Name="yellow" />
+                                <Rectangle Fill="Green" AutomationProperties.Name="green" />
+                                <Rectangle Fill="Blue" AutomationProperties.Name="blue" />
+                                <Rectangle Fill="Indigo" AutomationProperties.Name="indigo" />
+                                <Rectangle Fill="Purple" AutomationProperties.Name="purple" />
+                                <Rectangle Fill="White" AutomationProperties.Name="white" />
+                                <Rectangle Fill="Black" AutomationProperties.Name="black" />
+                            </GridView.Items>
+                        </GridView>
+
+                    </Flyout>
+                </SplitButton.Flyout>
+            </SplitButton>
+        </StackPanel>
+        <TextBlock Text="Preview Certificate Tag"/>
+        <StackPanel x:Name="BackgroundAC" Orientation="Horizontal" HorizontalAlignment="Left" Padding="10,4,10,5" CornerRadius="4" Margin="0, 8, 0, 0" Background="{Binding BackgroundColor}"  FlyoutBase.AttachedFlyout="{StaticResource ErrorMessage_Flyout}">
+            <TextBlock x:Name="ForegroundAC" Text="{Binding ElementName=CertificateName_TextBox, Path=Text}" FontSize="17" FontWeight="SemiBold" Foreground="{Binding ForegroundColor}" VerticalAlignment="Center"/>
+        </StackPanel>
+        <TextBox x:Name="RequireAge_TextBox" Header="Require Age" Text="{Binding RequireAge}" FlyoutBase.AttachedFlyout="{StaticResource ErrorMessage_Flyout}"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0, 16, 0, 0">
+            <!-- Save Button -->
+            <Button Content="Save" Click="SaveButton_Click" Background="{StaticResource SystemAccentColorLight1}" Margin="0,0,20,0"/>
+            <!-- Cancel Button -->
+            <Button Content="Cancel" Click="CancelButton_Click" />
+        </StackPanel>
+        <TextBlock x:Name="InvisibleTextBlock" Text="{Binding AgeCertificateId}" Visibility="Collapsed"/>
     </StackPanel>
 </Page>

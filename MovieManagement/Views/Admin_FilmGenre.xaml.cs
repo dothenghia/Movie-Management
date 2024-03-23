@@ -35,15 +35,15 @@ namespace MovieManagement.Views
         }
         private async void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            ContentDialog Dialog_AddNewMovie = new ContentDialog();
+            ContentDialog Dialog_AddNewGenre = new ContentDialog();
 
             // XamlRoot must be set in the case of a ContentDialog running in a Desktop app
-            Dialog_AddNewMovie.XamlRoot = this.XamlRoot;
-            Dialog_AddNewMovie.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-            Dialog_AddNewMovie.Title = "Add New Genre";
-            Dialog_AddNewMovie.Content = new MovieGenreDialog();
-            Dialog_AddNewMovie.RequestedTheme = (VisualTreeHelper.GetParent(sender as Button) as StackPanel).ActualTheme;
-            await Dialog_AddNewMovie.ShowAsync();
+            Dialog_AddNewGenre.XamlRoot = this.XamlRoot;
+            Dialog_AddNewGenre.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
+            Dialog_AddNewGenre.Title = "Add New Genre";
+            Dialog_AddNewGenre.Content = new MovieGenreDialog();
+            Dialog_AddNewGenre.RequestedTheme = (VisualTreeHelper.GetParent(sender as Button) as StackPanel).ActualTheme;
+            await Dialog_AddNewGenre.ShowAsync();
         }
         private async void EditButton_Click(object sender, RoutedEventArgs e)
         {
@@ -60,15 +60,15 @@ namespace MovieManagement.Views
         {
             Button button = sender as Button;
             int genreId = (int)button.DataContext.GetType().GetProperty("GenreId").GetValue(button.DataContext);
-            ContentDialog Dialog_DeleteMovie = new ContentDialog();
-            Dialog_DeleteMovie.XamlRoot = this.XamlRoot;
-            Dialog_DeleteMovie.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-            Dialog_DeleteMovie.Title = "Confirm Delete Genre";
-            Dialog_DeleteMovie.PrimaryButtonText = "Yes";
-            Dialog_DeleteMovie.CloseButtonText = "Cancel";
-            Dialog_DeleteMovie.DefaultButton = ContentDialogButton.Primary;
-            Dialog_DeleteMovie.Content = new ConfirmDeleteDialog();
-            var result = await Dialog_DeleteMovie.ShowAsync();
+            ContentDialog Dialog_DeleteGenre = new ContentDialog();
+            Dialog_DeleteGenre.XamlRoot = this.XamlRoot;
+            Dialog_DeleteGenre.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
+            Dialog_DeleteGenre.Title = "Confirm Delete Genre";
+            Dialog_DeleteGenre.PrimaryButtonText = "Yes";
+            Dialog_DeleteGenre.CloseButtonText = "Cancel";
+            Dialog_DeleteGenre.DefaultButton = ContentDialogButton.Primary;
+            Dialog_DeleteGenre.Content = new ConfirmDeleteDialog();
+            var result = await Dialog_DeleteGenre.ShowAsync();
 
             if (result == ContentDialogResult.Primary)
             {
