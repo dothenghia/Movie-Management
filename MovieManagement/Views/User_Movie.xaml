@@ -257,8 +257,6 @@
                 </PivotItem>
 
 
-
-
                 <!-- ==================== SHOWTIME TAB ==================== -->
                 <PivotItem Header="Show Time" HorizontalAlignment="Center">
                     <StackPanel>
@@ -328,7 +326,7 @@
                         </GridView>
 
                         <StackPanel x:Name="SeatsSelectionMap" Visibility="Collapsed">
-                            <Grid>
+                            <Grid HorizontalAlignment="Center">
                                 <Path Stroke="Orange" StrokeThickness="3">
                                     <Path.Data>
                                         <PathGeometry>
@@ -343,7 +341,7 @@
 
                             <ItemsRepeater ItemsSource="{Binding Seats}" Margin="30">
                                 <ItemsRepeater.ItemTemplate>
-                                    <DataTemplate x:DataType="local:Ticket">
+                                    <DataTemplate>
                                         <ToggleButton Content="{Binding position}" IsEnabled="{Binding isAvailable}" MinHeight="50" MaxHeight="100" MinWidth="50" MaxWidth="100" Checked="ToggleButton_Checked" Unchecked="ToggleButton_Unchecked" />
                                     </DataTemplate>
                                 </ItemsRepeater.ItemTemplate>
@@ -356,7 +354,7 @@
 
                                 <TextBlock x:Name ="SeatsSelection" Text="Your selection: " Style="{StaticResource SubtitleTextBlockStyle}"/>
 
-                                <Button Content="Booking" HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="DarkSeaGreen" />
+                                <Button Content="Booking" HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="DarkSeaGreen" Click="Booking_Click"/>
 
                             </StackPanel>
                         </StackPanel>
