@@ -82,7 +82,7 @@ namespace MovieManagement.Views
                         parentDialog.Hide();
                     }
                     var currentWindow = (Application.Current as App)?.m_window as MainWindow;
-                    var adminWindow = new MainWindow(1);
+                    var adminWindow = new AdminWindow();
                     adminWindow.Activate();
                     currentWindow.Close();
                 }

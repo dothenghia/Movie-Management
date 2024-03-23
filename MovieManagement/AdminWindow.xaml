@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window
+    x:Class="MovieManagement.AdminWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MovieManagement"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid>
+        <NavigationView x:Name="NavigationBar_Admin"
+            IsSettingsVisible="False" PaneDisplayMode="Left" IsTabStop="False" IsBackButtonVisible="Collapsed" AlwaysShowHeader="False"
+            SelectionChanged="NavigationBar_Admin_SelectionChanged"
+            >   
+
+            <NavigationView.MenuItems>
+                <!-- ====== Main Tag ====== -->
+                <NavigationViewItem Content="Dashboard" Tag="Main_NavTag" x:Name="Main_NavItem" Icon="Home"/>
+
+                <!-- ====== Manage Film Tag ====== -->
+                <NavigationViewItem Content="Manage Film" Tag="Film_NavTag" x:Name="Film_NavItem" Icon="Calendar">
+                    <NavigationViewItem.MenuItems>
+                        <NavigationViewItem Content="Film Infomation" Icon="PreviewLink" ToolTipService.ToolTip="Film Infomation" Tag="FilmInfo_NavTag" x:Name="FilmInfo_NavItem"/>
+                        <NavigationViewItem Content="Genre" Icon="List" ToolTipService.ToolTip="Genre" Tag="FilmGenre_NavTag" x:Name="FilmGenre_NavItem"/>
+                        <NavigationViewItem Content="Certification" Icon="Accept" ToolTipService.ToolTip="Certification" Tag="FilmCerti_NavTag" x:Name="FilmCerti_NavItem"/>
+                        <NavigationViewItem Content="Stars" Icon="People" ToolTipService.ToolTip="Stars" Tag="FilmStars_NavTag" x:Name="FilmStars_NavItem"/>
+                        <NavigationViewItem Content="Director" Icon="Video" ToolTipService.ToolTip="Director" Tag="FilmDirector_NavTag" x:Name="FilmDirector_NavItem"/>
+                    </NavigationViewItem.MenuItems>
+                </NavigationViewItem>
+
+                <!-- ====== Manage ShowTime Tag ====== -->
+                <NavigationViewItem Content="Manage ShowTime" Tag="ShowTime_NavTag" x:Name="ShowTime_NavItem" Icon="Clock" />
+
+                <!-- ====== Manage Tickets Tag ====== -->
+                <NavigationViewItem Content="Manage Tickets" Tag="Tickets_NavTag" x:Name="Tickets_NavItem" Icon="CalendarDay" />
+
+                <!-- ====== Manage Voucher Tag ====== -->
+                <NavigationViewItem Content="Manage Voucher" Tag="Voucher_NavTag" x:Name="Voucher_NavItem" Icon="Memo" />
+
+                <!-- ====== Manage Report Tag ====== -->
+                <NavigationViewItem Content="Report" Tag="Report_NavTag" x:Name="Report_NavItem" Icon="ShowResults" />
+
+            </NavigationView.MenuItems>
+
+            <!-- ====== MAIN CONTENT ====== -->
+            <Frame x:Name="MainContent" />
+
+
+        </NavigationView>
+    </Grid>
+</Window>

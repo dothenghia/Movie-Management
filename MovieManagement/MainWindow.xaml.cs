@@ -39,7 +39,10 @@ namespace MovieManagement
             }
             else if (mode == 1)
             {
-                page = new Admin_Frame();
+                var currentWindow = (Application.Current as App)?.m_window as MainWindow;
+                var adminWindow = new AdminWindow();
+                adminWindow.Activate();
+                currentWindow.Close();
             }
             else
             {
