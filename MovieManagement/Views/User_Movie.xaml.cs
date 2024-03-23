@@ -65,40 +65,6 @@ namespace MovieManagement.Views
         public User_Movie()
         {
             this.InitializeComponent();
-
-            // ############# INFORMATION TAB #############
-
-
-
-
-            // ############# SHOWTIME TAB #############
-            this.SizeChanged += OnWindowSizeChanged;
-            DateTime currentDate = DateTime.Today;
-            for (int i = 0; i < 7; i++)
-            {
-                daysOfWeek.Add(currentDate.AddDays(i).ToString("dd/MM/yyyy"));
-            }
-
-            for (int i = 0; i < 7; i++)
-            {
-                Showtimes.Add(new Showtime(i, i, new DateTime(2024, 3, 18 + i, 19, 00, 15)));
-                Showtimes.Add(new Showtime(i, i, new DateTime(2024, 3, 18 + i, 09, 15, 15)));
-                Showtimes.Add(new Showtime(i, i, new DateTime(2024, 3, 18 + i, 17, 25, 15)));
-                Showtimes.Add(new Showtime(i, i, new DateTime(2024, 3, 18 + i, 19, 40, 15)));
-                Showtimes.Add(new Showtime(i, i, new DateTime(2024, 3, 18 + i, 13, 55, 15)));
-                Showtimes.Add(new Showtime(i, i, new DateTime(2024, 3, 18 + i, 16, 35, 15)));
-            }
-            //DateGridView.ItemsSource = daysOfWeek;
-            for (char j = 'A'; j <= 'C'; j++)
-                for (int i = 0; i < 10; i++)
-                {
-                    Tickets.Add(new Ticket(i, j.ToString(), i.ToString(), false));
-                }
-            for (char j = 'D'; j <= 'G'; j++)
-                for (int i = 10; i < 20; i++)
-                {
-                    Tickets.Add(new Ticket(i, j.ToString(), i.ToString(), true));
-                }
         }
 
         // ####################### INFORMATION TAB #######################
@@ -180,7 +146,7 @@ namespace MovieManagement.Views
         private void ShowTimes_ItemClick(object sender, ItemClickEventArgs e)
         {
             SeatsSelectionMap.Visibility = Visibility.Visible;
-            seats = "";
+            GlobalContext.clearSeats();
             TextBlock textBlock = SeatsSelection;
             SeatsSelection.Text = "";
             var clickItem = e.ClickedItem;
@@ -190,7 +156,7 @@ namespace MovieManagement.Views
             }
         }
 
-        string seats = "";
+
 
         // -- Event Click for ToggleButton
         private void ToggleButton_Checked(object sender, RoutedEventArgs e)
@@ -198,12 +164,12 @@ namespace MovieManagement.Views
             var selectedToggleButton = sender as ToggleButton;
             TextBlock textBlock = SeatsSelection;
             string substring = selectedToggleButton.Content.ToString();
-            if (selectedToggleButton.IsChecked == true && !seats.Contains(substring))
+            if (selectedToggleButton.IsChecked == true && !GlobalContext.seats.Contains(substring))
             {
-                seats += selectedToggleButton.Content.ToString() + " ";
-                SeatsSelection.Text = "Your selection: " + seats;
+                GlobalContext.SetSeats(substring);
+                SeatsSelection.Text = "Your selection: " + GlobalContext.seats;
             }
-            Debug.WriteLine(seats);
+            Debug.WriteLine(GlobalContext.seats);
         }
 
         private void ToggleButton_Unchecked(object sender, RoutedEventArgs e)
@@ -211,10 +177,22 @@ namespace MovieManagement.Views
             var unselectedToggleButton = sender as ToggleButton;
             string substring = unselectedToggleButton.Content.ToString();
 
-            if (seats.Contains(substring+ " "))
+            if (GlobalContext.seats.Contains(substring))
             {
-                seats = seats.Replace(substring+ " ", "");
-                SeatsSelection.Text = "Your selection: " + seats;
+                GlobalContext.removeSeat(substring);
+                SeatsSelection.Text = "Your selection: " + GlobalContext.seats;
+            }
+        }
+
+        private async void Booking_Click(object sender, RoutedEventArgs e)
+        {
+            if (GlobalContext.UserID == 0)
+            {
+                Frame.Navigate(typeof(User_Profile)); 
+            }
+            else
+            {
+                Frame.Navigate(typeof(User_ExportTicket));
             }
         }
 

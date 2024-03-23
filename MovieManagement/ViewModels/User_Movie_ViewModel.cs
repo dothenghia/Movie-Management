@@ -12,6 +12,7 @@ using System.Windows.Input;
 using CommunityToolkit.Mvvm.Collections;
 using Microsoft.UI.Xaml.Controls;
 using CommunityToolkit.Mvvm.Input;
+using MovieManagement.Views;
 
 
 namespace MovieManagement.ViewModels
@@ -29,14 +30,18 @@ namespace MovieManagement.ViewModels
         public ObservableCollection<dynamic> DateInWeek { get; set; } = new ObservableCollection<dynamic>();
         public RelayCommand<string> DateSelectionCommand { get; }
         public RelayCommand<string> ShowtimeSelectionCommand { get; }
+        public RelayCommand<string> BookingCommand { get; }
         public ObservableCollection<dynamic> TicketsOfMovie { get; set; }
         public ObservableCollection<dynamic> Seats { get; set; } = new ObservableCollection<dynamic>();
+
 
         public User_Movie_ViewModel(int MovieID) 
         {
             // Execute query to get movie Information
             DateSelectionCommand = new RelayCommand<string>(DateSelection);
             ShowtimeSelectionCommand = new RelayCommand<string>(TimeSelection);
+            
+            
             MovieInformation = (from m in _context.Movies
                                 join a in _context.AgeCertificates on m.AgeCertificateId equals a.AgeCertificateId
                                 join g in _context.Genres on m.GenreId equals g.GenreId
@@ -140,8 +145,8 @@ namespace MovieManagement.ViewModels
                 selectedTime = selectedTime.Substring(0, indexOfComma);
                 var filterShowtimes = TimesOfDay.Where(t => t.time == selectedTime);
                 var filterShowtime = filterShowtimes.FirstOrDefault();
-                Debug.WriteLine(selectedTime);
-                Debug.WriteLine(filterShowtimes.Count());
+                GlobalContext.setShowtime(filterShowtime.ShowTimeID);
+                Debug.WriteLine(GlobalContext.showtimeID);
                 foreach (var ticket in TicketsOfMovie)
                 {
                     if (ticket.ShowTimeId == filterShowtime.ShowTimeID)
@@ -158,5 +163,7 @@ namespace MovieManagement.ViewModels
                 }
             }
         }
+
+        
     }
 }
