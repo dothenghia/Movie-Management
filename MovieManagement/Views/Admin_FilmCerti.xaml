@@ -48,14 +48,16 @@
 
             </controls:DataGrid.Resources>
             <controls:DataGrid.Columns>
-                <controls:DataGridTextColumn Header="Certificate Name" Width="*" Binding="{Binding DisplayContent}">
-                    <controls:DataGridTextColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="TextWrapping" Value="Wrap"/>
-                        </Style>
-                    </controls:DataGridTextColumn.ElementStyle>
-                </controls:DataGridTextColumn>
-                <controls:DataGridTextColumn Header="Require Age" Width="*" Binding="{Binding RequireAge}">
+                <controls:DataGridTemplateColumn Header="Certificate Name" Width="Auto">
+                    <controls:DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Padding="10,4,10,5" CornerRadius="4" Margin="0, 8, 0, 0" Background="{Binding BackgroundColor}">
+                                <TextBlock Text="{Binding DisplayContent}" FontSize="17" FontWeight="SemiBold" Foreground="{Binding ForegroundColor}" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </controls:DataGridTemplateColumn.CellTemplate>
+                </controls:DataGridTemplateColumn>
+                <controls:DataGridTextColumn Header="Require Age" Width="SizeToHeader" Binding="{Binding RequireAge}">
                     <controls:DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="TextWrapping" Value="Wrap"/>

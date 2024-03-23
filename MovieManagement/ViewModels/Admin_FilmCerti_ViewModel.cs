@@ -22,7 +22,9 @@ namespace MovieManagement.ViewModels
                                                                 {
                                                                     a.AgeCertificateId,
                                                                     a.DisplayContent,
-                                                                    a.RequireAge
+                                                                    a.RequireAge,
+                                                                    a.BackgroundColor,
+                                                                    a.ForegroundColor
                                                                 }).ToList());
         }
     }
