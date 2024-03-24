@@ -258,7 +258,7 @@
 
 
                 <!-- ==================== SHOWTIME TAB ==================== -->
-                <PivotItem Header="Show Time" HorizontalAlignment="Center">
+                <PivotItem Header="Show Time" HorizontalAlignment="Center" MinHeight="666" Padding="0, 24, 0, 0">
                     <StackPanel>
                         <GridView
                             x:Name="DateGridView"
@@ -283,9 +283,9 @@
                                         <Setter.Value>
                                             <ControlTemplate TargetType="GridViewItem">
                                                 <GridViewItemPresenter
-                                                    SelectedBackground="Orange"
-                                                    SelectedPointerOverBackground="DarkOrange"
-                                                    PointerOverBackground="OrangeRed"
+                                                    SelectedBackground="{StaticResource AccentAAFillColorDefaultBrush}"
+                                                    SelectedPointerOverBackground="{StaticResource AccentAAFillColorDefaultBrush}"
+                                                    PointerOverBackground="{StaticResource AccentAAFillColorSecondaryBrush}"
                                                     PlaceholderBackground="Red"
                                                     CornerRadius="10" Width="150" Height="80"/>
                                             </ControlTemplate>
@@ -312,9 +312,9 @@
                                         <Setter.Value>
                                             <ControlTemplate TargetType="GridViewItem">
                                                 <GridViewItemPresenter
-                                                SelectedBackground="Orange"
-                                                SelectedPointerOverBackground="Coral" 
-                                                PointerOverBackground="PaleVioletRed"
+                                                SelectedBackground="{StaticResource AccentAAFillColorDefaultBrush}"
+                                                SelectedPointerOverBackground="{StaticResource AccentAAFillColorDefaultBrush}" 
+                                                PointerOverBackground="{StaticResource AccentAAFillColorDisabled}"
                                                 CornerRadius="10" Width="80"/>
                                             </ControlTemplate>
                                         </Setter.Value>
@@ -354,7 +354,13 @@
 
                                 <TextBlock x:Name ="SeatsSelection" Text="Your selection: " Style="{StaticResource SubtitleTextBlockStyle}"/>
 
-                                <Button Content="Booking" HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="DarkSeaGreen" Click="Booking_Click"/>
+                                <Button Padding="14, 10" HorizontalAlignment="Right" VerticalAlignment="Bottom" CornerRadius="8"
+                                        Click="Booking_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <FontIcon Glyph="&#xE8B2;" FontSize="24" Margin="0,0,8,0"/>
+                                        <TextBlock Text="Booking" FontSize="18" FontWeight="SemiBold"/>
+                                    </StackPanel>
+                                </Button>
 
                             </StackPanel>
                         </StackPanel>
