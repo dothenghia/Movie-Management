@@ -7,10 +7,72 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
-    <Grid Margin="20, 10">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
+    xmlns:wctprimitives="using:CommunityToolkit.WinUI.UI.Controls.Primitives"
+    xmlns:converters="using:MovieManagement.Converters">
+    <Page.Resources>
+        <converters:ExpiredStatusConverter x:Key="ExpiredStatusConverter"/>
+        <converters:DiscountTypeConverter x:Key="DiscountTypeConverter"/>
+    </Page.Resources>
+    <StackPanel Margin="20, 10">
         <TextBlock Text="Manage Vouchers" Style="{StaticResource TitleTextBlockStyle}"/>
+        <Button Style="{StaticResource AccentButtonStyle}" HorizontalAlignment="Right" Margin="20" Click="AddButton_Click">
+            <StackPanel Orientation="Horizontal">
+                <FontIcon Glyph="&#xF8AA;" />
+                <TextBlock Text="  Add New Voucher"/>
+            </StackPanel>
+        </Button>
+        <controls:DataGrid x:Name="FilmVoucher_DataGrid" CanUserResizeColumns="False" CanUserReorderColumns="False" 
+            AutoGenerateColumns="False"
+            ItemsSource="{Binding Vouchers}"
+            IsReadOnly="True" HorizontalAlignment="Left">   
+            <controls:DataGrid.Resources>
 
-    </Grid>
+                <Color x:Key="HeaderBackgroundColor">Black</Color>
+                <Color x:Key="HeaderHoveredBackgroundColor">Orange</Color>
+                <Color x:Key="HeaderPressedBackgroundColor">Orange</Color>
+                <Color x:Key="RowBackgroundColor">Gray</Color>
+                <Color x:Key="RowSelectedBackgroundColor">Coral</Color>
+                <StaticResource x:Key="DataGridColumnHeaderBackgroundColor" ResourceKey="HeaderBackgroundColor" />
+                <StaticResource x:Key="DataGridColumnHeaderHoveredBackgroundColor" ResourceKey="HeaderHoveredBackgroundColor" />
+                <StaticResource x:Key="DataGridColumnHeaderPressedBackgroundColor" ResourceKey="HeaderPressedBackgroundColor" />
+                <StaticResource x:Key="DataGridRowSelectedBackgroundColor" ResourceKey="RowSelectedBackgroundColor" />
+                <StaticResource x:Key="DataGridRowSelectedHoveredBackgroundColor" ResourceKey="RowSelectedBackgroundColor"/>
+                <StaticResource x:Key="DataGridRowSelectedUnfocusedBackgroundColor" ResourceKey="RowSelectedBackgroundColor"/>
+                <StaticResource x:Key="DataGridRowSelectedHoveredUnfocusedBackgroundColor" ResourceKey="RowSelectedBackgroundColor"/>
+                <Style TargetType="wctprimitives:DataGridColumnHeader">
+                    <Setter Property="FontWeight" Value="Bold" />
+                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                </Style>
+
+            </controls:DataGrid.Resources>
+            <controls:DataGrid.Columns>
+                <controls:DataGridTextColumn Header="Voucher Code" Width="*" Binding="{Binding VoucherCode}"/>
+                <controls:DataGridTextColumn Header="Status" Width="*" Binding="{Binding IsExpired, Converter={StaticResource ExpiredStatusConverter}}"/>
+                <controls:DataGridTextColumn Header="Discount Type" Width="*" Binding="{Binding IsPercentageDiscount, Converter={StaticResource DiscountTypeConverter}}"/>
+                <controls:DataGridTextColumn Header="Discount Amount" Width="*" Binding="{Binding DiscountAmount}"/>
+                <controls:DataGridTextColumn Header="Requirement Amount" Width="*" Binding="{Binding RequirementAmount}"/>
+                <controls:DataGridTemplateColumn Width="SizeToCells">
+                    <controls:DataGridTemplateColumn.CellTemplate >
+                        <DataTemplate>
+                            <Button Click="EditButton_Click" Padding="5" Margin="5">
+                                <FontIcon Glyph="&#xE70F;" FontSize="15" />
+                            </Button>
+                        </DataTemplate>
+                    </controls:DataGridTemplateColumn.CellTemplate>
+                </controls:DataGridTemplateColumn>
+                <controls:DataGridTemplateColumn Width="SizeToCells">
+                    <controls:DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="DeleteButton_Click" Padding="5" Margin="5" Tag="{Binding}">
+                                <FontIcon Glyph="&#xE74D;" FontSize="15" />
+                            </Button>
+                        </DataTemplate>
+
+                    </controls:DataGridTemplateColumn.CellTemplate>
+                </controls:DataGridTemplateColumn>
+            </controls:DataGrid.Columns>
+        </controls:DataGrid>
+    </StackPanel>
 </Page>
