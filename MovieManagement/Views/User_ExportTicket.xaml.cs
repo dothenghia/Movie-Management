@@ -45,7 +45,6 @@ namespace MovieManagement.Views
             {
                 GlobalContext.setVoucher(substring);
             }
-            Debug.WriteLine(GlobalContext.voucher);
         }
 
         private void ToggleButton_Unchecked(object sender, RoutedEventArgs e)
@@ -65,6 +64,23 @@ namespace MovieManagement.Views
             {
                 viewModel.ApplyCommand.Execute(this);
                 ApplyButton.IsEnabled = false;
+            }
+        }
+
+        private async void ConfirmButton_Click(Object sender, RoutedEventArgs e)
+        {
+            if (DataContext is User_ExportTicket_ViewModel viewModel)
+            {
+                viewModel.ConfirmCommand.Execute(this);
+                ContentDialog contentDialog = new ContentDialog
+                {
+                    XamlRoot = this.XamlRoot,
+                    Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
+                    Title = "Success",
+                    Content = "You booking succesfully!",
+                    CloseButtonText = "Ok"
+                };
+                await contentDialog.ShowAsync();
             }
         }
     }

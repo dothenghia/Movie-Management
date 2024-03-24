@@ -33,9 +33,11 @@ namespace MovieManagement.ViewModels
         }
         public ObservableCollection<dynamic> AllVoucher { get; set; }
         public RelayCommand ApplyCommand { get; }
+        public RelayCommand ConfirmCommand { get; }
         public User_ExportTicket_ViewModel()
         {
             ApplyCommand = new RelayCommand(ApplyVoucher);
+            ConfirmCommand = new RelayCommand(Confirm);
             var temp = GlobalContext.seats;
             int quantity = temp.Count(c => c == ' ');
             Bill = (from s in _context.ShowTimes
@@ -70,13 +72,11 @@ namespace MovieManagement.ViewModels
         {
             string temp = GlobalContext.voucher;
             int quantity = temp.Count(c => c == ' ');
-            Debug.WriteLine(quantity);
             for (int j = 0; j < quantity; j++)
             {
                 int i = temp.IndexOf(' ');
                 string substring = temp.Substring(0, i);
                 temp = temp.Replace(substring+ " ","");
-                Debug.WriteLine(temp);
 
                 foreach (var voucher_temp in AllVoucher)
                 {
@@ -87,12 +87,56 @@ namespace MovieManagement.ViewModels
                             GlobalContext.setPrice((float)(GlobalContext.price * (1- voucher_temp.DiscountAmount)));
                         }
                         else GlobalContext.setPrice((float)(GlobalContext.price - voucher_temp.DiscountAmount));
-                        Debug.WriteLine(GlobalContext.price);
                     }
                 }
             }
             Price = GlobalContext.price;
-            //Debug.WriteLine(Price);
+        }
+
+        private void Confirm()
+        {
+            int newBillID;
+            var newBill = new Bill { 
+                AccountId = GlobalContext.UserID,
+                Total = GlobalContext.price,
+                BookingTime = DateTime.Now
+            };
+            _context.Bills.Add(newBill);
+            _context.SaveChanges();
+            newBillID = newBill.BillId;
+
+            while (GlobalContext.seats != "")
+            {
+                int i = GlobalContext.seats.IndexOf(' ');
+                string substring = GlobalContext.seats.Substring(0, i);
+                GlobalContext.removeSeat(substring);
+                var updateTicket = _context.Tickets.FirstOrDefault(t => t.Row+ t.Col.ToString() == substring);
+                if (updateTicket != null)
+                {
+                    updateTicket.BillId = newBillID;
+                    updateTicket.IsAvailable = false;
+                    _context.SaveChanges();
+                }
+            }
+
+            while (GlobalContext.voucher != "")
+            {
+                int i = GlobalContext.voucher.IndexOf(' ');
+                string substring = GlobalContext.voucher.Substring(0, i);
+                GlobalContext.voucher = GlobalContext.voucher.Replace(substring + " ", "");
+                var voucherID = _context.Vouchers.FirstOrDefault(v => v.VoucherCode == substring);
+                var newBillVoucher = new BillVoucher
+                {
+                    BillId = newBillID,
+                    VoucherId = voucherID.VoucherId,
+                    AppliedTime = DateTime.Now,
+                };
+                _context.BillVouchers.Add(newBillVoucher);
+                _context.SaveChanges();
+            }
+
+            Debug.WriteLine(GlobalContext.seats + " 123");
+            Debug.WriteLine(GlobalContext.voucher + " 456");
         }
 
     }
