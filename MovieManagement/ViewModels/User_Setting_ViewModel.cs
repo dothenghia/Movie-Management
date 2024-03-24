@@ -14,13 +14,16 @@ namespace MovieManagement.ViewModels
         private DB_MovieManagementContext _context = new DB_MovieManagementContext();
 
         public Account UserInformation { get; set; }
+        public DateTime DateOfBirth { get; set; }
 
         public User_Setting_ViewModel()
         {
             // Execute query to get movie Information
             UserInformation = (from a in _context.Accounts
-                               where a.AccountId == 9
+                               where a.AccountId == GlobalContext.UserID
                                select a).FirstOrDefault();
+            DateOfBirth = (DateTime)UserInformation.Dob;
+            DateOfBirth = DateOfBirth.Date;
         }
 
         // -- Update Fullname

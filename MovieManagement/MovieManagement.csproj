@@ -95,7 +95,7 @@
     <Content Update="Assets\avatar.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Update="Assets\Logo.png">
+    <Content Update="Assets\logo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Update="Assets\thumbnail-doc.jpg">
