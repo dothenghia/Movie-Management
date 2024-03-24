@@ -7,10 +7,180 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    Loaded="Window_Loaded"
     >
 
-    <Grid Margin="20, 10">
-        <TextBlock Text="Ticket Page" Style="{StaticResource TitleTextBlockStyle}"/>
+    <!-- ==================== Define Page Resources ==================== -->
+    <Page.Resources>
+        <!-- Define Style for SmallDot -->
+        <Style x:Key="SmallDot_Style" TargetType="StackPanel">
+            <Setter Property="Width" Value="14"/>
+            <Setter Property="Height" Value="14"/>
+            <Setter Property="Background" Value="Black"/>
+            <Setter Property="CornerRadius" Value="50"/>
+        </Style>
+        <!-- Define Style for LargeDot -->
+        <Style x:Key="LargeDot_Style" TargetType="StackPanel">
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Background" Value="Black"/>
+            <Setter Property="CornerRadius" Value="50"/>
+        </Style>
 
-    </Grid>
+        <!-- Define Style for TicketSlider -->
+        <Style x:Key="TicketSlider_Style" TargetType="ScrollViewer">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="HorizontalScrollBarVisibility" Value="Visible"/>
+            <Setter Property="VerticalScrollBarVisibility" Value="Hidden"/>
+            <Setter Property="HorizontalScrollMode" Value="Enabled"/>
+            <Setter Property="VerticalScrollMode" Value="Disabled"/>
+            <Setter Property="IsVerticalScrollChainingEnabled" Value="True"/>
+            <Setter Property="ZoomMode" Value="Disabled"/>
+            <Setter Property="IsTabStop" Value="True"/>
+            <Setter Property="Margin" Value="32, 20, 32, 30"/>
+        </Style>
+
+        <!-- Define DataTemplate for TicketCard -->
+        <DataTemplate x:Key="TicketCard_DataTemplate">
+            <!-- ==================== Movie Card ==================== -->
+            <Grid CornerRadius="24" Width="440" Height="Auto" Background="{StaticResource AcrylicBackgroundFillColorBaseBrush}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Image Thumbnail -->
+                <StackPanel Grid.Row="0" Background="Gray" Margin="20, 20, 20, 0" Height="240" CornerRadius="20">
+                     <Image Source="{Binding PosterUrl}" Stretch="UniformToFill" Height="240"/>
+                </StackPanel>
+
+                <!-- General Information 1 -->
+                <Grid Grid.Row="1" Padding="20, 10, 20, 6">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" Orientation="Vertical">
+                        <!-- Movie Name -->
+                        <TextBlock Text="{Binding Title}" TextWrapping="WrapWholeWords" FontSize="30" FontWeight="SemiBold"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Orientation="Vertical" Padding="0, 4">
+                        <!-- Bill ID -->
+                        <TextBlock Text="Booking ID" FontSize="17" Foreground="{StaticResource TextFillColorTertiaryBrush}"/>
+                        <TextBlock Text="{Binding BillId}" FontSize="26" FontWeight="SemiBold" TextAlignment="Center"/>
+                    </StackPanel>
+                </Grid>
+
+                <!-- Ticket Divider -->
+                <StackPanel Grid.Row="2" Orientation="Horizontal">
+                    <StackPanel Style="{StaticResource LargeDot_Style}" Margin="-20, 0, 0, 0"/>
+
+                    <Grid Width="400">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Style="{StaticResource SmallDot_Style}"/>
+                        <StackPanel Grid.Column="1" Style="{StaticResource SmallDot_Style}"/>
+                        <StackPanel Grid.Column="2" Style="{StaticResource SmallDot_Style}"/>
+                        <StackPanel Grid.Column="3" Style="{StaticResource SmallDot_Style}"/>
+                        <StackPanel Grid.Column="4" Style="{StaticResource SmallDot_Style}"/>
+                        <StackPanel Grid.Column="5" Style="{StaticResource SmallDot_Style}"/>
+                        <StackPanel Grid.Column="6" Style="{StaticResource SmallDot_Style}"/>
+                        <StackPanel Grid.Column="7" Style="{StaticResource SmallDot_Style}"/>
+                        <StackPanel Grid.Column="8" Style="{StaticResource SmallDot_Style}"/>
+                        <StackPanel Grid.Column="9" Style="{StaticResource SmallDot_Style}"/>
+                        <StackPanel Grid.Column="10" Style="{StaticResource SmallDot_Style}"/>
+                    </Grid>
+
+                    <StackPanel Style="{StaticResource LargeDot_Style}"/>
+                </StackPanel>
+
+                <!-- General Information 2 -->
+                <Grid Grid.Row="3" Padding="20, 8, 20, 20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" Orientation="Vertical" Padding="0, 4" Spacing="2">
+                        <!-- ShowTime DateTime -->
+                        <TextBlock Text="Show Time" FontSize="17" Foreground="{StaticResource TextFillColorTertiaryBrush}"/>
+                        <TextBlock Text="{Binding ShowTime}" Foreground="{StaticResource AccentTextFillColorTertiaryBrush}" FontSize="34" FontWeight="SemiBold" TextAlignment="Left"/>
+                        <TextBlock Text="{Binding ShowDate}" FontSize="20" FontWeight="SemiBold" TextAlignment="Left"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Orientation="Vertical" Padding="0, 4">
+                        <!-- Number of Tickets -->
+                        <TextBlock Text="Tickets" FontSize="17" Foreground="{StaticResource TextFillColorTertiaryBrush}" TextAlignment="Center"/>
+                        <TextBlock Text="{Binding NumberOfTickets}" FontSize="20" FontWeight="SemiBold" TextAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2" Orientation="Vertical" Padding="0, 4">
+                        <!-- Total price -->
+                        <TextBlock Text="Total price" FontSize="17" Foreground="{StaticResource TextFillColorTertiaryBrush}" TextAlignment="Right"/>
+                        <TextBlock Text="{Binding Total}" FontSize="20" FontWeight="SemiBold" TextAlignment="Right"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </DataTemplate>
+
+        <!-- Define Layout for MovieCard -->
+        <StackLayout x:Name="HorizontalStack_Layout" Orientation="Horizontal" Spacing="60"/>
+    </Page.Resources>
+
+    <!-- ==================== PAGE CONTENT ==================== -->
+    <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Black">
+        <StackPanel Margin="32, 20, 32, 0">
+
+            <!-- ==================== Blockbuster Title ==================== -->
+            <TextBlock Text="My Ticket Bill" Style="{StaticResource TitleTextBlockStyle}"/>
+
+            <!-- ==================== Movie Slider ==================== -->
+            <ScrollViewer Style="{StaticResource TicketSlider_Style}"  MinHeight="600">
+                <ItemsRepeater x:Name="Tickets_Slider"
+                   ItemsSource="{Binding TicketList}"
+                   ItemTemplate="{StaticResource TicketCard_DataTemplate}"
+                   Layout="{StaticResource HorizontalStack_Layout}"
+                   VerticalAlignment="Top">
+                </ItemsRepeater>
+            </ScrollViewer>
+
+
+            <!-- ==================== Footer ==================== -->
+            <Grid Margin="-32, 0, -32, 0" Padding="68, 20, 68, 20" Background="{StaticResource AcrylicBackgroundFillColorBaseBrush}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                    <Image Source="ms-appx:///Assets/logo.png"/>
+                    <TextBlock Text="Heart Steel Movie" Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Center" Margin="20, 0, 0, 0"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Orientation="Vertical" Spacing="8">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <FontIcon Glyph="&#xE899;" FontSize="18"/>
+                        <TextBlock Text="Team Members" FontSize="18" Margin="8, 0, 0, 0"/>
+                    </StackPanel>
+                    <TextBlock Text="21127367 - Đỗ Thế Nghĩa" FontSize="17" HorizontalAlignment="Right"/>
+                    <TextBlock Text="21127384 - Dương Hạnh Nhi" FontSize="17" HorizontalAlignment="Right"/>
+                    <TextBlock Text="21127461 - Lê Thành Trung" FontSize="17" HorizontalAlignment="Right"/>
+
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+    </ScrollViewer>
 </Page>

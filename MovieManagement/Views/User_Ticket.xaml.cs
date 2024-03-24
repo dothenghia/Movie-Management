@@ -5,6 +5,7 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using MovieManagement.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,19 +14,19 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
-
 namespace MovieManagement.Views
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class User_Ticket : Page
     {
         public User_Ticket()
         {
             this.InitializeComponent();
+        }
+
+        // ========== Binding Context to UI
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            DataContext = new User_Ticket_ViewModel();
         }
     }
 }
