@@ -144,11 +144,37 @@
     <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Black">
         <StackPanel Margin="32, 20, 32, 0">
 
-            <!-- ==================== Blockbuster Title ==================== -->
+            <!-- ==================== Title ==================== -->
             <TextBlock Text="My Ticket Bill" Style="{StaticResource TitleTextBlockStyle}"/>
 
+            <StackPanel x:Name="Remind_StackPanel"  MinHeight="600">
+                <TextBlock Text="Log in/Sign up to see your Booked Tickets" TextAlignment="Center" 
+                           Margin="0, 80, 0, 0"
+                           Style="{StaticResource TitleTextBlockStyle}"/>
+
+                <StackPanel Orientation="Horizontal" Margin="0, 40, 0, 0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <!-- Login Button -->
+                    <Button Grid.Row="1" HorizontalAlignment="Stretch" Click="LoginButton_Click"
+                        Padding="20, 14" CornerRadius="8">
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon Glyph="&#xE899;" FontSize="28" Margin="0,0,10,0"/>
+                            <TextBlock Text="Log In" FontSize="24"/>
+                        </StackPanel>
+                    </Button>
+
+                    <!-- Signup Button -->
+                    <Button Grid.Row="1" HorizontalAlignment="Stretch" Click="SignupButton_Click"
+                        Margin="40, 0, 0, 0" Padding="20, 14" CornerRadius="8">
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon Glyph="&#xE70F;" FontSize="28" Margin="0,0,10,0"/>
+                            <TextBlock Text="Sign Up" FontSize="24"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+
             <!-- ==================== Movie Slider ==================== -->
-            <ScrollViewer Style="{StaticResource TicketSlider_Style}"  MinHeight="600">
+            <ScrollViewer x:Name="Slide_ScrollViewer" Style="{StaticResource TicketSlider_Style}"  MinHeight="600">
                 <ItemsRepeater x:Name="Tickets_Slider"
                    ItemsSource="{Binding TicketList}"
                    ItemTemplate="{StaticResource TicketCard_DataTemplate}"

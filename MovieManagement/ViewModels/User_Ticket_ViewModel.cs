@@ -12,35 +12,54 @@ namespace MovieManagement.ViewModels
     public class User_Ticket_ViewModel : ViewModelBase
     {
         // Get database context
-        private DB_MovieManagementContext _context = new DB_MovieManagementContext();
+        private readonly DB_MovieManagementContext _context = new DB_MovieManagementContext();
 
         public ObservableCollection<dynamic> TicketList { get; set; } = new ObservableCollection<dynamic>();
 
-        public User_Ticket_ViewModel() 
+
+        public User_Ticket_ViewModel()
         {
-            List<string> SeatList = new List<string> { "A1", "A2" };
-            var DT = DateTime.Now;
-            var ShowDate = DT.ToString("ddd, dd/MMM/yyyy");
-            var ShowTime = DT.ToString("HH:mm");
+            LoadTicketList();
+        }
 
 
-            // Execute query to get ticket list
-            for (int i = 0; i < 10; i++)
+        private void LoadTicketList()
+        {
+            var tempTickets = (from bill in _context.Bills
+                           join ticket in _context.Tickets on bill.BillId equals ticket.BillId
+                           join showTime in _context.ShowTimes on ticket.ShowTimeId equals showTime.ShowTimeId
+                           join movie in _context.Movies on showTime.MovieId equals movie.MovieId
+                           where bill.AccountId == GlobalContext.UserID
+                           group ticket by new { bill.BillId, movie.Title, movie.PosterUrl, showTime.ShowDate, bill.Total } into g
+                           select new
+                           {
+                               Title = g.Key.Title,
+                               PosterUrl = g.Key.PosterUrl,
+                               BillId = g.Key.BillId,
+                               ShowDate = g.Key.ShowDate,
+                               NumberOfTickets = g.Count(),
+                               Seat = string.Join(", ", g.Select(t => t.Row + t.Col)),
+                               Total = g.Key.Total
+                           }).ToList();
+
+            foreach (var ticket in tempTickets)
             {
-                TicketList.Add(new
+                var DT = (DateTime)ticket.ShowDate;
+                var SD = DT.ToString("ddd, dd/MMM/yyyy");
+                var ST = DT.ToString("HH:mm");
+                var item = new
                 {
-                    TicketId = i,
-                    Title = "Movie Title", //
-                    PosterUrl = "ms-appx:///Assets/thumbnail-ngang.jpg", //
-                    BillId = 123, //
-                    ShowDate = ShowDate,
-                    ShowTime = ShowTime,
-                    NumberOfTickets = 2,
-                    Seat = SeatList,
-                    Total = 100000
-                });
+                    Title = ticket.Title,
+                    PosterUrl = ticket.PosterUrl,
+                    BillId = ticket.BillId,
+                    ShowDate = SD,
+                    ShowTime = ST,
+                    NumberOfTickets = ticket.NumberOfTickets,
+                    Seat = ticket.Seat,
+                    Total = ticket.Total
+                };
+                TicketList.Add(item);
             }
-
         }
     }
 }
