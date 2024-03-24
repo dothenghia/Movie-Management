@@ -38,11 +38,11 @@
                     <StackLayout Orientation="Horizontal" Spacing="10"/>
                 </ItemsRepeater.Layout>
             </ItemsRepeater>
-            <Button Click="ApplyButton_Click" Margin="0,15,0,0">
+            <Button x:Name="ApplyButton" Click="ApplyButton_Click" Margin="0,15,0,0">
                 <TextBlock Text="Apply" FontSize="15"/>
             </Button>
         </StackPanel>
-        <TextBlock x:Name="Price" VerticalAlignment="Bottom" Text="{Binding Price}" HorizontalAlignment="Right" Margin="0,0,50,0" FontSize="20"/>
-        <Button Content="Save" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,20,0,0"/>
+        <TextBlock x:Name="Price" VerticalAlignment="Bottom" Text="{Binding Price, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Margin="0,0,50,0" FontSize="20"/>
+        <Button Content="Confirm" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,20,0,0" Width="150"/>
     </StackPanel>
 </Page>

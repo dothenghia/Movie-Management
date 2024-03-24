@@ -64,6 +64,7 @@ namespace MovieManagement.Views
             if (DataContext is User_ExportTicket_ViewModel viewModel)
             {
                 viewModel.ApplyCommand.Execute(this);
+                ApplyButton.IsEnabled = false;
             }
         }
     }

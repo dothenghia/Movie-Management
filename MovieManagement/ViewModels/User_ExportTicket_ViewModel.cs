@@ -4,18 +4,33 @@ using MovieManagement.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Activation;
 using Windows.Media.MediaProperties;
 
 namespace MovieManagement.ViewModels
 {
-    public class User_ExportTicket_ViewModel:ViewModelBase
+    public class User_ExportTicket_ViewModel: ViewModelBase
     {
         private DB_MovieManagementContext _context = new DB_MovieManagementContext();
         public dynamic Bill { get; set; }
-        public float Price { get; set; }
+        public float _price;
+        public float Price
+        {
+            get { return _price; }
+            set
+            {
+                if (_price != value)
+                {
+                    _price = value; 
+                    NotifyPropertyChanged(nameof(Price));
+                }
+            }
+        }
         public ObservableCollection<dynamic> AllVoucher { get; set; }
         public RelayCommand ApplyCommand { get; }
         public User_ExportTicket_ViewModel()
@@ -55,24 +70,29 @@ namespace MovieManagement.ViewModels
         {
             string temp = GlobalContext.voucher;
             int quantity = temp.Count(c => c == ' ');
-            for (int j = 0; j < quantity-1; j++)
+            Debug.WriteLine(quantity);
+            for (int j = 0; j < quantity; j++)
             {
                 int i = temp.IndexOf(' ');
                 string substring = temp.Substring(0, i);
-                if (temp.Contains(substring)) {
-                    temp = temp.Replace(substring,"");
-                }
+                temp = temp.Replace(substring+ " ","");
+                Debug.WriteLine(temp);
+
                 foreach (var voucher_temp in AllVoucher)
                 {
                     if (substring == voucher_temp.VoucherCode)
+                    {
                         if (voucher_temp.IsPercentageDiscount)
                         {
-                            GlobalContext.setPrice((float)(GlobalContext.price * voucher_temp.DiscountAmount));
+                            GlobalContext.setPrice((float)(GlobalContext.price * (1- voucher_temp.DiscountAmount)));
                         }
                         else GlobalContext.setPrice((float)(GlobalContext.price - voucher_temp.DiscountAmount));
+                        Debug.WriteLine(GlobalContext.price);
+                    }
                 }
             }
             Price = GlobalContext.price;
+            //Debug.WriteLine(Price);
         }
 
     }
