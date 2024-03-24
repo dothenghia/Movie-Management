@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Page
-    x:Class="MovieManagement.Views.Admin_FilmDirector"
+    x:Class="MovieManagement.Views.Admin_FilmPerson"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:MovieManagement.Views"
@@ -12,17 +12,17 @@
     xmlns:wctprimitives="using:CommunityToolkit.WinUI.UI.Controls.Primitives">
 
     <StackPanel Margin="20, 10">
-        <TextBlock Text="Manage Directors Infomation" Style="{StaticResource TitleTextBlockStyle}"/>
+        <TextBlock Text="Manage Person Infomation" Style="{StaticResource TitleTextBlockStyle}"/>
         <Button Style="{StaticResource AccentButtonStyle}" HorizontalAlignment="Right" Margin="20" Click="AddButton_Click">
             <StackPanel Orientation="Horizontal">
                 <FontIcon Glyph="&#xF8AA;" />
-                <TextBlock Text="  Add new director"/>
+                <TextBlock Text="  Add new person"/>
             </StackPanel>
         </Button>
-        <controls:DataGrid x:Name="FilmDirector_DataGrid" 
+        <controls:DataGrid x:Name="FilmStar_DataGrid" 
         Height="600" CanUserResizeColumns="False" CanUserReorderColumns="False" 
         AutoGenerateColumns="False"
-        ItemsSource="{Binding MovieDirectors}"
+        ItemsSource="{Binding MovieStars}"
         IsReadOnly="True" HorizontalAlignment="Left">
             <controls:DataGrid.Resources>
 
@@ -89,6 +89,11 @@
                     </controls:DataGridTemplateColumn.CellTemplate>
                 </controls:DataGridTemplateColumn>
             </controls:DataGrid.Columns>
+            <controls:DataGrid.RowStyle>
+                <Style TargetType="controls:DataGridRow">
+                    <Setter Property="Margin" Value="5"/>
+                </Style>
+            </controls:DataGrid.RowStyle>
         </controls:DataGrid>
     </StackPanel>
 </Page>

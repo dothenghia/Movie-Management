@@ -16,5 +16,6 @@ namespace MovieManagement.Models
         public int PersonId { get; set; }
 
         public virtual ICollection<Contributor> Contributors { get; set; }
+
     }
 }

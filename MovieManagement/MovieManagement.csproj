@@ -14,10 +14,9 @@
   <ItemGroup>
     <None Remove="AdminWindow.xaml" />
     <None Remove="Views\Admin_FilmCerti.xaml" />
-    <None Remove="Views\Admin_FilmDirector.xaml" />
     <None Remove="Views\Admin_FilmGenre.xaml" />
     <None Remove="Views\Admin_FilmInfo.xaml" />
-    <None Remove="Views\Admin_FilmStars.xaml" />
+    <None Remove="Views\Admin_FilmPerson.xaml" />
     <None Remove="Views\Admin_Frame.xaml" />
     <None Remove="Views\Admin_Main.xaml" />
     <None Remove="Views\Admin_Report.xaml" />
@@ -167,17 +166,12 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Views\Admin_FilmDirector.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
     <Page Update="Views\User_Movie.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Views\Admin_FilmStars.xaml">
+    <Page Update="Views\Admin_FilmPerson.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
