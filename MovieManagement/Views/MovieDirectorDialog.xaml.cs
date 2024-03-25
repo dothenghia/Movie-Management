@@ -18,6 +18,7 @@ using Windows.Storage.Pickers;
 using MovieManagement.Models;
 using System.Text.RegularExpressions;
 using Windows.Storage;
+using System.Diagnostics;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -88,7 +89,11 @@ namespace MovieManagement.Views
             string fullname = Fullname_TextBox.Text;
             string bio = Bio_TextBox.Text;
             string avatarUrl ="";
-            if (isEdit) { avatarUrl = AvatarImage.ProfilePicture.ToString(); }
+            if (isEdit) {
+                var profilePicture = AvatarImage.ProfilePicture;
+                avatarUrl = ExtractUrlFromImageSource(profilePicture);
+                Debug.Print(avatarUrl);
+            }
             
             //// -- Validate full name
             if (fullname == null || fullname.Length == 0)
@@ -107,15 +112,6 @@ namespace MovieManagement.Views
                 return;
             }
 
-            // -- Check if database already has this name
-            var ppl = _context.People.Where(p => p.Fullname == fullname).FirstOrDefault();
-            if (ppl != null)
-            {
-                MessageBox.Text = "This person already exists.";
-                Flyout flyout = FlyoutBase.GetAttachedFlyout(Fullname_TextBox) as Flyout;
-                flyout.ShowAt(Fullname_TextBox);
-                return;
-            }
             if (selectedFile != null)
             {
                 // Copy the selected image file to the assets/avatars folder
@@ -162,6 +158,19 @@ namespace MovieManagement.Views
             {
                 parentDialog.Hide();
             }
+        }
+
+        private string ExtractUrlFromImageSource(ImageSource imageSource)
+        {
+            if (imageSource is BitmapImage bitmapImage)
+            {
+                Uri uri = bitmapImage.UriSource;
+                if (uri != null)
+                {
+                    return uri.AbsoluteUri;
+                }
+            }
+            return string.Empty;
         }
     }
 }
