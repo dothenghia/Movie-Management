@@ -27,12 +27,64 @@
         </Button>
         
         <!-- Filter -->
-        <ComboBox Grid.Row="1" x:Name="Filter" Margin="10,30,0,0" SelectionChanged="FilterCombobox_SelectionChanged" >
-            <x:String>Publish year</x:String>
-            <x:String>IMDB score</x:String>
-            <x:String>Duration</x:String>
-        </ComboBox>
+        <StackPanel Grid.Row="1" Margin="20,20,0,0" Orientation="Horizontal">
+            <TextBlock  Text="Sort:" Margin="0,5,10,0"/>
+            <ComboBox x:Name="Filter"  SelectionChanged="FilterCombobox_SelectionChanged" Margin=" 0,0,10,0" Width="150">
+                <x:String>Publish year</x:String>
+                <x:String>IMDB score</x:String>
+                <x:String>Duration</x:String>
+            </ComboBox>
 
+            <TextBlock Text="Filter:" Margin="20,5,10,0"/>
+            <ComboBox x:Name="Filter_genre" SelectionChanged="FilterGenreCombobox_SelectionChanged" PlaceholderText="Genre" Margin="0,0,20,0" Width="140">
+                <x:String>All</x:String>
+                <x:String>Action</x:String>
+                <x:String>Adventure</x:String>
+                <x:String>Comedy</x:String>
+                <x:String>Crime</x:String>
+                <x:String>Drama</x:String>
+                <x:String>Fantasy</x:String>
+                <x:String>Historical</x:String>
+                <x:String>Horror</x:String>
+                <x:String>Mystery</x:String>
+                <x:String>Romance</x:String>
+                <x:String>Science Fiction</x:String>
+                <x:String>Thriller</x:String>
+                <x:String>Western</x:String>
+            </ComboBox>
+
+            <ComboBox x:Name="Filter_year" SelectionChanged="FilterYearCombobox_SelectionChanged" PlaceholderText="Year" Margin="0,0,20,0" Width="90">
+                <x:String>All</x:String>
+                <x:String>2006</x:String>
+                <x:String>2007</x:String>
+                <x:String>2008</x:String>
+                <x:String>2009</x:String>
+                <x:String>2010</x:String>
+                <x:String>2011</x:String>
+                <x:String>2012</x:String>
+                <x:String>2013</x:String>
+                <x:String>2014</x:String>
+                <x:String>2015</x:String>
+                <x:String>2016</x:String>
+                <x:String>2017</x:String>
+                <x:String>2018</x:String>
+                <x:String>2019</x:String>
+                <x:String>2020</x:String>
+                <x:String>2021</x:String>
+                <x:String>2022</x:String>
+                <x:String>2023</x:String>
+                <x:String>2024</x:String>
+            </ComboBox>
+
+            <ComboBox x:Name="Filter_age" SelectionChanged="FilterAgeCombobox_SelectionChanged" PlaceholderText="Age">
+                <x:String>All</x:String>
+                <x:String>R</x:String>
+                <x:String>PG-13</x:String>
+                <x:String>PG</x:String>
+                <x:String>G</x:String>
+            </ComboBox>
+        </StackPanel>
+        
         <!-- Results -->
         <ListView Grid.Row="2" ItemsSource="{Binding Movies}" Margin="20, 0" HorizontalAlignment="Stretch" Height="500">
             <ListView.Header>

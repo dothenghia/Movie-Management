@@ -32,7 +32,7 @@ namespace MovieManagement.Views
             viewModel = new User_Search_ViewModel();
             DataContext = viewModel;
             Filter.SelectedItem = Filter.Items.FirstOrDefault();
-            viewModel.Update_Movie(Filter.Items.FirstOrDefault().ToString());
+            viewModel.Update_MovieSort(Filter.Items.FirstOrDefault().ToString());
             viewModel.UpdatePagedMovies();
         }
 
@@ -44,17 +44,35 @@ namespace MovieManagement.Views
         private void FilterCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string selectedFilter = (sender as ComboBox).SelectedItem as string;
-            viewModel.Update_Movie(selectedFilter);
+            viewModel.stored_sort = selectedFilter;
+            viewModel.Update_Movie();
         }
 
-        private void Next_Click(object sender, RoutedEventArgs e)
+        private void FilterGenreCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            string selectedFilter = (sender as ComboBox).SelectedItem as string;
+            if (selectedFilter == "All")
+                viewModel.stored_genre = "";
+            else viewModel.stored_genre = selectedFilter;
+            viewModel.Update_Movie();
         }
 
-        private void Previous_Click(object sender, RoutedEventArgs e)
+        private void FilterYearCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            string selectedFilter = (sender as ComboBox).SelectedItem as string;
+            if (selectedFilter == "All")
+                viewModel.stored_year = "";
+            else viewModel.stored_year = selectedFilter;
+            viewModel.Update_Movie();
+        }
 
+        private void FilterAgeCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string selectedFilter  = (sender as ComboBox).SelectedItem as string;
+            if (selectedFilter == "All")
+                viewModel.stored_agecertification = "";
+            else viewModel.stored_agecertification = selectedFilter;
+            viewModel.Update_Movie();
         }
 
     }

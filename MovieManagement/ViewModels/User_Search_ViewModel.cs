@@ -49,19 +49,24 @@ namespace MovieManagement.ViewModels
                 NotifyPropertyChanged(nameof(TotalPages));
             }
         }
-
+        public ObservableCollection<dynamic> MoviestoRemove {  get; set; }
+        public string stored_sort="";
+        public string stored_genre = "";
+        public string stored_year = "";
+        public string stored_agecertification = "";
         public User_Search_ViewModel()
         {
             Movies = new ObservableCollection<dynamic>();
+            MoviestoRemove = new ObservableCollection<dynamic>();
             PagedMovies = new ObservableCollection<dynamic>();
             NextPageCommand = new RelayCommand(NextPage);
             PreviousPageCommand = new RelayCommand(PreviousPage);
         }
 
-        public void Update_Movie(string filter)
+        public void Update_MovieSort(string filter)
         {
             Movies.Clear();
-            
+            stored_sort = filter;
             var movie_from_movie_name = (from m in _context.Movies
                                          join a in _context.AgeCertificates on m.AgeCertificateId equals a.AgeCertificateId
                                          join g in _context.Genres on m.GenreId equals g.GenreId
@@ -158,6 +163,7 @@ namespace MovieManagement.ViewModels
                         }
                 }
             }
+
             UpdatePagedMovies();
         }
     
@@ -165,8 +171,6 @@ namespace MovieManagement.ViewModels
         {
             TotalPages = (int)Math.Ceiling((double)Movies.Count / PageSize);
             PagedMovies = new ObservableCollection<dynamic>(Movies.Skip((_currentPage - 1) * PageSize).Take(PageSize));
-            Debug.WriteLine(TotalPages);
-
         }
 
         public void NextPage()
@@ -185,6 +189,239 @@ namespace MovieManagement.ViewModels
                 _currentPage--;
                 UpdatePagedMovies();
             }
+        }
+
+        public void Update_MovieByGenre(string filter)
+        {
+            Update_MovieSort(stored_sort);
+            if (stored_year != "") 
+                Update_MovieByYear(stored_year);
+            if (stored_agecertification != "")
+                Update_MovieByAge(stored_agecertification);
+            
+            stored_genre = filter;
+            foreach (var movie in Movies)
+            {
+                if (movie.GenreName != filter)
+                {
+                    MoviestoRemove.Add(movie);
+                }
+            }
+            foreach (var movietoremove in MoviestoRemove)
+            {
+                Movies.Remove(movietoremove);
+            }
+            MoviestoRemove.Clear();
+            UpdatePagedMovies();
+        }
+
+        public void Update_MovieByYear(string filter)
+        {
+            Update_MovieSort(stored_sort);
+            if (stored_genre != "")
+                Update_MovieByGenre(stored_genre);
+            if (stored_agecertification != "")
+                Update_MovieByAge(stored_agecertification);
+            
+            stored_year = filter;
+            foreach (var movie in Movies)
+            {
+                if (movie.PublishYear.ToString() != filter)
+                {
+                    MoviestoRemove.Add(movie);
+                }
+            }
+            foreach(var movietoremove in MoviestoRemove)
+            {
+                Movies.Remove(movietoremove);
+            }
+            MoviestoRemove.Clear();
+        }
+
+        public void Update_MovieByAge(string filter)
+        {
+            Update_MovieSort(stored_sort);
+            if (stored_genre != "")
+                Update_MovieByGenre(stored_genre);
+            if (stored_year != "")
+                Update_MovieByYear(stored_year);
+            
+            stored_agecertification = filter;
+            foreach (var movie in Movies)
+            {
+                if (movie.DisplayContent != filter)
+                {
+                    MoviestoRemove.Add(movie);
+                }
+            }
+            foreach (var movietoremove in MoviestoRemove)
+            {
+                Movies.Remove(movietoremove);
+            }
+            MoviestoRemove.Clear();
+        }
+
+        public void Update_Movie()
+        {
+            Movies.Clear();
+            var movie_from_movie_name = (from m in _context.Movies
+                                         join a in _context.AgeCertificates on m.AgeCertificateId equals a.AgeCertificateId
+                                         join g in _context.Genres on m.GenreId equals g.GenreId
+                                         where m.Title == GlobalContext.name
+                                         select new
+                                         {
+                                             m.PosterUrl,
+                                             m.Duration,
+                                             m.Title,
+                                             m.ImdbScore,
+                                             m.PublishYear,
+                                             a.DisplayContent,
+                                             g.GenreName,
+                                         }).FirstOrDefault();
+            if (movie_from_movie_name != null)
+            {
+                if (stored_agecertification == stored_genre && stored_genre == stored_year)
+                    Movies.Add(movie_from_movie_name);
+                if (stored_year == stored_genre && movie_from_movie_name.DisplayContent == stored_agecertification)
+                    Movies.Add(movie_from_movie_name);
+                if (stored_year == stored_agecertification && movie_from_movie_name.GenreName == stored_genre)
+                    Movies.Add(movie_from_movie_name);
+                if (stored_genre == stored_agecertification && movie_from_movie_name.PublishYear.ToString() == stored_year)
+                    Movies.Add(movie_from_movie_name);
+                if (movie_from_movie_name.GenreName == stored_genre && movie_from_movie_name.PublishYear.ToString() == stored_year && (stored_agecertification == "" || stored_agecertification=="All"))
+                    Movies.Add(movie_from_movie_name);
+                if (movie_from_movie_name.GenreName == stored_genre && movie_from_movie_name.DisplayContent == stored_agecertification && (stored_year == ""|| stored_year == "All"))
+                    Movies.Add(movie_from_movie_name);  
+                if (movie_from_movie_name.PublishYear.ToString() == stored_year &&  movie_from_movie_name.DisplayContent == stored_agecertification && (stored_genre == "" || stored_genre == "All"))
+                    Movies.Add(movie_from_movie_name);
+                if (movie_from_movie_name.PublishYear.ToString() == stored_year &&  movie_from_movie_name.DisplayContent == stored_agecertification &&   movie_from_movie_name.GenreName == stored_genre)
+                    Movies.Add(movie_from_movie_name);
+                return;
+            }
+
+            else
+            {
+                if (stored_sort == "Publish year")
+                {
+                    var all_movies_from_star_name = (from m in _context.Movies
+                                                     join c in _context.Contributors on m.MovieId equals c.MovieId
+                                                     join p in _context.People on c.PersonId equals p.PersonId
+                                                     join a in _context.AgeCertificates on m.AgeCertificateId equals a.AgeCertificateId
+                                                     join g in _context.Genres on m.GenreId equals g.GenreId
+                                                     where p.Fullname == GlobalContext.name
+                                                     select new
+                                                     {
+                                                         m.PosterUrl,
+                                                         m.Duration,
+                                                         m.Title,
+                                                         a.DisplayContent,
+                                                         m.PublishYear,
+                                                         m.ImdbScore,
+                                                         g.GenreName,
+                                                     }).OrderByDescending(m => m.PublishYear).ToList();
+
+                    foreach (var movies in all_movies_from_star_name)
+                    {
+                        if (stored_agecertification == stored_genre && stored_genre == stored_year)
+                            Movies.Add(movies);
+                        if (stored_year == stored_genre && movies.DisplayContent == stored_agecertification)
+                            Movies.Add(movies);
+                        if (stored_year == stored_agecertification && movies.GenreName == stored_genre) 
+                            Movies.Add(movies);
+                        if (stored_genre ==  stored_agecertification && movies.PublishYear.ToString() == stored_year)
+                            Movies.Add(movies);
+                        if (movies.GenreName == stored_genre && movies.PublishYear.ToString() == stored_year && stored_agecertification == "")
+                            Movies.Add(movies);
+                        if (movies.GenreName == stored_genre && movies.DisplayContent == stored_agecertification && stored_year == "")
+                            Movies.Add(movies);
+                        if (movies.PublishYear.ToString() == stored_year && movies.DisplayContent == stored_agecertification && stored_genre=="")
+                            Movies.Add(movies);
+                        if (movies.PublishYear.ToString() == stored_year && movies.DisplayContent == stored_agecertification && movies.GenreName == stored_genre)
+                            Movies.Add(movies);
+                    }
+                }
+                if (stored_sort == "IMDB score")
+                {
+                    var all_movies_from_star_name = (from m in _context.Movies
+                                                     join c in _context.Contributors on m.MovieId equals c.MovieId
+                                                     join p in _context.People on c.PersonId equals p.PersonId
+                                                     join a in _context.AgeCertificates on m.AgeCertificateId equals a.AgeCertificateId
+                                                     join g in _context.Genres on m.GenreId equals g.GenreId
+                                                     where p.Fullname == GlobalContext.name
+                                                     select new
+                                                     {
+                                                         m.PosterUrl,
+                                                         m.Duration,
+                                                         m.Title,
+                                                         a.DisplayContent,
+                                                         m.PublishYear,
+                                                         m.ImdbScore,
+                                                         g.GenreName
+                                                     }).OrderByDescending(m => m.ImdbScore).ToList();
+
+                    foreach (var movies in all_movies_from_star_name)
+                    {
+                        if (stored_agecertification == stored_genre && stored_genre == stored_year)
+                            Movies.Add(movies);
+                        if (stored_year == stored_genre && movies.DisplayContent == stored_agecertification)
+                            Movies.Add(movies);
+                        if (stored_year == stored_agecertification && movies.GenreName == stored_genre)
+                            Movies.Add(movies);
+                        if (stored_genre == stored_agecertification && movies.PublishYear.ToString() == stored_year)
+                            Movies.Add(movies);
+                        if (movies.GenreName == stored_genre && movies.PublishYear.ToString() == stored_year && stored_agecertification == "")
+                            Movies.Add(movies);
+                        if (movies.GenreName == stored_genre && movies.DisplayContent == stored_agecertification && stored_year == "")
+                            Movies.Add(movies);
+                        if (movies.PublishYear.ToString() == stored_year && movies.DisplayContent == stored_agecertification && stored_genre == "")
+                            Movies.Add(movies);
+                        if (movies.PublishYear.ToString() == stored_year && movies.DisplayContent == stored_agecertification && movies.GenreName == stored_genre)
+                            Movies.Add(movies);
+                    }
+
+                }
+                if (stored_sort == "Duration")
+                {
+                    var all_movies_from_star_name = (from m in _context.Movies
+                                                     join c in _context.Contributors on m.MovieId equals c.MovieId
+                                                     join p in _context.People on c.PersonId equals p.PersonId
+                                                     join a in _context.AgeCertificates on m.AgeCertificateId equals a.AgeCertificateId
+                                                     join g in _context.Genres on m.GenreId equals g.GenreId
+                                                     where p.Fullname == GlobalContext.name
+                                                     select new
+                                                     {
+                                                         m.PosterUrl,
+                                                         m.Duration,
+                                                         m.Title,
+                                                         a.DisplayContent,
+                                                         m.PublishYear,
+                                                         m.ImdbScore,
+                                                         g.GenreName
+                                                     }).OrderByDescending(m => m.Duration).ToList();
+
+                    foreach (var movies in all_movies_from_star_name)
+                    {
+                        if (stored_agecertification == stored_genre && stored_genre == stored_year)
+                            Movies.Add(movies);
+                        if (stored_year == stored_genre && movies.DisplayContent == stored_agecertification)
+                            Movies.Add(movies);
+                        if (stored_year == stored_agecertification && movies.GenreName == stored_genre)
+                            Movies.Add(movies);
+                        if (stored_genre == stored_agecertification && movies.PublishYear.ToString() == stored_year)
+                            Movies.Add(movies);
+                        if (movies.GenreName == stored_genre && movies.PublishYear.ToString() == stored_year && stored_agecertification == "")
+                            Movies.Add(movies);
+                        if (movies.GenreName == stored_genre && movies.DisplayContent == stored_agecertification && stored_year == "")
+                            Movies.Add(movies);
+                        if (movies.PublishYear.ToString() == stored_year && movies.DisplayContent == stored_agecertification && stored_genre == "")
+                            Movies.Add(movies);
+                        if (movies.PublishYear.ToString() == stored_year && movies.DisplayContent == stored_agecertification && movies.GenreName == stored_genre)
+                            Movies.Add(movies);
+                    }
+                }
+            }
+
+            UpdatePagedMovies();
         }
     }
 }
