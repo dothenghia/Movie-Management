@@ -45,7 +45,7 @@
             </controls:DataGrid.Resources>
             <controls:DataGrid.Columns>
                 <controls:DataGridTextColumn Header="Date" Width="SizeToCells" Binding="{Binding Date}"/>
-                <controls:DataGridTextColumn Header="Time" Width="SizeToCells" Binding="{Binding Time}"/>
+                <controls:DataGridTextColumn Header="Time" Width="SizeToHeader" Binding="{Binding Time}"/>
                 <controls:DataGridTemplateColumn Header="Movie" Width="*">
                     <controls:DataGridTemplateColumn.CellTemplate >
                         <DataTemplate>

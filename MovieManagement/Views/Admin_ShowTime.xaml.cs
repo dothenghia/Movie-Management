@@ -26,10 +26,13 @@ namespace MovieManagement.Views
     public sealed partial class Admin_ShowTime : Page
     {
         private DB_MovieManagementContext _context = new DB_MovieManagementContext();
+        private Admin_ShowTime_ViewModel _viewModel;
         public Admin_ShowTime()
         {
             this.InitializeComponent();
-            DataContext = new Admin_ShowTime_ViewModel();
+            _viewModel = new Admin_ShowTime_ViewModel();
+            DataContext = _viewModel;
+            _viewModel.Update_Showtimes();
         }
         private async void AddButton_Click(object sender, RoutedEventArgs e)
         {
@@ -42,6 +45,7 @@ namespace MovieManagement.Views
             Dialog_AddShowtime.Content = new ShowtimeDialog();
             Dialog_AddShowtime.RequestedTheme = (VisualTreeHelper.GetParent(sender as Button) as StackPanel).ActualTheme;
             await Dialog_AddShowtime.ShowAsync();
+            _viewModel.Update_Showtimes();
         }
         private async void EditButton_Click(object sender, RoutedEventArgs e)
         {
@@ -53,6 +57,7 @@ namespace MovieManagement.Views
             Dialog_EditShowtime.Content = new ShowtimeDialog();
             Dialog_EditShowtime.DataContext = button.DataContext;
             await Dialog_EditShowtime.ShowAsync();
+            _viewModel.Update_Showtimes();
         }
         private async void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
@@ -70,12 +75,13 @@ namespace MovieManagement.Views
 
             if (result == ContentDialogResult.Primary)
             {
-                var deleteVoucher = _context.Vouchers.FirstOrDefault(v => v.VoucherId == showtimeId);
-                if (deleteVoucher != null)
+                var deleteShowtime = _context.ShowTimes.FirstOrDefault(s => s.ShowTimeId == showtimeId);
+                if (deleteShowtime != null)
                 {
-                    _context.Vouchers.Remove(deleteVoucher);
+                    _context.ShowTimes.Remove(deleteShowtime);
                     _context.SaveChanges();
                 }
+                _viewModel.Update_Showtimes();
             }
         }
     }

@@ -51,7 +51,12 @@ namespace MovieManagement.Views
         {
             if (string.IsNullOrEmpty(InvisibleTextBlock.Text)) { isAdd = true; isEdit = false; }
             else { isAdd = false; isEdit = true; }
-            Movie_SuggestBox.Text = InvisibleTextBlock2.Text;
+            if (isEdit)
+            {
+                Movie_SuggestBox.Text = InvisibleTextBlock2.Text;
+                int.TryParse(InvisibleTextBlock3.Text, out selectedMovieId);
+            }
+
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
@@ -66,133 +71,80 @@ namespace MovieManagement.Views
         {
             int showtimeid;
             int.TryParse(InvisibleTextBlock.Text, out showtimeid);
+            int maxrow;
+            int.TryParse(MaxRow_TextBox.Text, out maxrow);
+            int maxcol ;
+            int.TryParse(MaxCol_TextBox.Text, out maxcol);
 
-            //// Validate voucher code
-            //string vouchercode = VoucherCode_TextBox.Text;
-            //if (vouchercode == null || vouchercode.Length == 0)
-            //{
-            //    MessageBox.Text = "Voucher code must not be null.";
-            //    Flyout flyout = FlyoutBase.GetAttachedFlyout(VoucherCode_TextBox) as Flyout;
-            //    flyout.ShowAt(VoucherCode_TextBox);
-            //    return;
-            //}
-            //Regex regex = new Regex(@"^[A-Z0-9]*$");
-            //if (!regex.IsMatch(vouchercode))
-            //{
-            //    MessageBox.Text = "Voucher code must contains capital letters and digits only.";
-            //    Flyout flyout = FlyoutBase.GetAttachedFlyout(VoucherCode_TextBox) as Flyout;
-            //    flyout.ShowAt(VoucherCode_TextBox);
-            //    return;
-            //}
-            //var voucher = _context.Vouchers.Where(g => g.VoucherCode == vouchercode).FirstOrDefault();
-            //if (isAdd && voucher != null)
-            //{
-            //    MessageBox.Text = "This voucher code already exists.";
-            //    Flyout flyout = FlyoutBase.GetAttachedFlyout(VoucherCode_TextBox) as Flyout;
-            //    flyout.ShowAt(VoucherCode_TextBox);
-            //    return;
-            //}
+            ///Validate date
+            DateTimeOffset? selectedDate = ShowDatePicker.SelectedDate;
+            DateTime defaultDate = new DateTime(1601, 1, 1);
+            DateTime today = DateTime.Today;
+            ///Validate time
+            TimeSpan? selectedTime = ShowTimePicker.SelectedTime;
 
-            //// Validate status
-            //var selectedstatus = Status_ComboBox.SelectedItem;
-            //if (selectedstatus == null)
-            //{
-            //    MessageBox.Text = "Please select a status.";
-            //    Flyout flyout = FlyoutBase.GetAttachedFlyout(Status_ComboBox) as Flyout;
-            //    flyout.ShowAt(Status_ComboBox);
-            //    return;
-            //}
-            //var statusconverter = new ExpiredStatusConverter();
-            //bool isExpired = (bool)statusconverter.ConvertBack(selectedstatus, typeof(bool), null, null);
+            if (selectedDate.Value.Date == defaultDate)
+            {
+                MessageBox.Text = "Please select a day.";
+                Flyout flyout = FlyoutBase.GetAttachedFlyout(ShowDatePicker) as Flyout;
+                flyout.ShowAt(ShowDatePicker);
+                return;
+            }
+            if (selectedDate.Value.Date <= today.Date)
+            {
+                MessageBox.Text = "Can not add showtime for previous day.";
+                Flyout flyout = FlyoutBase.GetAttachedFlyout(ShowDatePicker) as Flyout;
+                flyout.ShowAt(ShowDatePicker);
+                return;
+            }
+            DateTime selectedShowTime = selectedDate.Value.DateTime;
+            selectedShowTime = new DateTime(selectedShowTime.Year,
+                                            selectedShowTime.Month,
+                                            selectedShowTime.Day,
+                                            0,0,0);
+            selectedShowTime += selectedTime.Value;
+            //validate movie
+            if (selectedMovieId == 0)
+            {
+                MessageBox.Text = "Please select a movie.";
+                Flyout flyout = FlyoutBase.GetAttachedFlyout(Movie_SuggestBox) as Flyout;
+                flyout.ShowAt(Movie_SuggestBox);
+                return;
+            }
+            //validate showtime
+            var showtime = _context.ShowTimes.Where(s => s.MovieId == selectedMovieId && s.ShowDate == selectedShowTime).FirstOrDefault();
+            if (showtime != null)
+            {
+                MessageBox.Text = "This movie already has this showtime.";
+                Flyout flyout = FlyoutBase.GetAttachedFlyout(Movie_SuggestBox) as Flyout;
+                flyout.ShowAt(Movie_SuggestBox);
+                return;
+            }
 
-            //var selectedtype = Type_ComboBox.SelectedItem;
-            //if (selectedtype == null)
-            //{
-            //    MessageBox.Text = "Please select a discount type.";
-            //    Flyout flyout = FlyoutBase.GetAttachedFlyout(Type_ComboBox) as Flyout;
-            //    flyout.ShowAt(Type_ComboBox);
-            //    return;
-            //}
-            //var typeconverter = new DiscountTypeConverter();
-            //bool isPercentageDiscount = (bool)typeconverter.ConvertBack(selectedtype, typeof(bool), null, null);
-
-            ////Validate discount amount
-            //string discountamount = DiscountAmount_TextBox.Text;
-            //if (discountamount == null || discountamount.Length == 0)
-            //{
-            //    MessageBox.Text = "Please enter discount amount.";
-            //    Flyout flyout = FlyoutBase.GetAttachedFlyout(DiscountAmount_TextBox) as Flyout;
-            //    flyout.ShowAt(DiscountAmount_TextBox);
-            //    return;
-            //}
-            //Regex regexdouble = new Regex(@"^[0-9]*\.?[0-9]*$");
-            //Regex regexpercentage = new Regex(@"^0\.[0-9]*$");
-            //if (!regexdouble.IsMatch(discountamount))
-            //{
-            //    MessageBox.Text = "Discount amount must be a number.";
-            //    Flyout flyout = FlyoutBase.GetAttachedFlyout(DiscountAmount_TextBox) as Flyout;
-            //    flyout.ShowAt(DiscountAmount_TextBox);
-            //    return;
-            //}
-            //if (isPercentageDiscount)
-            //{
-            //    if (!regexpercentage.IsMatch(discountamount))
-            //    {
-            //        MessageBox.Text = "Percentage discount amount must be a number between 0 and 1.";
-            //        Flyout flyout = FlyoutBase.GetAttachedFlyout(DiscountAmount_TextBox) as Flyout;
-            //        flyout.ShowAt(DiscountAmount_TextBox);
-            //        return;
-            //    }
-            //}
-            //double dcam;
-            //double.TryParse(discountamount, NumberStyles.Float, CultureInfo.InvariantCulture, out dcam);
-
-            ////Validate requirement amount
-            //string requirementamount = RequirementAmount_TextBox.Text;
-            //if (requirementamount == null || requirementamount.Length == 0)
-            //{
-            //    MessageBox.Text = "Please enter requirement amount.";
-            //    Flyout flyout = FlyoutBase.GetAttachedFlyout(RequirementAmount_TextBox) as Flyout;
-            //    flyout.ShowAt(RequirementAmount_TextBox);
-            //    return;
-            //}
-            //if (!regexdouble.IsMatch(requirementamount))
-            //{
-            //    MessageBox.Text = "Requirement amount must be a number.";
-            //    Flyout flyout = FlyoutBase.GetAttachedFlyout(RequirementAmount_TextBox) as Flyout;
-            //    flyout.ShowAt(RequirementAmount_TextBox);
-            //    return;
-            //}
-            //double rqam;
-            //double.TryParse(requirementamount, NumberStyles.Float, CultureInfo.InvariantCulture, out rqam);
-
-            //if (isAdd)
-            //{
-            //    Voucher newVoucher = new Voucher
-            //    {
-            //        VoucherCode = vouchercode,
-            //        IsExpired = isExpired,
-            //        IsPercentageDiscount = isPercentageDiscount,
-            //        DiscountAmount = dcam,
-            //        RequirementAmount = rqam
-            //    };
-            //    _context.Vouchers.Add(newVoucher);
-            //    _context.SaveChanges();
-            //}
-            //else if (isEdit)
-            //{
-            //    var editvoucher = _context.Vouchers.Where(v => v.VoucherId == voucherid).FirstOrDefault();
-            //    if (editvoucher != null)
-            //    {
-            //        editvoucher.VoucherCode = vouchercode;
-            //        editvoucher.IsExpired = isExpired;
-            //        editvoucher.IsPercentageDiscount = isPercentageDiscount;
-            //        editvoucher.DiscountAmount = dcam;
-            //        editvoucher.RequirementAmount = rqam;
-            //        _context.SaveChanges();
-            //    }
-            //}
-
+            if (isAdd)
+            {
+                ShowTime newShowtime = new ShowTime
+                {
+                    MovieId = selectedMovieId,
+                    MaxCol = maxcol,
+                    MaxRow = maxrow,
+                    ShowDate = selectedShowTime,
+                };
+                _context.ShowTimes.Add(newShowtime);
+                _context.SaveChanges();
+            }
+            else if (isEdit)
+            {
+                var editshowtime = _context.ShowTimes.Where(s => s.ShowTimeId == showtimeid).FirstOrDefault();
+                if (editshowtime != null)
+                {
+                    editshowtime.MovieId = selectedMovieId;
+                    editshowtime.MaxCol = maxcol;
+                    editshowtime.MaxRow = maxrow;
+                    editshowtime.ShowDate = selectedShowTime;
+                    _context.SaveChanges();
+                }
+            }
             // -- Close Dialog and Raise SignupValid event
             ContentDialog parentDialog = this.Parent as ContentDialog;
             if (parentDialog != null)
@@ -229,6 +181,8 @@ namespace MovieManagement.Views
         private void AutoSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
         {
             string selectedtitle = args.SelectedItem.ToString();
+            var movie = _context.Movies.Where(m=> m.Title == selectedtitle).FirstOrDefault();
+            selectedMovieId = movie.MovieId;
         }
     }
 }

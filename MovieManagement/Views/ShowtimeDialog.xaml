@@ -28,13 +28,13 @@
     </Page.Resources>
 
     <StackPanel VerticalAlignment="Stretch">
-        <DatePicker x:Name="DatePicker" Header="Date" SelectedDate="{Binding ShowDate, Mode=TwoWay, Converter={StaticResource DatePickerConverter}}" />
-        <TimePicker x:Name="TimePicker" ClockIdentifier="24HourClock" Header="Time" MinuteIncrement="5" SelectedTime="{Binding ShowDate, Mode=TwoWay, Converter={StaticResource TimePickerConverter}}"/>
+        <DatePicker x:Name="ShowDatePicker" Header="Date" SelectedDate="{Binding ShowDate, Mode=TwoWay, Converter={StaticResource DatePickerConverter}}" FlyoutBase.AttachedFlyout="{StaticResource ErrorMessage_Flyout}"/>
+        <TimePicker x:Name="ShowTimePicker" ClockIdentifier="24HourClock" Header="Time" MinuteIncrement="5" SelectedTime="{Binding ShowDate, Mode=TwoWay, Converter={StaticResource TimePickerConverter}}" FlyoutBase.AttachedFlyout="{StaticResource ErrorMessage_Flyout}"/>
         <StackPanel Orientation="Horizontal">
-            <TextBox x:Name="MaxCol_TextBox" Header="Max Column" Text="{Binding MaxCol}" Margin="0,0,40,0" FlyoutBase.AttachedFlyout="{StaticResource ErrorMessage_Flyout}"/>
-            <TextBox x:Name="MaxRow_TextBox" Header="Max Row" Text="{Binding MaxRow}" FlyoutBase.AttachedFlyout="{StaticResource ErrorMessage_Flyout}"/>
+            <TextBox x:Name="MaxCol_TextBox" Header="Max Column" Text="{Binding MaxCol}" Margin="0,0,40,0"/>
+            <TextBox x:Name="MaxRow_TextBox" Header="Max Row" Text="{Binding MaxRow}"/>
         </StackPanel>
-        <AutoSuggestBox x:Name="Movie_SuggestBox" Text="{Binding Title}"
+        <AutoSuggestBox x:Name="Movie_SuggestBox" Text="{Binding Title}" FlyoutBase.AttachedFlyout="{StaticResource ErrorMessage_Flyout}"
                 TextChanged="AutoSuggestBox_TextChanged" Header="Movie"
                 SuggestionChosen="AutoSuggestBox_SuggestionChosen"
                 Width="300" AutomationProperties.Name="Basic AutoSuggestBox"/>

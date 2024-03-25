@@ -13,23 +13,28 @@ namespace MovieManagement.ViewModels
     {
         // Get database context
         private readonly DB_MovieManagementContext _context = new DB_MovieManagementContext();
-        public ObservableCollection<dynamic> Showtimes { get; set; } = new ObservableCollection<dynamic>();
+        public ObservableCollection<dynamic> Showtimes { get; set; }
         public Admin_ShowTime_ViewModel()
         {
+            Showtimes = new ObservableCollection<dynamic>();
+        }
+        public void Update_Showtimes()
+        {
+            Showtimes.Clear();
             var allshowtimes = new ObservableCollection<dynamic>((from s in _context.ShowTimes
-                                                           join m in _context.Movies on s.MovieId equals m.MovieId
-                                                           where s.ShowDate >= DateTime.Now.Date
-                                                            select new
-                                                            {
-                                                                s.ShowTimeId,
-                                                                s.ShowDate,
-                                                                s.MovieId,
-                                                                m.PosterUrl,
-                                                                m.Title,
-                                                                s.MaxRow,
-                                                                s.MaxCol
-                                                            }).ToList());
-            foreach(var s in allshowtimes)
+                                                                  join m in _context.Movies on s.MovieId equals m.MovieId
+                                                                  where s.ShowDate >= DateTime.Now.Date
+                                                                  select new
+                                                                  {
+                                                                      s.ShowTimeId,
+                                                                      s.ShowDate,
+                                                                      s.MovieId,
+                                                                      m.PosterUrl,
+                                                                      m.Title,
+                                                                      s.MaxRow,
+                                                                      s.MaxCol
+                                                                  }).ToList());
+            foreach (var s in allshowtimes)
             {
                 bool IsEditButtonEnabled = false;
                 bool IsDeleteButtonEnabled = false;
@@ -43,8 +48,8 @@ namespace MovieManagement.ViewModels
                     s.Title,
                     s.MaxRow,
                     s.MaxCol,
-                    Date = s.ShowDate.Day + "/" + s.ShowDate.Month + "/" + s.ShowDate.Year,
-                    Time = s.ShowDate.TimeOfDay,
+                    Date = $"{s.ShowDate.Day}/{s.ShowDate.Month}/{s.ShowDate.Year}",
+                    Time = $"{s.ShowDate.Hour:D2}:{s.ShowDate.Minute:D2}",
                     IsEditButtonEnabled = IsEditButtonEnabled,
                     IsDeleteButtonEnabled = IsDeleteButtonEnabled,
                 });

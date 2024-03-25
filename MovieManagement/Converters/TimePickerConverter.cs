@@ -11,8 +11,8 @@ namespace MovieManagement.Converters
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             DateTime date = (DateTime)value;
-            TimeSpan newtime = date.TimeOfDay;
-            return newtime;
+            TimeSpan? time; 
+            return time = new TimeSpan(date.Hour, date.Minute, 00);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

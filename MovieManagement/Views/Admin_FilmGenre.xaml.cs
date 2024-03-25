@@ -83,8 +83,8 @@ namespace MovieManagement.Views
                     _context.Genres.Remove(deleteGenre);
                     _context.SaveChanges();
                 }
+                viewModel.Update_Genres();
             }
-            viewModel.Update_Genres();
         }
     }
 }
