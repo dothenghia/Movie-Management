@@ -5,8 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data.SqlTypes;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Activation;
@@ -40,6 +42,9 @@ namespace MovieManagement.ViewModels
             ConfirmCommand = new RelayCommand(Confirm);
             var temp = GlobalContext.seats;
             int quantity = temp.Count(c => c == ' ');
+
+            
+
             Bill = (from s in _context.ShowTimes
                     join m in _context.Movies on s.MovieId equals m.MovieId
                     join t in _context.Tickets on s.ShowTimeId equals t.ShowTimeId
@@ -52,11 +57,8 @@ namespace MovieManagement.ViewModels
                         Seat = temp,
                         t.Price
                     }).FirstOrDefault();
-            if (quantity > 0)
-            {
-                GlobalContext.setPrice((float)(Bill.Price * quantity));
-                Price = GlobalContext.price;
-            }
+            
+            
             AllVoucher = new ObservableCollection<dynamic>((from v in _context.Vouchers
                           where v.IsExpired == false
                           select new
@@ -66,10 +68,48 @@ namespace MovieManagement.ViewModels
                               v.DiscountAmount,
                               v.IsPercentageDiscount
                           }).ToList());
+
+            var AllVoucherIncludeExpired = (from v in _context.Vouchers
+                                            select new
+                                            {
+                                                v.VoucherCode,
+                                                v.DiscountAmount,
+                                                v.IsPercentageDiscount,
+                                            }).ToList();
+            if (quantity > 0)
+            {
+                GlobalContext.setPrice((float)(Bill.Price * quantity));
+                DateTime thisMonth = DateTime.Now;
+                int month = thisMonth.Month;
+                var dob = (from a in _context.Accounts
+                           where a.AccountId == GlobalContext.UserID
+                           select new
+                           {
+                               Month = a.Dob.Value.Month
+                           }).FirstOrDefault();
+                if (dob.Month == month)
+                {
+                    foreach (var voucher_temp in AllVoucherIncludeExpired)
+                    {
+                        Debug.WriteLine("haah");
+                        if (voucher_temp.VoucherCode == "Birthday")
+                        {
+                            if (voucher_temp.IsPercentageDiscount == true)
+                            {
+                                GlobalContext.setPrice((float)(GlobalContext.price * (1 - voucher_temp.DiscountAmount)));
+                            }
+                            else GlobalContext.setPrice((float)(GlobalContext.price - voucher_temp.DiscountAmount));
+                            Debug.WriteLine("hmmmm");
+                        }
+                    }
+                }
+                Price = GlobalContext.price;
+            }
         }
 
         private void ApplyVoucher()
         {
+            
             string temp = GlobalContext.voucher;
             int quantity = temp.Count(c => c == ' ');
             for (int j = 0; j < quantity; j++)
@@ -134,9 +174,6 @@ namespace MovieManagement.ViewModels
                 _context.BillVouchers.Add(newBillVoucher);
                 _context.SaveChanges();
             }
-
-            Debug.WriteLine(GlobalContext.seats + " 123");
-            Debug.WriteLine(GlobalContext.voucher + " 456");
         }
 
     }
