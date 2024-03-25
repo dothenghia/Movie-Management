@@ -20,37 +20,63 @@ namespace MovieManagement.ViewModels
         public List<string> AgeCertificatesList { get; set; } = new List<string>();
         public Admin_FilmInfo_ViewModel()
         {
-            var movies = (from m in _context.Movies
-                          join a in _context.AgeCertificates on m.AgeCertificateId equals a.AgeCertificateId
-                          join g in _context.Genres on m.GenreId equals g.GenreId
-                          select new
-                          {
-                              MovieId = m.MovieId,
-                              Title = m.Title,
-                              Duration = m.Duration,
-                              PublishYear = m.PublishYear,
-                              ImdbScore = m.ImdbScore,
-                              PosterUrl = m.PosterUrl,
-                              TrailerUrl = m.TrailerUrl,
-                              Description = m.Description,
-                              GenreName = g.GenreName,
-                              AgeCertificate = a.DisplayContent,
-                              BackgroundColor = a.BackgroundColor,
-                              ForegroundColor = a.ForegroundColor
-                          }).ToList();
+            FilmInfo = new ObservableCollection<dynamic>();
 
-            var contributors = (from c in _context.Contributors
-                                join p in _context.People on c.PersonId equals p.PersonId
-                                join r in _context.Roles on c.RoleId equals r.RoleId
-                                //where r.RoleName == "Director"
-                                group p by c.MovieId into grp
-                                select new
-                                {
-                                    MovieId = grp.Key,
-                                    Contributors = string.Join(", ", grp.Select(person => person.Fullname))
-                                }).ToList();
+            Genres = new ObservableCollection<dynamic>((from g in _context.Genres
+                                                        select new
+                                                        {
+                                                            g.GenreName
+                                                        }).ToList());
+            foreach (var g in Genres)
+            {
+                string genreName = g.GenreName;
+                GenresList.Add(genreName);
+            }
+            AgeCertificates = new ObservableCollection<dynamic>((from a in _context.AgeCertificates
+                                                                 select new
+                                                                 {
+                                                                     a.DisplayContent
+                                                                 }).ToList());
+            foreach (var a in AgeCertificates)
+            {
+                string content = a.DisplayContent;
+                AgeCertificatesList.Add(content);
+            }
+        }
+        public void Update_FilmInfo()
+        {
+            FilmInfo.Clear();
+                var movies = (from m in _context.Movies
+                              join a in _context.AgeCertificates on m.AgeCertificateId equals a.AgeCertificateId
+                              join g in _context.Genres on m.GenreId equals g.GenreId
+                              select new
+                              {
+                                  MovieId = m.MovieId,
+                                  Title = m.Title,
+                                  Duration = m.Duration,
+                                  PublishYear = m.PublishYear,
+                                  ImdbScore = m.ImdbScore,
+                                  PosterUrl = m.PosterUrl,
+                                  TrailerUrl = m.TrailerUrl,
+                                  Description = m.Description,
+                                  GenreName = g.GenreName,
+                                  AgeCertificate = a.DisplayContent,
+                                  BackgroundColor = a.BackgroundColor,
+                                  ForegroundColor = a.ForegroundColor
+                              }).ToList();
 
-            FilmInfo = new ObservableCollection<dynamic>( (from m in movies
+                var contributors = (from c in _context.Contributors
+                                    join p in _context.People on c.PersonId equals p.PersonId
+                                    join r in _context.Roles on c.RoleId equals r.RoleId
+                                    //where r.RoleName == "Director"
+                                    group p by c.MovieId into grp
+                                    select new
+                                    {
+                                        MovieId = grp.Key,
+                                        Contributors = string.Join(", ", grp.Select(person => person.Fullname))
+                                    }).ToList();
+
+            var allmovies = (from m in movies
                             join c in contributors on m.MovieId equals c.MovieId into movieContributors
                             from mc in movieContributors.DefaultIfEmpty()
                             select new
@@ -68,50 +94,10 @@ namespace MovieManagement.ViewModels
                                 m.BackgroundColor,
                                 m.ForegroundColor,
                                 Contributors = mc != null ? mc.Contributors : ""
-                            }).ToList());
-
-            var alldirectors = new ObservableCollection<dynamic>((from c in _context.Contributors
-                                                                  join p in _context.People on c.PersonId equals p.PersonId
-                                                                  join r in _context.Roles on c.RoleId equals r.RoleId
-                                                                  where r.RoleName == "Director"
-                                                                  select new
-                                                                  {
-                                                                      c.MovieId,
-                                                                      c.PersonId,
-                                                                      p.AvatarUrl,
-                                                                      p.Fullname
-                                                                  }).ToList());
-            var allactors = new ObservableCollection<dynamic>((from c in _context.Contributors
-                                                                  join p in _context.People on c.PersonId equals p.PersonId
-                                                                  join r in _context.Roles on c.RoleId equals r.RoleId
-                                                                  where r.RoleName == "Actor"
-                                                                  select new
-                                                                  {
-                                                                      c.MovieId,
-                                                                      c.PersonId,
-                                                                      p.AvatarUrl,
-                                                                      p.Fullname
-                                                                  }).ToList());
-
-            Genres = new ObservableCollection<dynamic> ((from g in _context.Genres
-                                                        select new 
-                                                        {
-                                                           g.GenreName
-                                                        }).ToList());
-            foreach (var g in Genres)
+                            });
+            foreach (var item in allmovies)
             {
-                string genreName = g.GenreName;
-                GenresList.Add(genreName);
-            }
-            AgeCertificates = new ObservableCollection<dynamic>((from a in _context.AgeCertificates
-                                                        select new
-                                                        {
-                                                            a.DisplayContent
-                                                        }).ToList());
-            foreach (var a in AgeCertificates)
-            {
-                string content = a.DisplayContent;
-                AgeCertificatesList.Add(content);
+                FilmInfo.Add(item);
             }
         }
     }

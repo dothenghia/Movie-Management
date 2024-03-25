@@ -28,11 +28,14 @@ namespace MovieManagement.Views
     /// </summary>
     public sealed partial class Admin_FilmInfo : Page
     {
+        private DB_MovieManagementContext _context = new DB_MovieManagementContext();
+        private Admin_FilmInfo_ViewModel _viewModel;
         public Admin_FilmInfo()
         {
             this.InitializeComponent();
-            DataContext = new Admin_FilmInfo_ViewModel();
-            
+            _viewModel = new Admin_FilmInfo_ViewModel();
+            DataContext = _viewModel;
+            _viewModel.Update_FilmInfo();
         }
         private async void AddButton_Click(object sender, RoutedEventArgs e)
         {
@@ -42,45 +45,26 @@ namespace MovieManagement.Views
             Dialog_AddNewMovie.XamlRoot = this.XamlRoot;
             Dialog_AddNewMovie.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
             Dialog_AddNewMovie.Title = "Add New Movie";
-            Dialog_AddNewMovie.PrimaryButtonText = "Save";
-            Dialog_AddNewMovie.CloseButtonText = "Cancel";
-            Dialog_AddNewMovie.DefaultButton = ContentDialogButton.Primary;
             Dialog_AddNewMovie.Content = new MovieInfoDialog();
             Dialog_AddNewMovie.RequestedTheme = (VisualTreeHelper.GetParent(sender as Button) as StackPanel).ActualTheme;
-
-            var result = await Dialog_AddNewMovie.ShowAsync();
-
-            if (result == ContentDialogResult.Primary)
-            {
-                Debug.Print("User saved their work");
-            }
-            else
-            {
-                Debug.Print("User cancelled the dialog");
-            }
+            await Dialog_AddNewMovie.ShowAsync();
+            _viewModel.Update_FilmInfo();
         }
         private async void EditButton_Click(object sender, RoutedEventArgs e)
         {
-            Button button= sender as Button;
+            Button button = sender as Button;
             ContentDialog Dialog_EditMovie = new ContentDialog();
             Dialog_EditMovie.XamlRoot = this.XamlRoot;
             Dialog_EditMovie.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
             Dialog_EditMovie.Title = "Edit Movie";
-            Dialog_EditMovie.PrimaryButtonText = "Save";
-            Dialog_EditMovie.CloseButtonText = "Cancel";
-            Dialog_EditMovie.DefaultButton = ContentDialogButton.Primary;
             Dialog_EditMovie.Content = new MovieInfoDialog();
             Dialog_EditMovie.DataContext = button.DataContext;
-            
-            var result = await Dialog_EditMovie.ShowAsync();
-
-            if (result == ContentDialogResult.Primary)
-            {
-
-            }
+            await Dialog_EditMovie.ShowAsync();
+            _viewModel.Update_FilmInfo();
         }
         private async void DeleteButton_Click(object sender, RoutedEventArgs e) {
             Button button = sender as Button;
+            int movieid = (int)button.DataContext.GetType().GetProperty("MovieId").GetValue(button.DataContext);
             ContentDialog Dialog_DeleteMovie = new ContentDialog();
             Dialog_DeleteMovie.XamlRoot = this.XamlRoot;
             Dialog_DeleteMovie.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
@@ -93,7 +77,13 @@ namespace MovieManagement.Views
 
             if (result == ContentDialogResult.Primary)
             {
-
+                var deleteMovie = _context.Movies.FirstOrDefault(m => m.MovieId == movieid);
+                if (deleteMovie != null)
+                {
+                    _context.Movies.Remove(deleteMovie);
+                    _context.SaveChanges();
+                }
+                _viewModel.Update_FilmInfo();
             }
         }
     }
