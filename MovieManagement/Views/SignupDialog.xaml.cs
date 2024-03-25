@@ -112,7 +112,6 @@ namespace MovieManagement.Views
             if (parentDialog != null)
             {
                 parentDialog.Hide();
-                GlobalContext.SetGo2Setting(true);
                 GlobalContext.SetUserID(newAccount.AccountId);
                 SignupValid?.Invoke();
             }

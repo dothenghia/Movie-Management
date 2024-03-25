@@ -262,13 +262,13 @@
 
 
 
-            <!-- ==================== Night Time Movies ==================== -->
-            <TextBlock Text="Night Time Movies" Style="{StaticResource TitleTextBlockStyle}" Margin="0, -50, 0, 0"/>
+            <!-- ==================== Day Time Movies ==================== -->
+            <TextBlock Text="Day Time Movies (from 6h to 18h)" Style="{StaticResource TitleTextBlockStyle}" Margin="0, -50, 0, 0"/>
 
             <!-- ==================== Movie Slider ==================== -->
             <ScrollViewer Style="{StaticResource MovieSlider_Style}" Height="380">
-                <ItemsRepeater x:Name="Nighttime_Slider"
-                               ItemsSource="{Binding Nighttime_Movies}"
+                <ItemsRepeater x:Name="Daytime_Slider"
+                               ItemsSource="{Binding DayTime_Movies}"
                                ItemTemplate="{StaticResource MovieCard_DataTemplate}"
                                Layout="{StaticResource HorizontalStack_Layout_2}"
                                VerticalAlignment="Top">
@@ -277,13 +277,27 @@
 
 
 
-            <!-- ==================== Standard Time Movies ==================== -->
-            <TextBlock Text="Standard Time Movies" Style="{StaticResource TitleTextBlockStyle}" Margin="0, -50, 0, 0"/>
+            <!-- ==================== Night Time Movies ==================== -->
+            <TextBlock Text="Night Time Movies (from 18h to 6h)" Style="{StaticResource TitleTextBlockStyle}" Margin="0, -50, 0, 0"/>
 
             <!-- ==================== Movie Slider ==================== -->
             <ScrollViewer Style="{StaticResource MovieSlider_Style}" Height="380">
-                <ItemsRepeater x:Name="Standardtime_Slider"
-                               ItemsSource="{Binding Standard_Movies}"
+                <ItemsRepeater x:Name="Nighttime_Slider"
+                               ItemsSource="{Binding NightTime_Movies}"
+                               ItemTemplate="{StaticResource MovieCard_DataTemplate}"
+                               Layout="{StaticResource HorizontalStack_Layout_2}"
+                               VerticalAlignment="Top">
+                </ItemsRepeater>
+            </ScrollViewer>
+
+
+            <!-- ==================== All Movies ==================== -->
+            <TextBlock Text="All Movies" Style="{StaticResource TitleTextBlockStyle}" Margin="0, -50, 0, 0"/>
+
+            <!-- ==================== Movie Slider ==================== -->
+            <ScrollViewer Style="{StaticResource MovieSlider_Style}" Height="380">
+                <ItemsRepeater x:Name="All_Slider"
+                               ItemsSource="{Binding All_Movies}"
                                ItemTemplate="{StaticResource MovieCard_DataTemplate}"
                                Layout="{StaticResource HorizontalStack_Layout_2}"
                                VerticalAlignment="Top">

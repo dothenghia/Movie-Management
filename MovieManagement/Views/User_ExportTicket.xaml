@@ -9,40 +9,141 @@
     mc:Ignorable="d"
     >
 
-    <StackPanel VerticalAlignment="Stretch" Margin="32, 20, 32, 0">
-        
-        <Button Click="BackButton_Click">
-            <StackPanel Orientation="Horizontal">
-                <FontIcon Glyph="&#xE72B;" FontSize="15" Margin="0,0,6,0"/>
-                <TextBlock Text="Back" FontSize="15"/>
-            </StackPanel>
-        </Button>
-        
-        <TextBlock Text="Movie name" FontSize="24"/>
-        <TextBlock x:Name="MovieName" FontSize="16" Text="{Binding Bill.Title }"/>
-        <TextBlock Text="Quantity" FontSize="24"/>
-        <TextBlock x:Name="Quantity" FontSize="16" Text="{Binding Bill.Quantity}"/>
-        <TextBlock Text="Position" FontSize="24"/>
-        <TextBlock x:Name="Positio" FontSize="16" Text="{Binding Bill.Seat}"/>
-        <TextBlock Text="Showtime" FontSize="24"/>
-        <TextBlock x:Name="Showtime" FontSize="16" Text="{Binding Bill.ShowDate}"/>
-        <StackPanel>
-            <TextBlock Text="Voucher" FontSize="20"/>
-            <ItemsRepeater ItemsSource="{Binding AllVoucher}" Margin="0,15,0,0">
-                <ItemsRepeater.ItemTemplate>
-                    <DataTemplate>
-                        <ToggleButton Content="{Binding VoucherCode}" IsEnabled="{Binding isAvailable}" Checked="ToggleButton_Checked" Unchecked="ToggleButton_Unchecked"/>
-                    </DataTemplate>
-                </ItemsRepeater.ItemTemplate>
-                <ItemsRepeater.Layout>
-                    <StackLayout Orientation="Horizontal" Spacing="10"/>
-                </ItemsRepeater.Layout>
-            </ItemsRepeater>
-            <Button x:Name="ApplyButton" Click="ApplyButton_Click" Margin="0,15,0,0">
-                <TextBlock Text="Apply" FontSize="15"/>
+    <!-- ==================== Define Page Resources ==================== -->
+
+
+    <!-- ==================== PAGE CONTENT ==================== -->
+    <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <StackPanel Margin="32, 20, 32, 0">
+            
+            <!-- Back Button -->
+            <Button Click="BackButton_Click">
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon Glyph="&#xE72B;" FontSize="15" Margin="0,0,6,0"/>
+                    <TextBlock Text="Back" FontSize="15"/>
+                </StackPanel>
             </Button>
+
+            <!-- ==================== Title ==================== -->
+            <TextBlock Text="Detail Booking Bill" Margin="0, 12, 0, 0" Style="{StaticResource TitleTextBlockStyle}"/>
+
+            <Grid Margin="32, 40, 32, 80" HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Ticket Information -->
+                <Grid Grid.Column="0" CornerRadius="24" Width="440" Height="Auto" Background="{StaticResource AcrylicBackgroundFillColorBaseBrush}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <!-- Image Thumbnail -->
+                    <StackPanel Grid.Row="0" Background="Gray" Margin="20, 20, 20, 0" Height="240" CornerRadius="20">
+                        <Image Source="{Binding Bill.PosterUrl}" Stretch="UniformToFill" Height="240"/>
+                    </StackPanel>
+
+                    <!-- General Information 1 -->
+                    <Grid Grid.Row="1" Padding="20, 10, 20, 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0" Orientation="Vertical">
+                            <!-- Movie Name -->
+                            <TextBlock Text="{Binding Bill.Title}" TextWrapping="WrapWholeWords" FontSize="30" FontWeight="SemiBold"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Vertical" Padding="0, 4">
+                            <!-- Tickets -->
+                            <TextBlock Text="Tickets" FontSize="18" Foreground="{StaticResource TextFillColorTertiaryBrush}"/>
+                            <TextBlock Text="{Binding Bill.Quantity}" FontSize="26" FontWeight="SemiBold" TextAlignment="Center"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- General Information 2 -->
+                    <Grid Grid.Row="2" Padding="20, 0, 20, 20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0" Orientation="Vertical" Padding="0, 4" Spacing="2">
+                            <!-- ShowTime DateTime -->
+                            <TextBlock Text="Show Time" FontSize="17" Foreground="{StaticResource TextFillColorTertiaryBrush}"/>
+                            <TextBlock Text="{Binding Bill.ST}" Foreground="{StaticResource AccentTextFillColorTertiaryBrush}" FontSize="34" FontWeight="SemiBold" TextAlignment="Left"/>
+                            <TextBlock Text="{Binding Bill.SD}" FontSize="20" FontWeight="SemiBold" TextAlignment="Left"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="2" Orientation="Vertical" Padding="0, 4">
+                            <!-- Seat List -->
+                            <TextBlock Text="Seat List" FontSize="17" Foreground="{StaticResource TextFillColorTertiaryBrush}" TextAlignment="Right"/>
+                            <TextBlock Text="{Binding Bill.Seat}" FontSize="20" FontWeight="SemiBold" TextAlignment="Right"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+
+
+                <!-- Voucher Apply -->
+                <Grid Grid.Column="1" CornerRadius="24" Width="Auto" Height="Auto" Padding="20, 14, 20, 16" Margin="60, 0, 0, 0"
+                      Background="{StaticResource AcrylicBackgroundFillColorBaseBrush}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0">
+                        <TextBlock Text="Voucher Apply" FontSize="24" FontWeight="SemiBold"/>
+
+                        <!-- Voucher List -->
+                        <ItemsRepeater ItemsSource="{Binding AllVoucher}" Margin="0,16,0,0">
+                            <ItemsRepeater.ItemTemplate>
+                                <DataTemplate>
+                                    <ToggleButton Content="{Binding VoucherCode}" IsEnabled="{Binding isAvailable}" Checked="ToggleButton_Checked" Unchecked="ToggleButton_Unchecked"/>
+                                </DataTemplate>
+                            </ItemsRepeater.ItemTemplate>
+                            <ItemsRepeater.Layout>
+                                <StackLayout Orientation="Horizontal" Spacing="10"/>
+                            </ItemsRepeater.Layout>
+                        </ItemsRepeater>
+                    </StackPanel>
+
+                    <Button Grid.Row="1" x:Name="ApplyButton" Click="ApplyButton_Click" Margin="0,40,0,0" HorizontalAlignment="Right">
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon Glyph="&#xE73E;" FontSize="18" Margin="0,0,6,0"/>
+                            <TextBlock Text="Apply" FontSize="18"/>
+                        </StackPanel>
+                    </Button>
+
+                    <StackPanel Grid.Row="2" Height="2" Margin="0, 10" Background="{StaticResource TextFillColorTertiaryBrush}"></StackPanel>
+
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Total -->
+                        <TextBlock Grid.Column="0" Text="Total" FontSize="36" FontWeight="Medium" Foreground="{StaticResource TextFillColorTertiaryBrush}"/>
+
+                        <!-- Total -->
+                        <TextBlock Grid.Column="1" x:Name="Price"
+                                   Text="{Binding Price, UpdateSourceTrigger=PropertyChanged}" 
+                                   HorizontalAlignment="Right" FontSize="36" FontWeight="Medium"/>
+                    </Grid>
+
+
+
+                    <Button Grid.Row="4" Content="Confirm" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" 
+                            FontSize="30" FontWeight="SemiBold" CornerRadius="10" Padding="0, 12"
+                            Margin="0,20,0,0" Click="ConfirmButton_Click"/>
+                </Grid>
+            </Grid>
         </StackPanel>
-        <TextBlock x:Name="Price" VerticalAlignment="Bottom" Text="{Binding Price, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Margin="0,0,50,0" FontSize="20"/>
-        <Button Content="Confirm" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,20,0,0" Width="150" Click="ConfirmButton_Click"/>
-    </StackPanel>
+    </ScrollViewer>
 </Page>
