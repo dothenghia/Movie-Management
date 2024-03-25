@@ -28,10 +28,13 @@ namespace MovieManagement.Views
     public sealed partial class Admin_FilmGenre : Page
     {       
         private DB_MovieManagementContext _context = new DB_MovieManagementContext();
+        private Admin_FilmGenre_ViewModel viewModel;
         public Admin_FilmGenre()
         {
             this.InitializeComponent();
-            DataContext = new Admin_FilmGenre_ViewModel();
+            viewModel = new Admin_FilmGenre_ViewModel();
+            DataContext = viewModel;
+            viewModel.Update_Genres();
         }
         private async void AddButton_Click(object sender, RoutedEventArgs e)
         {
@@ -44,6 +47,7 @@ namespace MovieManagement.Views
             Dialog_AddNewGenre.Content = new MovieGenreDialog();
             Dialog_AddNewGenre.RequestedTheme = (VisualTreeHelper.GetParent(sender as Button) as StackPanel).ActualTheme;
             await Dialog_AddNewGenre.ShowAsync();
+            viewModel.Update_Genres();
         }
         private async void EditButton_Click(object sender, RoutedEventArgs e)
         {
@@ -55,6 +59,7 @@ namespace MovieManagement.Views
             Dialog_EditMovie.Content = new MovieGenreDialog();
             Dialog_EditMovie.DataContext = button.DataContext;
             await Dialog_EditMovie.ShowAsync();
+            viewModel.Update_Genres();
         }
         private async void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
@@ -79,6 +84,7 @@ namespace MovieManagement.Views
                     _context.SaveChanges();
                 }
             }
+            viewModel.Update_Genres();
         }
     }
 }

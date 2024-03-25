@@ -15,12 +15,22 @@ namespace MovieManagement.ViewModels
         public ObservableCollection<dynamic> Genres { get; set; }
         public Admin_FilmGenre_ViewModel() 
         {
-            Genres = new ObservableCollection<dynamic>((from g in _context.Genres
-                                                         select new
-                                                         {
-                                                             g.GenreId,
-                                                             g.GenreName
-                                                         }).ToList());
+            Genres = new ObservableCollection<dynamic>();
+        }
+
+        public void Update_Genres()
+        {
+            Genres.Clear();
+            var allGenres = (from g in _context.Genres
+                             select new
+                             {
+                                 g.GenreId,
+                                 g.GenreName
+                             });
+            foreach (var item in allGenres)
+            {
+                Genres.Add(item);
+            }
         }
     }
 }

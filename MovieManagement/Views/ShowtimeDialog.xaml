@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="MovieManagement.Views.ShowtimeDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Loaded="DialogPage_Loaded"
+    xmlns:converters="using:MovieManagement.Converters">
+
+    <Page.Resources>
+        <!-- Define a Flyout for displaying error message -->
+        <Flyout x:Key="ErrorMessage_Flyout" x:Name="ErrorMessage_Flyout" Placement="Bottom">
+            <Flyout.FlyoutPresenterStyle>
+                <Style TargetType="FlyoutPresenter">
+                    <Setter Property="Background" Value="{StaticResource AcrylicBackgroundFillColorBaseBrush}"/>
+                    <Setter Property="BorderBrush" Value="{StaticResource AccentAAFillColorDefaultBrush}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="Padding" Value="12, 8, 12, 12"/>
+                    <Setter Property="CornerRadius" Value="6"/>
+                </Style>
+            </Flyout.FlyoutPresenterStyle>
+            <!-- Flyout Content -->
+            <StackPanel MaxWidth="340">
+                <TextBlock x:Name="MessageBox" TextWrapping="WrapWholeWords" Style="{StaticResource BodyTextBlockStyle}"/>
+            </StackPanel>
+        </Flyout>
+        <converters:DatePickerConverter x:Key="DatePickerConverter"/>
+        <converters:TimePickerConverter x:Key="TimePickerConverter"/>
+    </Page.Resources>
+
+    <StackPanel VerticalAlignment="Stretch">
+        <DatePicker x:Name="DatePicker" Header="Date" SelectedDate="{Binding ShowDate, Mode=TwoWay, Converter={StaticResource DatePickerConverter}}" />
+        <TimePicker x:Name="TimePicker" ClockIdentifier="24HourClock" Header="Time" MinuteIncrement="5" SelectedTime="{Binding ShowDate, Mode=TwoWay, Converter={StaticResource TimePickerConverter}}"/>
+        <StackPanel Orientation="Horizontal">
+            <TextBox x:Name="MaxCol_TextBox" Header="Max Column" Text="{Binding MaxCol}" Margin="0,0,40,0" FlyoutBase.AttachedFlyout="{StaticResource ErrorMessage_Flyout}"/>
+            <TextBox x:Name="MaxRow_TextBox" Header="Max Row" Text="{Binding MaxRow}" FlyoutBase.AttachedFlyout="{StaticResource ErrorMessage_Flyout}"/>
+        </StackPanel>
+        <AutoSuggestBox x:Name="Movie_SuggestBox" Text="{Binding Title}"
+                TextChanged="AutoSuggestBox_TextChanged" Header="Movie"
+                SuggestionChosen="AutoSuggestBox_SuggestionChosen"
+                Width="300" AutomationProperties.Name="Basic AutoSuggestBox"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0, 16, 0, 0">
+            <!-- Save Button -->
+            <Button Content="Save" Click="SaveButton_Click" Background="{StaticResource SystemAccentColorLight1}" Margin="0,0,20,0"/>
+            <!-- Cancel Button -->
+            <Button Content="Cancel" Click="CancelButton_Click" />
+        </StackPanel>
+        <TextBlock x:Name="InvisibleTextBlock" Text="{Binding ShowTimeId}" Visibility="Collapsed"/>
+        <TextBlock x:Name="InvisibleTextBlock2" Text="{Binding Title}" Visibility="Collapsed"/>
+        <TextBlock x:Name="InvisibleTextBlock3" Text="{Binding MovieId}" Visibility="Collapsed"/>
+    </StackPanel>
+</Page>
