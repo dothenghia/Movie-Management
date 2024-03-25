@@ -176,6 +176,20 @@
                 </StackPanel>
             </StackPanel>
 
+
+            <StackPanel x:Name="Empty_StackPanel" MinHeight="600">
+                <TextBlock Text="You have not booked any ticket yet" TextAlignment="Center" 
+                           Margin="0, 100, 0, 0"
+                           Style="{StaticResource TitleTextBlockStyle}"/>
+                <Button Grid.Row="1" Click="HomeButton_Click" HorizontalAlignment="Center"
+                        Padding="20, 14" CornerRadius="8" Margin="0, 40, 0, 0">
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon Glyph="&#xE899;" FontSize="28" Margin="0,0,10,0"/>
+                            <TextBlock Text="Go to Home page" FontSize="24"/>
+                        </StackPanel>
+                </Button>
+            </StackPanel>
+
             <!-- ==================== Ticket Slider ==================== -->
             <ScrollViewer x:Name="Slide_ScrollViewer" Style="{StaticResource TicketSlider_Style}"  MinHeight="600">
                 <ItemsRepeater x:Name="Tickets_Slider"

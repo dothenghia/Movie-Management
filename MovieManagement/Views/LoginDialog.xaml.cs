@@ -90,7 +90,6 @@ namespace MovieManagement.Views
                     ContentDialog parentDialog = this.Parent as ContentDialog;
                     if (parentDialog != null) {
                         parentDialog.Hide();
-                        GlobalContext.SetGo2Setting(true);
                         GlobalContext.SetUserID(user.AccountId);
                         LoginValid?.Invoke();
                     }

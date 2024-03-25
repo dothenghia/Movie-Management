@@ -37,7 +37,7 @@ namespace MovieManagement.Views
         // ====== Listener for Login Dialog Success event
         private void OnLoginDialogSuccess()
         {
-            Frame.Navigate(typeof(User_Setting));
+            Frame.Navigate(typeof(User_Home));
         }
 
 
@@ -56,7 +56,7 @@ namespace MovieManagement.Views
         // ====== Listener for Login Dialog Closed event
         private void OnSignupDialogSuccess()
         {
-            Frame.Navigate(typeof(User_Setting));
+            Frame.Navigate(typeof(User_Home));
         }
     }
 }
