@@ -1,13 +1,15 @@
-using Microsoft.UI.Xaml;
+﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using MovieManagement.Models;
 using MovieManagement.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -18,6 +20,8 @@ namespace MovieManagement.Views
 {
     public sealed partial class User_Ticket : Page
     {
+        public FrameworkElement ParentFrame;
+
         public User_Ticket()
         {
             this.InitializeComponent();
@@ -40,6 +44,40 @@ namespace MovieManagement.Views
             DataContext = new User_Ticket_ViewModel();
         }
 
+        // ========== Event PointerEntered for Ticket Card
+        private void Ticket_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            if (sender is Grid grid)
+            {
+                grid.Background = (SolidColorBrush)Application.Current.Resources["CardBackgroundFillColorDefaultBrush"];
+            }
+        }
+
+        // ========== Event PointerExited for Ticket Card
+        private void Ticket_PointerExited(object sender, PointerRoutedEventArgs e)
+        {
+            if (sender is Grid grid)
+            {
+                SolidColorBrush brush = new SolidColorBrush(((AcrylicBrush)Application.Current.Resources["AcrylicBackgroundFillColorBaseBrush"]).FallbackColor);
+                grid.Background = brush;
+            }
+        }
+
+        // ========== Event Tapped for Ticket Card
+        private void Ticket_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (sender is FrameworkElement grid)
+            {
+                var billId = (grid.DataContext as dynamic)?.BillId;
+
+                if (billId != null)
+                {
+                    //Debug.WriteLine($"BillId: {billId}");
+                    Frame.Navigate(typeof(User_Movie), billId);
+                }
+            }
+        }
+
 
         // ====== Event Click for Login button => Show LoginDialog
         private async void LoginButton_Click(object sender, RoutedEventArgs e)
@@ -57,7 +95,6 @@ namespace MovieManagement.Views
         {
             Frame.Navigate(typeof(User_Setting));
         }
-
 
 
         // ====== Event Click for Signup button => Show SignupDialog

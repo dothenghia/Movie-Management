@@ -42,8 +42,11 @@
 
         <!-- Define DataTemplate for TicketCard -->
         <DataTemplate x:Key="TicketCard_DataTemplate">
-            <!-- ==================== Movie Card ==================== -->
-            <Grid CornerRadius="24" Width="440" Height="Auto" Background="{StaticResource AcrylicBackgroundFillColorBaseBrush}">
+            <!-- ==================== Ticket Card ==================== -->
+            <Grid CornerRadius="24" Width="440" Height="Auto" Background="{StaticResource AcrylicBackgroundFillColorBaseBrush}"
+                  PointerEntered="Ticket_PointerEntered"
+                  PointerExited="Ticket_PointerExited"
+                  Tapped="Ticket_Tapped">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -136,7 +139,7 @@
             </Grid>
         </DataTemplate>
 
-        <!-- Define Layout for MovieCard -->
+        <!-- Define Layout for TicketCard -->
         <StackLayout x:Name="HorizontalStack_Layout" Orientation="Horizontal" Spacing="60"/>
     </Page.Resources>
 
@@ -173,7 +176,7 @@
                 </StackPanel>
             </StackPanel>
 
-            <!-- ==================== Movie Slider ==================== -->
+            <!-- ==================== Ticket Slider ==================== -->
             <ScrollViewer x:Name="Slide_ScrollViewer" Style="{StaticResource TicketSlider_Style}"  MinHeight="600">
                 <ItemsRepeater x:Name="Tickets_Slider"
                    ItemsSource="{Binding TicketList}"

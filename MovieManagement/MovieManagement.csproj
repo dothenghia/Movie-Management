@@ -32,6 +32,7 @@
     <None Remove="Views\MovieGenreDialog.xaml" />
     <None Remove="Views\MovieInfoDialog.xaml" />
     <None Remove="Views\SignupDialog.xaml" />
+    <None Remove="Views\User_DetailTicket.xaml" />
     <None Remove="Views\User_ExportTicket.xaml" />
     <None Remove="Views\User_Frame.xaml" />
     <None Remove="Views\User_Home.xaml" />
@@ -110,6 +111,11 @@
     <Content Update="Assets\watch_illustration.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\User_DetailTicket.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\BookingDialog.xaml">
