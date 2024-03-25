@@ -51,7 +51,10 @@ namespace MovieManagement.ViewModels
                     where s.ShowTimeId == GlobalContext.showtimeID
                     select new
                     {
+                        m.PosterUrl,
                         m.Title,
+                        SD = s.ShowDate.Value.ToString("ddd, dd/MMM/yyyy"),
+                        ST = s.ShowDate.Value.ToString("HH:mm"),
                         Quantity = quantity,
                         s.ShowDate,
                         Seat = temp,
