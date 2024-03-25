@@ -184,7 +184,7 @@ namespace MovieManagement.Views
             }
         }
 
-        private async void Booking_Click(object sender, RoutedEventArgs e)
+        private void Booking_Click(object sender, RoutedEventArgs e)
         {
             if (GlobalContext.UserID == 0)
             {
