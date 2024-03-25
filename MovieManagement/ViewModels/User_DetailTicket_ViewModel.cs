@@ -15,6 +15,7 @@ namespace MovieManagement.ViewModels
 
         public dynamic TicketInformation { get; set; }
 
+
         public User_DetailTicket_ViewModel(int billID)
         {
             LoadTicketDetail(billID);
@@ -27,34 +28,58 @@ namespace MovieManagement.ViewModels
                                          join showTime in _context.ShowTimes on ticket.ShowTimeId equals showTime.ShowTimeId
                                          join movie in _context.Movies on showTime.MovieId equals movie.MovieId
                                          where bill.BillId == billID
-                                         group ticket by new { bill.BillId, movie.Title, movie.PosterUrl, showTime.ShowDate, bill.Total } into g
+                                         group ticket by new { bill.BillId, movie.Title, movie.PosterUrl, showTime.ShowDate, bill.Total, bill.BookingTime } into g
                                          select new
                                          {
-                                             Title = g.Key.Title,
                                              PosterUrl = g.Key.PosterUrl,
+                                             Title = g.Key.Title,
                                              BillId = g.Key.BillId,
                                              ShowDate = g.Key.ShowDate,
                                              NumberOfTickets = g.Count(),
+                                             Total = g.Key.Total,
                                              Seat = string.Join(", ", g.Select(t => t.Row + t.Col)),
-                                             Total = g.Key.Total
+                                             Price = g.Select(t => t.Price).FirstOrDefault(),
+                                             Voucher = (from bv in _context.BillVouchers
+                                                        join v in _context.Vouchers on bv.VoucherId equals v.VoucherId
+                                                        where bv.BillId == billID
+                                                        select v.VoucherCode).ToList(),
+                                             BookTime = g.Key.BookingTime,
                                          }).FirstOrDefault();
+
             if (TempTicketInformation != null)
             {
                 var DT = (DateTime)TempTicketInformation.ShowDate;
                 var SD = DT.ToString("ddd, dd/MMM/yyyy");
                 var ST = DT.ToString("HH:mm");
+
+                var BT = (DateTime)TempTicketInformation.BookTime;
+                var BTString = BT.ToString("ddd, dd/MMM/yyyy HH:mm");
+
+                if (TempTicketInformation.Voucher.Count == 0) {
+                    TempTicketInformation.Voucher.Add("---");
+                }
                 TicketInformation = new
                 {
-                    Title = TempTicketInformation.Title,
                     PosterUrl = TempTicketInformation.PosterUrl,
+                    Title = TempTicketInformation.Title,
                     BillId = TempTicketInformation.BillId,
-                    ShowDate = SD,
                     ShowTime = ST,
+                    ShowDate = SD,
                     NumberOfTickets = TempTicketInformation.NumberOfTickets,
-                    Seat = TempTicketInformation.Seat,
-                    Total = TempTicketInformation.Total
+                    Total = TempTicketInformation.Total.ToString(),
+                    SeatList = GetSeatList(TempTicketInformation.Seat),
+                    Price = TempTicketInformation.Price.ToString(),
+                    RawPrice = (TempTicketInformation.Price * TempTicketInformation.NumberOfTickets).ToString(),
+                    DiscountPrice = (TempTicketInformation.Total - (TempTicketInformation.Price * TempTicketInformation.NumberOfTickets)).ToString(),
+                    BookTime = BTString,
+                    VoucherList = TempTicketInformation.Voucher
                 };
             }
+        }
+
+        private List<string> GetSeatList(string seatString)
+        {
+            return seatString.Split(", ").ToList();
         }
     }
 }

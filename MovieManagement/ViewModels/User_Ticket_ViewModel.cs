@@ -38,7 +38,6 @@ namespace MovieManagement.ViewModels
                                BillId = g.Key.BillId,
                                ShowDate = g.Key.ShowDate,
                                NumberOfTickets = g.Count(),
-                               Seat = string.Join(", ", g.Select(t => t.Row + t.Col)),
                                Total = g.Key.Total
                            }).ToList();
 
@@ -55,8 +54,7 @@ namespace MovieManagement.ViewModels
                     ShowDate = SD,
                     ShowTime = ST,
                     NumberOfTickets = ticket.NumberOfTickets,
-                    Seat = ticket.Seat,
-                    Total = ticket.Total
+                    Total = ticket.Total.ToString()
                 };
                 TicketList.Add(item);
             }

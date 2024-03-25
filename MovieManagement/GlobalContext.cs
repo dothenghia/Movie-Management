@@ -10,6 +10,10 @@ namespace MovieManagement
     {
         public static int UserID = 0; // 0 means user did not login yet
         public static bool Go2Setting = false; // Fix Navigate to Setting page after login bug
+        public static bool Go2DetailTicket = false; // Fix Navigate to DetailTicket page after click Ticket
+        public static bool Go2Ticket = false; // Fix Navigate to Ticket page after click Back
+        public static int DetailTicketID = 0;
+
         public static string seats = "";
         public static int showtimeID = 0;
         public static string voucher = "";
@@ -22,7 +26,19 @@ namespace MovieManagement
         public static void SetGo2Setting(bool go2Setting) {
             Go2Setting = go2Setting;
         }
-        
+        public static void SetGo2DetailTicket(bool go2DetailTicket)
+        {
+            Go2DetailTicket = go2DetailTicket;
+        }
+        public static void SetGo2Ticket(bool go2Ticket)
+        {
+            Go2Ticket = go2Ticket;
+        }
+        public static void SetDetailTicketID(int id)
+        {
+            DetailTicketID = id;
+        }
+
         public static void SetSeats(string seat)
         {
             seats += seat+ " ";

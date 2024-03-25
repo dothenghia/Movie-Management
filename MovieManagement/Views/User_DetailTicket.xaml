@@ -34,11 +34,245 @@
     <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Black">
         <StackPanel Margin="32, 20, 32, 0">
 
+            <!-- Back Button -->
+            <Button Click="BackButton_Click">
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon Glyph="&#xE72B;" FontSize="15" Margin="0,0,6,0"/>
+                    <TextBlock Text="Back" FontSize="15"/>
+                </StackPanel>
+            </Button>
+
             <!-- ==================== Title ==================== -->
-            <TextBlock Text="Detail Ticket Bill" Style="{StaticResource TitleTextBlockStyle}"/>
+            <TextBlock Text="Detail Ticket Bill" Margin="0, 12, 0, 0" Style="{StaticResource TitleTextBlockStyle}"/>
 
             <!-- ==================== Ticket Slider ==================== -->
-            
+            <Grid Margin="32, 40, 32, 80" HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0" CornerRadius="24" Width="440" Height="Auto" Background="{StaticResource AcrylicBackgroundFillColorBaseBrush}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Image Thumbnail -->
+                    <StackPanel Grid.Row="0" Background="Gray" Margin="20, 20, 20, 0" Height="240" CornerRadius="20">
+                        <Image Source="{Binding TicketInformation.PosterUrl}" Stretch="UniformToFill" Height="240"/>
+                    </StackPanel>
+
+                    <!-- General Information 1 -->
+                    <Grid Grid.Row="1" Padding="20, 10, 20, 6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0" Orientation="Vertical">
+                            <!-- Movie Name -->
+                            <TextBlock Text="{Binding TicketInformation.Title}" TextWrapping="WrapWholeWords" FontSize="30" FontWeight="SemiBold"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Vertical" Padding="0, 4">
+                            <!-- Bill ID -->
+                            <TextBlock Text="Booking ID" FontSize="17" Foreground="{StaticResource TextFillColorTertiaryBrush}"/>
+                            <TextBlock Text="{Binding TicketInformation.BillId}" FontSize="26" FontWeight="SemiBold" TextAlignment="Center"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- Ticket Divider -->
+                    <StackPanel Grid.Row="2" Orientation="Horizontal">
+                        <StackPanel Style="{StaticResource LargeDot_Style}" Margin="-20, 0, 0, 0"/>
+
+                        <Grid Width="400">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Style="{StaticResource SmallDot_Style}"/>
+                            <StackPanel Grid.Column="1" Style="{StaticResource SmallDot_Style}"/>
+                            <StackPanel Grid.Column="2" Style="{StaticResource SmallDot_Style}"/>
+                            <StackPanel Grid.Column="3" Style="{StaticResource SmallDot_Style}"/>
+                            <StackPanel Grid.Column="4" Style="{StaticResource SmallDot_Style}"/>
+                            <StackPanel Grid.Column="5" Style="{StaticResource SmallDot_Style}"/>
+                            <StackPanel Grid.Column="6" Style="{StaticResource SmallDot_Style}"/>
+                            <StackPanel Grid.Column="7" Style="{StaticResource SmallDot_Style}"/>
+                            <StackPanel Grid.Column="8" Style="{StaticResource SmallDot_Style}"/>
+                            <StackPanel Grid.Column="9" Style="{StaticResource SmallDot_Style}"/>
+                            <StackPanel Grid.Column="10" Style="{StaticResource SmallDot_Style}"/>
+                        </Grid>
+
+                        <StackPanel Style="{StaticResource LargeDot_Style}"/>
+                    </StackPanel>
+
+                    <!-- General Information 2 -->
+                    <Grid Grid.Row="3" Padding="20, 8, 20, 20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0" Orientation="Vertical" Padding="0, 4" Spacing="2">
+                            <!-- ShowTime DateTime -->
+                            <TextBlock Text="Show Time" FontSize="17" Foreground="{StaticResource TextFillColorTertiaryBrush}"/>
+                            <TextBlock Text="{Binding TicketInformation.ShowTime}" Foreground="{StaticResource AccentTextFillColorTertiaryBrush}" FontSize="34" FontWeight="SemiBold" TextAlignment="Left"/>
+                            <TextBlock Text="{Binding TicketInformation.ShowDate}" FontSize="20" FontWeight="SemiBold" TextAlignment="Left"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Vertical" Padding="0, 4">
+                            <!-- Number of Tickets -->
+                            <TextBlock Text="Tickets" FontSize="17" Foreground="{StaticResource TextFillColorTertiaryBrush}" TextAlignment="Center"/>
+                            <TextBlock Text="{Binding TicketInformation.NumberOfTickets}" FontSize="20" FontWeight="SemiBold" TextAlignment="Center"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="2" Orientation="Vertical" Padding="0, 4">
+                            <!-- Total price -->
+                            <TextBlock Text="Total price" FontSize="17" Foreground="{StaticResource TextFillColorTertiaryBrush}" TextAlignment="Right"/>
+                            <TextBlock Text="{Binding TicketInformation.Total}" FontSize="20" FontWeight="SemiBold" TextAlignment="Right"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+                
+                
+                <!-- Detail Bill Information -->
+                <Grid Grid.Column="1" CornerRadius="24" Width="400" Height="Auto" Padding="20, 14, 20, 16" Margin="60, 0, 0, 0"
+                      Background="{StaticResource AcrylicBackgroundFillColorBaseBrush}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    
+                    <StackPanel Grid.Row="0">
+                        <TextBlock Text="Detail Bill Information" FontSize="24" FontWeight="SemiBold"/>
+
+                        <Grid Margin="0, 10, 0, 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                        
+                            <StackPanel Grid.Column="0" Orientation="Vertical" Padding="0, 8" Spacing="13">
+                                <!-- Seat List -->
+                                <TextBlock Text="Seat List" FontSize="18" Foreground="{StaticResource TextFillColorTertiaryBrush}"/>
+
+                                <!-- Number of Tickets -->
+                                <TextBlock Text="Tickets" FontSize="18" Foreground="{StaticResource TextFillColorTertiaryBrush}"/>
+
+                                <!-- Price per ticket -->
+                                <TextBlock Text="Price per Ticket" FontSize="18" Foreground="{StaticResource TextFillColorTertiaryBrush}"/>
+
+                                <!-- Total price -->
+                                <TextBlock Text="Total price" FontSize="18" Foreground="{StaticResource TextFillColorTertiaryBrush}"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1" Orientation="Vertical" Padding="0, 8" Spacing="10" HorizontalAlignment="Right">
+                                <!-- Seat List -->
+                                <ItemsControl ItemsSource="{Binding TicketInformation.SeatList}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding}" FontSize="20" FontWeight="SemiBold" TextAlignment="Right"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Horizontal" Spacing="6" HorizontalAlignment="Right"/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                </ItemsControl>
+
+                                <!-- Number of Tickets -->
+                                <TextBlock Text="{Binding TicketInformation.NumberOfTickets}" FontSize="20" FontWeight="SemiBold" TextAlignment="Right"/>
+
+                                <!-- Price per ticket -->
+                                <TextBlock Text="{Binding TicketInformation.Price}" FontSize="20" FontWeight="SemiBold" TextAlignment="Right"/>
+
+                                <!-- Total price -->
+                                <TextBlock Text="{Binding TicketInformation.RawPrice}" FontSize="20" FontWeight="SemiBold" TextAlignment="Right"/>
+                            </StackPanel>
+                        </Grid>
+
+                        <Grid Margin="0, 6, 0, 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <!-- Voucher -->
+                            <TextBlock Grid.Column="0" Text="Voucher" FontSize="18" Foreground="{StaticResource TextFillColorTertiaryBrush}"/>
+
+                            <!-- Voucher -->
+                            <ItemsControl Grid.Column="1" ItemsSource="{Binding TicketInformation.VoucherList}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding}" FontSize="20" TextAlignment="Right"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Right"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
+                        </Grid>
+
+                        <Grid Margin="0, 6, 0, 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <!-- Discount -->
+                            <TextBlock Grid.Column="0" Text="Discount" FontSize="18" Foreground="{StaticResource TextFillColorTertiaryBrush}"/>
+
+                            <!-- Discount -->
+                            <TextBlock Grid.Column="1" Text="{Binding TicketInformation.DiscountPrice}" FontSize="20" FontWeight="SemiBold" TextAlignment="Right"/>
+                        </Grid>
+
+                        <StackPanel Height="2" Margin="4, 6"
+                                    Background="{StaticResource TextFillColorTertiaryBrush}"></StackPanel>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Total -->
+                            <TextBlock Grid.Column="0" Text="Total" FontSize="36" FontWeight="Medium" Foreground="{StaticResource TextFillColorTertiaryBrush}"/>
+
+                            <!-- Total -->
+                            <TextBlock Grid.Column="1" Text="{Binding TicketInformation.Total}" FontWeight="Medium" HorizontalAlignment="Right" FontSize="36"/>
+                        </Grid>
+
+                        <Grid Margin="0, 6, 0, 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Booking Time -->
+                            <TextBlock Grid.Column="0" Text="Booking Time" FontSize="18" Foreground="{StaticResource TextFillColorTertiaryBrush}"/>
+
+                            <!-- Booking Time -->
+                            <TextBlock Grid.Column="1" Text="{Binding TicketInformation.BookTime}" FontSize="18" TextAlignment="Right"/>
+                        </Grid>
+                    </StackPanel>
+                    
+                    <StackPanel Grid.Row="1">
+                        <TextBlock Text="Booked tickets are non-refundable" TextAlignment="Center" FontWeight="SemiBold"
+                                    FontSize="18" Foreground="{StaticResource TextFillColorTertiaryBrush}"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
 
 
             <!-- ==================== Footer ==================== -->

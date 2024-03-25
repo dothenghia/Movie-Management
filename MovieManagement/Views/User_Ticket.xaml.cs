@@ -73,7 +73,9 @@ namespace MovieManagement.Views
                 if (billId != null)
                 {
                     //Debug.WriteLine($"BillId: {billId}");
-                    Frame.Navigate(typeof(User_Movie), billId);
+                    GlobalContext.SetGo2DetailTicket(true);
+                    GlobalContext.SetDetailTicketID(billId);
+                    Frame.Navigate(typeof(User_DetailTicket));
                 }
             }
         }

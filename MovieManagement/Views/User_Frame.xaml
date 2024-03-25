@@ -24,13 +24,6 @@
                 <!-- ====== My Tickets Tag ====== -->
                 <NavigationViewItem Content="My Tickets" Tag="Ticket_NavgationTag" Icon="Calendar" />
 
-
-                <!-- ====== TEMPTEMPTEMP ====== -->
-                <NavigationViewItem Content="Xuất Vé (Temp)" Tag="ExportTicket_NavgationTag" Icon="Calendar" />
-                <NavigationViewItem Content="Open Admin (Temp)" Tag="Admin_NavgationTag" Icon="Calendar" />
-
-                
-                
             </NavigationView.MenuItems>
 
 

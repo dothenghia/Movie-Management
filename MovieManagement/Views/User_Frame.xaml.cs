@@ -71,6 +71,35 @@ namespace MovieManagement.Views
                 return;
             }
 
+            // Fix navigation to DetailTicket page after click Ticket
+            if (GlobalContext.Go2DetailTicket) {
+                // Set NavigationViewItem to Profile
+                NavigationViewItem profileItem = NavigationBar_User.MenuItems[1] as NavigationViewItem;
+                if (profileItem != null) {
+                    NavigationBar_User.SelectedItem = profileItem;
+                }
+
+                MainContent.Navigate(typeof(Views.User_DetailTicket));
+                GlobalContext.SetGo2DetailTicket(false);
+
+                return;
+            }
+
+            // Fix navigation to Ticket page after click Ticket
+            if (GlobalContext.Go2Ticket)
+            {
+                // Set NavigationViewItem to Profile
+                NavigationViewItem profileItem = NavigationBar_User.MenuItems[1] as NavigationViewItem;
+                if (profileItem != null) {
+                    NavigationBar_User.SelectedItem = profileItem;
+                }
+
+                MainContent.Navigate(typeof(Views.User_Ticket));
+                GlobalContext.SetGo2Ticket(false);
+
+                return;
+            }
+
 
             NavigationViewItem selectedItem = args.SelectedItem as NavigationViewItem;
             if (selectedItem != null)
@@ -90,18 +119,6 @@ namespace MovieManagement.Views
                         else { // If user is logged in
                             MainContent.Navigate(typeof(Views.User_Setting));
                         }
-                        break;
-
-
-                    // Temp Navigation for Test UI
-                    case "Admin_NavgationTag":
-                        var currentWindow = (Application.Current as App)?.m_window as MainWindow;
-                        var adminWindow = new AdminWindow();
-                        adminWindow.Activate();
-                        currentWindow.Close();
-                        break;
-                    case "ExportTicket_NavgationTag":
-                        MainContent.Navigate(typeof(Views.User_ExportTicket));
                         break;
 
 
