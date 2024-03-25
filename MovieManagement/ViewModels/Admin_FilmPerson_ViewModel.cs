@@ -5,21 +5,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using CommunityToolkit.Mvvm.Input;
+using System.Windows.Input;
+using Microsoft.UI.Xaml.Controls;
+using System.ComponentModel;
 
 namespace MovieManagement.ViewModels
 {
-    public class Admin_FilmDirector_ViewModel : ViewModelBase
+    public class Admin_FilmPerson_ViewModel : ViewModelBase
     {
         // Get database context
         private readonly DB_MovieManagementContext _context = new DB_MovieManagementContext();
-        public ObservableCollection<dynamic> MovieDirectors { get; set; }
-
-        public Admin_FilmDirector_ViewModel() 
+        public ObservableCollection<dynamic> MovieStars { get; set; }
+        public Admin_FilmPerson_ViewModel() 
         {
-            MovieDirectors = new ObservableCollection<dynamic>((from c in _context.Contributors
-                                                                join p in _context.People on c.PersonId equals p.PersonId
-                                                                join r in _context.Roles on c.RoleId equals r.RoleId
-                                                                where r.RoleName == "Director"
+            MovieStars = new ObservableCollection<dynamic>((from p in _context.People
                                                                 select new
                                                                 {
                                                                     p.PersonId,
@@ -28,5 +28,6 @@ namespace MovieManagement.ViewModels
                                                                     p.Biography,
                                                                 }).Distinct().ToList());
         }
+     
     }
 }

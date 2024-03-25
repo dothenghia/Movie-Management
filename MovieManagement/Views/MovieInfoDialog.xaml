@@ -6,23 +6,23 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
         <!-- Content body -->
         <StackPanel Grid.Column="0" Margin="0,0,20,0">
             <TextBlock Text="Poster" Margin="0,0,0,10"/>
             <Image x:Name="PosterImage" Source="{Binding PosterUrl}" Stretch="Uniform"/>
-            <Button Content="Upload Photo" Click="UploadPhotoButton_Click"/>
-            <TextBox Header="Enter Movie Title:" Text="{Binding Title}"/>
-            <TextBox Header="Description: " Text="{Binding Description}" />
+            <Button Content="Upload Photo" Click="UploadPhotoButton_Click" Style="{StaticResource AccentButtonStyle}"/>
+            <TextBox Header="Movie Title" Text="{Binding Title}"/>
+            <TextBox Header="Description" Text="{Binding Description}" Height="100" TextWrapping="Wrap" />
         </StackPanel>
         <StackPanel Grid.Column="1">
-            <ComboBox Header="Select Genre" PlaceholderText="Genre" ItemsSource="{x:Bind GenresList}" SelectedItem="{Binding Genre}"/>
-            <TextBox Header="Enter Duration:" Text="{Binding Duration}"/>
-            <TextBox Header="Enter Published Year:" Text="{Binding PublishYear}"/>
-            <TextBox Header="Enter iMDB Score:" Text="{Binding ImdbScore}"/>
-            <ComboBox Header="Select Age Certificate:" PlaceholderText="Age Certification" ItemsSource="{x:Bind AgeCertificatesList}" SelectedItem="{Binding AgeCertificateContent}"/>
+            <ComboBox Header="Genre" PlaceholderText="Genre" ItemsSource="{x:Bind GenresList}" SelectedItem="{Binding Genre}"/>
+            <TextBox Header="Duration" Text="{Binding Duration}"/>
+            <TextBox Header="Published Year" Text="{Binding PublishYear}"/>
+            <TextBox Header="IMDb Score" Text="{Binding ImdbScore}"/>
+            <ComboBox Header="Age Certificate" PlaceholderText="Age Certification" ItemsSource="{x:Bind AgeCertificatesList}" SelectedItem="{Binding AgeCertificateContent}"/>
         </StackPanel>
     </Grid>
 

@@ -17,6 +17,9 @@
     <Page Update="Views\User_DetailTicket.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\VoucherDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\MovieGenreDialog.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -50,10 +53,7 @@
     <Page Update="Views\User_Movie.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\Admin_FilmDirector.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\Admin_FilmStars.xaml">
+    <Page Update="Views\Admin_FilmPerson.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Admin_FilmCerti.xaml">

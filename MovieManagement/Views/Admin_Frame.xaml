@@ -26,8 +26,7 @@
                         <NavigationViewItem Content="Film Infomation" Icon="PreviewLink" ToolTipService.ToolTip="Film Infomation" Tag="FilmInfo_NavTag" x:Name="FilmInfo_NavItem"/>
                         <NavigationViewItem Content="Genre" Icon="List" ToolTipService.ToolTip="Genre" Tag="FilmGenre_NavTag" x:Name="FilmGenre_NavItem"/>
                         <NavigationViewItem Content="Certification" Icon="Accept" ToolTipService.ToolTip="Certification" Tag="FilmCerti_NavTag" x:Name="FilmCerti_NavItem"/>
-                        <NavigationViewItem Content="Stars" Icon="People" ToolTipService.ToolTip="Stars" Tag="FilmStars_NavTag" x:Name="FilmStars_NavItem"/>
-                        <NavigationViewItem Content="Director" Icon="Video" ToolTipService.ToolTip="Director" Tag="FilmDirector_NavTag" x:Name="FilmDirector_NavItem"/>
+                        <NavigationViewItem Content="Person" Icon="People" ToolTipService.ToolTip="Stars" Tag="FilmPerson_NavTag" x:Name="FilmPerson_NavItem"/>
                     </NavigationViewItem.MenuItems>
                 </NavigationViewItem>
 

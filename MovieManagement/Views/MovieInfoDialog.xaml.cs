@@ -42,11 +42,11 @@ namespace MovieManagement.Views
 
 
             // Retrieve the window handle (HWND) of the current WinUI 3 window.
-            var window = (Application.Current as App)?.m_window as MainWindow; ;
-            var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(window);
-
+            var window = new Microsoft.UI.Xaml.Window();
+            // ...
+            var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(window);
             // Initialize the file picker with the window handle (HWND).
-            //WinRT.Interop.InitializeWithWindow.Initialize(openPicker, hWnd);
+            WinRT.Interop.InitializeWithWindow.Initialize(openPicker, hwnd);
 
             openPicker.ViewMode = PickerViewMode.Thumbnail;
             openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
@@ -71,7 +71,5 @@ namespace MovieManagement.Views
             }
 
         }
-
-
     }
 }

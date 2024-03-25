@@ -28,7 +28,6 @@
             ItemsSource="{Binding FilmInfo}"
             IsReadOnly="True" HorizontalAlignment="Left">
             <controls:DataGrid.Resources>
-
                 <Color x:Key="HeaderBackgroundColor">Black</Color>
                 <Color x:Key="HeaderHoveredBackgroundColor">Orange</Color>
                 <Color x:Key="HeaderPressedBackgroundColor">Orange</Color>
@@ -44,6 +43,8 @@
                 <Style TargetType="wctprimitives:DataGridColumnHeader">
                     <Setter Property="FontWeight" Value="Bold" />
                     <Setter Property="HorizontalContentAlignment" Value="Center" />
+                    <Setter Property="Padding" Value="0,0,0,0"/>
+                    <Setter Property="Margin" Value="0,0,0,0"/>
                 </Style>
                 <!--<Style TargetType="controls:DataGridCell">
                     <Setter Property="IsHitTestVisible" Value="False"/>
@@ -65,17 +66,24 @@
                         </Style>
                     </controls:DataGridTextColumn.ElementStyle>
                 </controls:DataGridTextColumn>
-                <controls:DataGridTextColumn Header="Genre" Width="*" Binding="{Binding Genre}">
+                <controls:DataGridTextColumn Header="Genre" Width="*" Binding="{Binding GenreName}">
                     <controls:DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="TextWrapping" Value="Wrap"/>
                         </Style>
                     </controls:DataGridTextColumn.ElementStyle>
                 </controls:DataGridTextColumn>
-                <controls:DataGridTextColumn Header="Duration" Width="*" Binding="{Binding Duration}" />
-                <controls:DataGridTextColumn Header="Publish&#x0a;Year" Width="*" Binding="{Binding PublishYear}" />
-                <controls:DataGridTextColumn Header="IMDb&#x0a;Score" Width="*" Binding="{Binding ImdbScore}" />
-                <controls:DataGridTextColumn Header="Age&#x0a;Certification" Width="SizeToHeader" Binding="{Binding AgeCertificateContent}" />
+                <controls:DataGridTextColumn Header="Duration" Width="SizeToHeader" Binding="{Binding Duration}" />
+                <controls:DataGridTextColumn Header="Publish&#x0a;Year" Width="SizeToHeader" Binding="{Binding PublishYear}" />
+                <controls:DataGridTextColumn Header="IMDb&#x0a;Score" Width="SizeToHeader" Binding="{Binding ImdbScore}" />
+                <controls:DataGridTextColumn Header="Age&#x0a;Certificate" Width="SizeToHeader" Binding="{Binding AgeCertificate}"/>
+                <controls:DataGridTextColumn Header="Contributors" Width="*" Binding="{Binding Contributors}">
+                    <controls:DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="TextWrapping" Value="Wrap"/>
+                        </Style>
+                    </controls:DataGridTextColumn.ElementStyle>
+                </controls:DataGridTextColumn>
 
                 <controls:DataGridTemplateColumn Width="SizeToCells">
                     <controls:DataGridTemplateColumn.CellTemplate >

@@ -64,9 +64,9 @@ namespace MovieManagement.ViewModels
                 .Where(st => st.ShowDate.Value.Date == currentDate)
                 .Count().ToString();
 
-            DateTime startOfWeek = currentDate.Date.AddDays(-(int)currentDate.DayOfWeek + 1).Date;
+            DateTime startOfWeek = currentDate.Date.AddDays(-(int)currentDate.DayOfWeek).Date;
             DateTime endOfWeek = startOfWeek.AddDays(6).Date;
-
+            Debug.Print(startOfWeek.ToString() + "   " + currentDate.DayOfWeek.ToString());
             _showtimesWeekly = _context.ShowTimes
                 .Where(st => st.ShowDate.Value.Date >= startOfWeek && st.ShowDate.Value.Date <= endOfWeek)
                 .Count().ToString();

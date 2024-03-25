@@ -12,49 +12,87 @@ namespace MovieManagement.ViewModels
     {
         // Get database context
         private readonly DB_MovieManagementContext _context = new DB_MovieManagementContext();
-        public ObservableCollection<dynamic> FilmInfo { get; set; } = new ObservableCollection<dynamic>();
+        public ObservableCollection<dynamic> FilmInfo { get; set; }
+        public ObservableCollection<dynamic> Actors { get; set; }
         public ObservableCollection<dynamic> Genres { get; set; }
         public List<string> GenresList { get; set; } = new List<string>();
         public ObservableCollection<dynamic> AgeCertificates { get; set; }
         public List<string> AgeCertificatesList { get; set; } = new List<string>();
         public Admin_FilmInfo_ViewModel()
         {
-            var allMovies = (from m in _context.Movies
-                             join a in _context.AgeCertificates on m.AgeCertificateId equals a.AgeCertificateId
-                             join g in _context.Genres on m.GenreId equals g.GenreId
-                             select new
-                             {
-                                 MovieId = m.MovieId,
-                                 Title = m.Title,
-                                 Duration = m.Duration,
-                                 PublishYear = m.PublishYear,
-                                 ImdbScore = m.ImdbScore,
-                                 AgeCertificateContent = a.DisplayContent,
-                                 AgeBackground = a.BackgroundColor,
-                                 AgeForeground = a.ForegroundColor,
-                                 PosterUrl = m.PosterUrl,
-                                 TrailerUrl = m.TrailerUrl,
-                                 Description = m.Description,
-                                 Genre = g.GenreName
-                             }).ToList();
-            foreach (var movie in allMovies)
-            {
-                FilmInfo.Add(new
-                {
-                    MovieId = movie.MovieId,
-                    Title = movie.Title,
-                    Duration = movie.Duration + "m",
-                    PublishYear = movie.PublishYear,
-                    ImdbScore = movie.ImdbScore,
-                    AgeCertificateContent = movie.AgeCertificateContent,
-                    PosterUrl = movie.PosterUrl,
-                    TrailerUrl = movie.TrailerUrl,
-                    Description = movie.Description,
-                    Genre = movie.Genre,
-                    AgeBackground = movie.AgeBackground,
-                    AgeForeground = movie.AgeForeground
-                });
-            }
+            var movies = (from m in _context.Movies
+                          join a in _context.AgeCertificates on m.AgeCertificateId equals a.AgeCertificateId
+                          join g in _context.Genres on m.GenreId equals g.GenreId
+                          select new
+                          {
+                              MovieId = m.MovieId,
+                              Title = m.Title,
+                              Duration = m.Duration,
+                              PublishYear = m.PublishYear,
+                              ImdbScore = m.ImdbScore,
+                              PosterUrl = m.PosterUrl,
+                              TrailerUrl = m.TrailerUrl,
+                              Description = m.Description,
+                              GenreName = g.GenreName,
+                              AgeCertificate = a.DisplayContent,
+                              BackgroundColor = a.BackgroundColor,
+                              ForegroundColor = a.ForegroundColor
+                          }).ToList();
+
+            var contributors = (from c in _context.Contributors
+                                join p in _context.People on c.PersonId equals p.PersonId
+                                join r in _context.Roles on c.RoleId equals r.RoleId
+                                //where r.RoleName == "Director"
+                                group p by c.MovieId into grp
+                                select new
+                                {
+                                    MovieId = grp.Key,
+                                    Contributors = string.Join(", ", grp.Select(person => person.Fullname))
+                                }).ToList();
+
+            FilmInfo = new ObservableCollection<dynamic>( (from m in movies
+                            join c in contributors on m.MovieId equals c.MovieId into movieContributors
+                            from mc in movieContributors.DefaultIfEmpty()
+                            select new
+                            {
+                                m.MovieId,
+                                m.Title,
+                                m.Duration,
+                                m.PublishYear,
+                                m.ImdbScore,
+                                m.PosterUrl,
+                                m.TrailerUrl,
+                                m.Description,
+                                m.GenreName,
+                                m.AgeCertificate,
+                                m.BackgroundColor,
+                                m.ForegroundColor,
+                                Contributors = mc != null ? mc.Contributors : ""
+                            }).ToList());
+
+            var alldirectors = new ObservableCollection<dynamic>((from c in _context.Contributors
+                                                                  join p in _context.People on c.PersonId equals p.PersonId
+                                                                  join r in _context.Roles on c.RoleId equals r.RoleId
+                                                                  where r.RoleName == "Director"
+                                                                  select new
+                                                                  {
+                                                                      c.MovieId,
+                                                                      c.PersonId,
+                                                                      p.AvatarUrl,
+                                                                      p.Fullname
+                                                                  }).ToList());
+            var allactors = new ObservableCollection<dynamic>((from c in _context.Contributors
+                                                                  join p in _context.People on c.PersonId equals p.PersonId
+                                                                  join r in _context.Roles on c.RoleId equals r.RoleId
+                                                                  where r.RoleName == "Actor"
+                                                                  select new
+                                                                  {
+                                                                      c.MovieId,
+                                                                      c.PersonId,
+                                                                      p.AvatarUrl,
+                                                                      p.Fullname
+                                                                  }).ToList());
+
             Genres = new ObservableCollection<dynamic> ((from g in _context.Genres
                                                         select new 
                                                         {
