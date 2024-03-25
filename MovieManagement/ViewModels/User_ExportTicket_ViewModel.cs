@@ -58,7 +58,6 @@ namespace MovieManagement.ViewModels
                         t.Price
                     }).FirstOrDefault();
             
-            
             AllVoucher = new ObservableCollection<dynamic>((from v in _context.Vouchers
                           where v.IsExpired == false
                           select new
@@ -91,7 +90,6 @@ namespace MovieManagement.ViewModels
                 {
                     foreach (var voucher_temp in AllVoucherIncludeExpired)
                     {
-                        Debug.WriteLine("haah");
                         if (voucher_temp.VoucherCode == "Birthday")
                         {
                             if (voucher_temp.IsPercentageDiscount == true)
@@ -99,7 +97,6 @@ namespace MovieManagement.ViewModels
                                 GlobalContext.setPrice((float)(GlobalContext.price * (1 - voucher_temp.DiscountAmount)));
                             }
                             else GlobalContext.setPrice((float)(GlobalContext.price - voucher_temp.DiscountAmount));
-                            Debug.WriteLine("hmmmm");
                         }
                     }
                 }
@@ -150,9 +147,10 @@ namespace MovieManagement.ViewModels
                 int i = GlobalContext.seats.IndexOf(' ');
                 string substring = GlobalContext.seats.Substring(0, i);
                 GlobalContext.removeSeat(substring);
-                var updateTicket = _context.Tickets.FirstOrDefault(t => t.Row+ t.Col.ToString() == substring);
+                var updateTicket = _context.Tickets.Where(t => t.Row + t.Col.ToString() == substring && t.ShowTimeId == GlobalContext.showtimeID).FirstOrDefault();
                 if (updateTicket != null)
                 {
+                    Debug.WriteLine("hmmmm");
                     updateTicket.BillId = newBillID;
                     updateTicket.IsAvailable = false;
                     _context.SaveChanges();

@@ -33,7 +33,19 @@ namespace MovieManagement.ViewModels
         public RelayCommand<string> BookingCommand { get; }
         public ObservableCollection<dynamic> TicketsOfMovie { get; set; }
         public ObservableCollection<dynamic> Seats { get; set; } = new ObservableCollection<dynamic>();
-
+        public string _availableseats;
+        public string AvailableSeats
+        {
+            get { return "Available seats: " + _availableseats; }
+            set
+            {
+                if (_availableseats != value)
+                {
+                    _availableseats = value;
+                    NotifyPropertyChanged(nameof(AvailableSeats));
+                }
+            }
+        }
 
         public User_Movie_ViewModel(int MovieID) 
         {
@@ -161,6 +173,15 @@ namespace MovieManagement.ViewModels
                         });
                     }
                 }
+                int count = 0;
+                foreach (var seat in Seats)
+                {
+                    if (seat.isAvailable)
+                    {
+                        count++;
+                    }
+                }
+                AvailableSeats = count.ToString();
             }
         }
 

@@ -326,6 +326,7 @@
                         </GridView>
 
                         <StackPanel x:Name="SeatsSelectionMap" Visibility="Collapsed">
+                            <TextBlock HorizontalAlignment="Left" FontSize="15" Text="{Binding AvailableSeats}"/>
                             <Grid HorizontalAlignment="Center">
                                 <Path Stroke="Orange" StrokeThickness="3">
                                     <Path.Data>
