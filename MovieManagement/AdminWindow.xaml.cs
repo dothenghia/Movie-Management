@@ -5,6 +5,7 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using MovieManagement.Views;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,7 +25,6 @@ namespace MovieManagement
 
             MainContent.Navigate(typeof(Views.Admin_Main));
         }
-
         // Navigate to the page corresponding to selected item
         private void NavigationBar_Admin_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
@@ -57,8 +57,11 @@ namespace MovieManagement
                 case "Voucher_NavTag":
                     MainContent.Navigate(typeof(Views.Admin_Voucher));
                     break;
-                case "Report_NavTag":
-                    MainContent.Navigate(typeof(Views.Admin_Report));
+                case "Logout_NavTag":
+                    GlobalContext.SetUserID(0);
+                    MainWindow newUserMainWindow = new MainWindow(0);
+                    newUserMainWindow.Activate();
+                    this.Close();
                     break;
                 default:
                     break;

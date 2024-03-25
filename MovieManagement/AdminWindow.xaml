@@ -37,10 +37,11 @@
                 <!-- ====== Manage Voucher Tag ====== -->
                 <NavigationViewItem Content="Manage Voucher" Tag="Voucher_NavTag" x:Name="Voucher_NavItem" Icon="Memo" />
 
-                <!-- ====== Manage Report Tag ====== -->
-                <NavigationViewItem Content="Report" Tag="Report_NavTag" x:Name="Report_NavItem" Icon="ShowResults" />
-
             </NavigationView.MenuItems>
+            <NavigationView.FooterMenuItems>
+                <NavigationViewItem Content="Logout" Tag="Logout_NavTag" x:Name="Logout_NavTag" Icon="ClosePane" />
+            </NavigationView.FooterMenuItems>
+
 
             <!-- ====== MAIN CONTENT ====== -->
             <Frame x:Name="MainContent" />
