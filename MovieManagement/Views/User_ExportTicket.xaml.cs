@@ -81,6 +81,7 @@ namespace MovieManagement.Views
                     CloseButtonText = "Ok"
                 };
                 await contentDialog.ShowAsync();
+                Frame.Navigate(typeof(User_Home));
             }
         }
     }

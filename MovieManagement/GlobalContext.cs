@@ -14,6 +14,7 @@ namespace MovieManagement
         public static int showtimeID = 0;
         public static string voucher = "";
         public static float price = 0;
+        public static string name = "";
         public static void SetUserID(int id) {
             UserID = id;
         }

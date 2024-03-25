@@ -36,7 +36,9 @@
 
             <!-- ====== Search Input ====== -->
             <NavigationView.AutoSuggestBox>
-                <AutoSuggestBox QueryIcon="Find" AutomationProperties.Name="Search" />
+                <AutoSuggestBox 
+                    QueryIcon="Find" AutomationProperties.Name="Search" QuerySubmitted="Search_QuerySummited"
+                    TextChanged="Search_TextChanged" SuggestionChosen="Search_SuggestionChosen" x:Name="SuggestionOutput"/>
             </NavigationView.AutoSuggestBox>
 
 
