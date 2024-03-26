@@ -29,11 +29,12 @@ namespace MovieManagement.Views
     {
         
         // Other properties and methods
-
+        private Admin_Main_ViewModel _viewModel;
         public Admin_Main()
         {
             this.InitializeComponent();
-            DataContext = new Admin_Main_ViewModel();
+            _viewModel = new Admin_Main_ViewModel();
+            DataContext = _viewModel;
         }
         private void ShowtimeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -58,7 +59,5 @@ namespace MovieManagement.Views
                 showtimesCountDisplay.SetBinding(TextBlock.TextProperty, binding);  
             }
         }
-
-
     }
 }

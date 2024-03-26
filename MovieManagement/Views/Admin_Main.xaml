@@ -14,12 +14,10 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Row="0" Margin="20, 10" Style="{StaticResource TitleTextBlockStyle}" Text="Admin Dashboard"/>
-        
+
         <Grid Grid.Row="1" x:Name="MainGrid" Margin="20, 0, 0, 0" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
@@ -45,41 +43,48 @@
                 <TextBlock x:Name="showtimesCountDisplay" Style="{StaticResource TitleLargeTextBlockStyle}" Text="{Binding showtimesDaily}" Margin="20,10" />
             </StackPanel>
         </Grid>
-        <TextBlock Grid.Row="2" Margin="20, 10" Style="{StaticResource SubtitleTextBlockStyle}" Text="Best Seller Movies"/>
-        <ListView Grid.Row="3" ItemsSource="{Binding Movies}" Margin="20, 0" HorizontalAlignment="Stretch" Height="500">
-            <ListView.Header>
-                <Grid Padding="12" Background="{ThemeResource SystemColorButtonTextColor}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Text="Movie" Style="{ThemeResource BodyStrongTextBlockStyle}"/>
-                    <TextBlock Grid.Column="1" Text="Genre" Style="{ThemeResource BodyStrongTextBlockStyle}"/>
-                    <TextBlock Grid.Column="2" Text="Age Certificate" Style="{ThemeResource BodyStrongTextBlockStyle}"/>
-                </Grid>
-            </ListView.Header>
-            <ListView.ItemTemplate>
-                <DataTemplate x:Name="TableDataTemplate">
-                    <Grid Height="48">
+        <Grid Grid.Row="2" Margin="0,30,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" Margin="20, 10" Style="{StaticResource SubtitleTextBlockStyle}" Text="Best Seller Movies"/>
+            <ListView Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Movies}" Margin="20, 0" HorizontalAlignment="Stretch" Height="500" x:Name="BestMovieListView">
+                <ListView.Header>
+                    <Grid Padding="12" Background="{ThemeResource SystemColorButtonTextColor}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="2*"/>
                         </Grid.ColumnDefinitions>
-                        <Rectangle VerticalAlignment="Center" Width="120" Height="80">
-                            <Rectangle.Fill>
-                                <ImageBrush ImageSource="{Binding PosterUrl}"/>
-                            </Rectangle.Fill>
-                        </Rectangle>
-                        <TextBlock Grid.Column="1" VerticalAlignment="Center" Style="{ThemeResource BaseTextBlockStyle}" Text="{Binding Title}" />
-                        <TextBlock Grid.Column="2" VerticalAlignment="Center" Style="{ThemeResource BaseTextBlockStyle}" Text="{Binding GenreName}" />
-                        <TextBlock Grid.Column="3" VerticalAlignment="Center" Style="{ThemeResource BaseTextBlockStyle}" Text="{Binding DisplayContent}"/>
+                        <TextBlock Grid.Column="0" Text="No." Style="{ThemeResource BodyStrongTextBlockStyle}"/>
+                        <TextBlock Grid.Column="1" Text="Movie" Style="{ThemeResource BodyStrongTextBlockStyle}"/>
                     </Grid>
+                </ListView.Header>
+                <ListView.ItemTemplate>
+                <DataTemplate x:Name="TableDataTemplate">
+                    <Grid Height="48" Margin="10">
+                        <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                         </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" VerticalAlignment="Center" Style="{ThemeResource BaseTextBlockStyle}" Text="{Binding Rank}"/>
+                            <Rectangle VerticalAlignment="Center" Width="120" Height="80">
+                                <Rectangle.Fill>
+                                    <ImageBrush ImageSource="{Binding PosterUrl}"/>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                            <TextBlock Grid.Column="1" VerticalAlignment="Center" Style="{ThemeResource BaseTextBlockStyle}" Text="{Binding Title}" Margin="30,0,0,0"/>
+                        </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>
+            </ListView>
+            <TextBlock Grid.Row="0" Grid.Column="1" Margin="20, 10" Style="{StaticResource SubtitleTextBlockStyle}" Text="Revenue Chart"/>
+            <local:ChartControl Margin="20, 10" Grid.Row="1" Grid.Column="1"/>
+        </Grid>
     </Grid>
 
 </Page>

@@ -24,6 +24,7 @@
     <None Remove="Views\Admin_Tickets.xaml" />
     <None Remove="Views\Admin_Voucher.xaml" />
     <None Remove="Views\BookingDialog.xaml" />
+    <None Remove="Views\ChartControl.xaml" />
     <None Remove="Views\ConfirmDeleteDialog.xaml" />
     <None Remove="Views\LoginDialog.xaml" />
     <None Remove="Views\MovieCertiDialog.xaml" />
@@ -70,6 +71,7 @@
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.WinUI.UI.Controls.DataGrid" Version="7.1.2" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+    <PackageReference Include="LiveChartsCore.SkiaSharpView.WinUI" Version="2.0.0-rc2.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.28" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.28" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.28">
@@ -111,6 +113,11 @@
     <Content Update="Assets\watch_illustration.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\ChartControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\User_DetailTicket.xaml">

@@ -15,7 +15,7 @@ namespace MovieManagement.ViewModels
         // Get database context
         private readonly DB_MovieManagementContext _context = new DB_MovieManagementContext();
 
-        public ObservableCollection<dynamic> Movies { get; set; }
+        public ObservableCollection<dynamic> Movies { get; set; } = new ObservableCollection<dynamic>();
         string _moviesCount;
         public string moviesCount
         {
@@ -42,7 +42,7 @@ namespace MovieManagement.ViewModels
         }
         public Admin_Main_ViewModel() 
         {
-            Movies = new ObservableCollection<dynamic>((from m in _context.Movies
+            var bestMovies = new ObservableCollection<dynamic>((from m in _context.Movies
                                                         join a in _context.AgeCertificates on m.AgeCertificateId equals a.AgeCertificateId
                                                         join g in _context.Genres on m.GenreId equals g.GenreId
                                                         where m.IsBlockbuster == true 
@@ -50,11 +50,21 @@ namespace MovieManagement.ViewModels
                                                         {
                                                             m.MovieId,
                                                             m.Title,
-                                                            m.ImdbScore,
-                                                            a.DisplayContent,
-                                                            g.GenreName,
                                                             m.PosterUrl,
                                                         }).ToList());
+            int i = 0;
+            foreach(var movie in bestMovies)
+            {
+                i++;
+                Movies.Add(new
+                {
+                    movie.MovieId,
+                    movie.Title,
+                    movie.PosterUrl,
+                    Rank = i.ToString(),
+                }); ;
+            }
+
             _moviesCount = (from m in _context.Movies
                             join s in _context.ShowTimes on m.MovieId equals s.MovieId
                             select m).Distinct().Count().ToString();
