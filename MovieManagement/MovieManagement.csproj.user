@@ -14,6 +14,12 @@
     <None Update="Package.appxmanifest">
       <SubType>Designer</SubType>
     </None>
+    <Page Update="Views\MovieContributorDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Admin_FilmContributor.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\TicketDialog.xaml">
       <SubType>Designer</SubType>
     </Page>

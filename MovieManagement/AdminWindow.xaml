@@ -25,6 +25,7 @@
                         <NavigationViewItem Content="Genre" Icon="List" ToolTipService.ToolTip="Genre" Tag="FilmGenre_NavTag" x:Name="FilmGenre_NavItem"/>
                         <NavigationViewItem Content="Certification" Icon="Accept" ToolTipService.ToolTip="Certification" Tag="FilmCerti_NavTag" x:Name="FilmCerti_NavItem"/>
                         <NavigationViewItem Content="Person" Icon="People" ToolTipService.ToolTip="Person" Tag="FilmPerson_NavTag" x:Name="FilmPerson_NavItem"/>
+                        <NavigationViewItem Content="Contributor" Icon="OtherUser" ToolTipService.ToolTip="Contributor" Tag="FilmContributor_NavTag" x:Name="FilmContributor_NavItem"/>
                     </NavigationViewItem.MenuItems>
                 </NavigationViewItem>
 

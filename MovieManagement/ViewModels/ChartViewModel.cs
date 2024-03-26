@@ -21,8 +21,6 @@ public partial class ChartViewModel : ObservableObject
     public LabelVisual Title { get; set; } =
         new LabelVisual
         {
-            Text = "Revenue",
-            TextSize = 10,
             Padding = new LiveChartsCore.Drawing.Padding(15),
             Paint = new SolidColorPaint(SKColors.DarkSlateGray)
         };

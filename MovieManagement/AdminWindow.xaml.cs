@@ -48,6 +48,9 @@ namespace MovieManagement
                 case "FilmPerson_NavTag":
                     MainContent.Navigate(typeof(Views.Admin_FilmPerson));
                     break;
+                case "FilmContributor_NavTag":
+                    MainContent.Navigate(typeof(Views.Admin_FilmContributor));
+                    break;
                 case "ShowTime_NavTag":
                     MainContent.Navigate(typeof(Views.Admin_ShowTime));
                     break;
