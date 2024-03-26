@@ -14,6 +14,8 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using MovieManagement.ViewModels;
 using CommunityToolkit.Mvvm.Input;
+using MovieManagement.Models;
+using System.Diagnostics;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -75,5 +77,18 @@ namespace MovieManagement.Views
             viewModel.Update_Movie();
         }
 
+
+        private void Detail_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is FrameworkElement button)
+            {
+                var movieId = (button.DataContext as dynamic)?.MovieId; // ------ Get MovieId
+                //Debug.WriteLine((int)movieId);
+                if (movieId != null)
+                {
+                    Frame.Navigate(typeof(User_Movie), movieId);
+                }
+            }
+        }
     }
 }

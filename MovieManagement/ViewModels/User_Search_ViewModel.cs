@@ -73,6 +73,7 @@ namespace MovieManagement.ViewModels
                                          where m.Title == GlobalContext.name
                                          select new
                                          {
+                                             m.MovieId,
                                              m.PosterUrl,
                                              m.Duration,
                                              m.Title,
@@ -99,6 +100,7 @@ namespace MovieManagement.ViewModels
                                                      where p.Fullname == GlobalContext.name
                                                      select new
                                                      {
+                                                         m.MovieId,
                                                          m.PosterUrl,
                                                          m.Duration,
                                                          m.Title,
@@ -123,6 +125,7 @@ namespace MovieManagement.ViewModels
                                                      where p.Fullname == GlobalContext.name
                                                      select new
                                                      {
+                                                         m.MovieId,
                                                          m.PosterUrl,
                                                          m.Duration,
                                                          m.Title,
@@ -148,6 +151,7 @@ namespace MovieManagement.ViewModels
                                                      where p.Fullname == GlobalContext.name
                                                      select new
                                                      {
+                                                         m.MovieId,
                                                          m.PosterUrl,
                                                          m.Duration,
                                                          m.Title,
@@ -200,6 +204,7 @@ namespace MovieManagement.ViewModels
                                          where m.Title == GlobalContext.name
                                          select new
                                          {
+                                             m.MovieId,
                                              m.PosterUrl,
                                              m.Duration,
                                              m.Title,
@@ -241,6 +246,7 @@ namespace MovieManagement.ViewModels
                                                      where p.Fullname == GlobalContext.name
                                                      select new
                                                      {
+                                                         m.MovieId,
                                                          m.PosterUrl,
                                                          m.Duration,
                                                          m.Title,
@@ -280,6 +286,7 @@ namespace MovieManagement.ViewModels
                                                      where p.Fullname == GlobalContext.name
                                                      select new
                                                      {
+                                                         m.MovieId,
                                                          m.PosterUrl,
                                                          m.Duration,
                                                          m.Title,
@@ -320,6 +327,7 @@ namespace MovieManagement.ViewModels
                                                      where p.Fullname == GlobalContext.name
                                                      select new
                                                      {
+                                                         m.MovieId,
                                                          m.PosterUrl,
                                                          m.Duration,
                                                          m.Title,

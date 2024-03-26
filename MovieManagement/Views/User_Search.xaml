@@ -8,142 +8,155 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     >
-    
-    
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+    <!-- ==================== Define Page Resources ==================== -->
 
-        <!-- Back Button -->
-        <Button Grid.Row="0" Margin ="15,10,0,0" Click="BackButton_Click">
-            <StackPanel Orientation="Horizontal">
-                <FontIcon Glyph="&#xE72B;" FontSize="15" Margin="0,0,6,0"/>
-                <TextBlock Text="Back" FontSize="15"/>
+
+    <!-- ==================== PAGE CONTENT ==================== -->
+    <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid Margin="32, 20, 32, 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Back Button -->
+            <Button Grid.Row="0" Margin ="15,10,0,0" Click="BackButton_Click">
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon Glyph="&#xE72B;" FontSize="15" Margin="0,0,6,0"/>
+                    <TextBlock Text="Back" FontSize="15"/>
+                </StackPanel>
+            </Button>
+        
+            <!-- Filter -->
+            <StackPanel Grid.Row="1" Margin="20,20,0,20" Orientation="Horizontal">
+                <TextBlock  Text="Sort:" Margin="0,5,10,0"/>
+                <ComboBox x:Name="Filter"  SelectionChanged="FilterCombobox_SelectionChanged" Margin=" 0,0,10,0" Width="150">
+                    <x:String>Publish year</x:String>
+                    <x:String>IMDB score</x:String>
+                    <x:String>Duration</x:String>
+                </ComboBox>
+
+                <TextBlock Text="Filter:" Margin="20,5,10,0"/>
+                <ComboBox x:Name="Filter_genre" SelectionChanged="FilterGenreCombobox_SelectionChanged" PlaceholderText="Genre" Margin="0,0,20,0" Width="140">
+                    <x:String>All</x:String>
+                    <x:String>Action</x:String>
+                    <x:String>Adventure</x:String>
+                    <x:String>Comedy</x:String>
+                    <x:String>Crime</x:String>
+                    <x:String>Drama</x:String>
+                    <x:String>Fantasy</x:String>
+                    <x:String>Historical</x:String>
+                    <x:String>Horror</x:String>
+                    <x:String>Mystery</x:String>
+                    <x:String>Romance</x:String>
+                    <x:String>Science Fiction</x:String>
+                    <x:String>Thriller</x:String>
+                    <x:String>Western</x:String>
+                </ComboBox>
+
+                <ComboBox x:Name="Filter_year" SelectionChanged="FilterYearCombobox_SelectionChanged" PlaceholderText="Year" Margin="0,0,20,0" Width="90">
+                    <x:String>All</x:String>
+                    <x:String>2006</x:String>
+                    <x:String>2007</x:String>
+                    <x:String>2008</x:String>
+                    <x:String>2009</x:String>
+                    <x:String>2010</x:String>
+                    <x:String>2011</x:String>
+                    <x:String>2012</x:String>
+                    <x:String>2013</x:String>
+                    <x:String>2014</x:String>
+                    <x:String>2015</x:String>
+                    <x:String>2016</x:String>
+                    <x:String>2017</x:String>
+                    <x:String>2018</x:String>
+                    <x:String>2019</x:String>
+                    <x:String>2020</x:String>
+                    <x:String>2021</x:String>
+                    <x:String>2022</x:String>
+                    <x:String>2023</x:String>
+                    <x:String>2024</x:String>
+                </ComboBox>
+
+                <ComboBox x:Name="Filter_age" SelectionChanged="FilterAgeCombobox_SelectionChanged" PlaceholderText="Age">
+                    <x:String>All</x:String>
+                    <x:String>R</x:String>
+                    <x:String>PG-13</x:String>
+                    <x:String>PG</x:String>
+                    <x:String>G</x:String>
+                </ComboBox>
             </StackPanel>
-        </Button>
         
-        <!-- Filter -->
-        <StackPanel Grid.Row="1" Margin="20,20,0,0" Orientation="Horizontal">
-            <TextBlock  Text="Sort:" Margin="0,5,10,0"/>
-            <ComboBox x:Name="Filter"  SelectionChanged="FilterCombobox_SelectionChanged" Margin=" 0,0,10,0" Width="150">
-                <x:String>Publish year</x:String>
-                <x:String>IMDB score</x:String>
-                <x:String>Duration</x:String>
-            </ComboBox>
-
-            <TextBlock Text="Filter:" Margin="20,5,10,0"/>
-            <ComboBox x:Name="Filter_genre" SelectionChanged="FilterGenreCombobox_SelectionChanged" PlaceholderText="Genre" Margin="0,0,20,0" Width="140">
-                <x:String>All</x:String>
-                <x:String>Action</x:String>
-                <x:String>Adventure</x:String>
-                <x:String>Comedy</x:String>
-                <x:String>Crime</x:String>
-                <x:String>Drama</x:String>
-                <x:String>Fantasy</x:String>
-                <x:String>Historical</x:String>
-                <x:String>Horror</x:String>
-                <x:String>Mystery</x:String>
-                <x:String>Romance</x:String>
-                <x:String>Science Fiction</x:String>
-                <x:String>Thriller</x:String>
-                <x:String>Western</x:String>
-            </ComboBox>
-
-            <ComboBox x:Name="Filter_year" SelectionChanged="FilterYearCombobox_SelectionChanged" PlaceholderText="Year" Margin="0,0,20,0" Width="90">
-                <x:String>All</x:String>
-                <x:String>2006</x:String>
-                <x:String>2007</x:String>
-                <x:String>2008</x:String>
-                <x:String>2009</x:String>
-                <x:String>2010</x:String>
-                <x:String>2011</x:String>
-                <x:String>2012</x:String>
-                <x:String>2013</x:String>
-                <x:String>2014</x:String>
-                <x:String>2015</x:String>
-                <x:String>2016</x:String>
-                <x:String>2017</x:String>
-                <x:String>2018</x:String>
-                <x:String>2019</x:String>
-                <x:String>2020</x:String>
-                <x:String>2021</x:String>
-                <x:String>2022</x:String>
-                <x:String>2023</x:String>
-                <x:String>2024</x:String>
-            </ComboBox>
-
-            <ComboBox x:Name="Filter_age" SelectionChanged="FilterAgeCombobox_SelectionChanged" PlaceholderText="Age">
-                <x:String>All</x:String>
-                <x:String>R</x:String>
-                <x:String>PG-13</x:String>
-                <x:String>PG</x:String>
-                <x:String>G</x:String>
-            </ComboBox>
-        </StackPanel>
-        
-        <!-- Results -->
-        <ListView Grid.Row="2" ItemsSource="{Binding Movies}" Margin="20, 0" HorizontalAlignment="Stretch" Height="500">
-            <ListView.Header>
-                <Grid Padding="12" Background="{ThemeResource SystemColorButtonTextColor}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
-
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Text="Poster" Style="{ThemeResource BodyStrongTextBlockStyle}"/>
-                    <TextBlock Grid.Column="1" Text="Title" Style="{ThemeResource BodyStrongTextBlockStyle}"/>
-                    <TextBlock Grid.Column="2" Text="Genre" Style="{ThemeResource BodyStrongTextBlockStyle}"/>
-                    <TextBlock Grid.Column="3" Text="Age Certificate" Style="{ThemeResource BodyStrongTextBlockStyle}"/>
-                    <TextBlock Grid.Column="4" Text="Publish Year" Style="{ThemeResource BodyStrongTextBlockStyle}"/>
-                    <TextBlock Grid.Column="5" Text="Duration" Style="{ThemeResource BodyStrongTextBlockStyle}"/>
-                    <TextBlock Grid.Column="6" Text="IMDB Score" Style="{ThemeResource BodyStrongTextBlockStyle}"/>
-                </Grid>
-            </ListView.Header>
-            <ListView.ItemTemplate>
-                <DataTemplate x:Name="TableDataTemplate">
-                    <Grid Height="100">
+            <!-- Results -->
+            <ListView Grid.Row="2" ItemsSource="{Binding Movies}" Margin="20, 0" HorizontalAlignment="Stretch" Height="500">
+                <ListView.Header>
+                    <Grid Padding="12" Background="{ThemeResource SystemColorButtonTextColor}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="2*"/>
                             <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="1*"/>
-                        </Grid.ColumnDefinitions>
-                        <Rectangle VerticalAlignment="Center" Width="120" Height="80">
-                            <Rectangle.Fill>
-                                <ImageBrush ImageSource="{Binding PosterUrl}"/>
-                            </Rectangle.Fill>
-                        </Rectangle>
-                        <TextBlock Grid.Column="1" VerticalAlignment="Center" Style="{ThemeResource BaseTextBlockStyle}" Text="{Binding Title}" />
-                        <TextBlock Grid.Column="2" VerticalAlignment="Center" Style="{ThemeResource BaseTextBlockStyle}" Text="{Binding GenreName}" />
-                        <TextBlock Grid.Column="3" VerticalAlignment="Center" Style="{ThemeResource BaseTextBlockStyle}" Text="{Binding DisplayContent}"/>
-                        <TextBlock Grid.Column="4" VerticalAlignment="Center" Style="{ThemeResource BaseTextBlockStyle}" Text="{Binding PublishYear}"/>
-                        <TextBlock Grid.Column="5" VerticalAlignment="Center" Style="{ThemeResource BaseTextBlockStyle}" Text="{Binding Duration}"/>
-                        <TextBlock Grid.Column="6" VerticalAlignment="Center" Style="{ThemeResource BaseTextBlockStyle}" Text="{Binding ImdbScore}"/>
-                        
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
 
-        <!-- Pagination -->
-        <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Center">
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="Poster" Style="{ThemeResource BodyStrongTextBlockStyle}" TextAlignment="Center"/>
+                        <TextBlock Grid.Column="1" Text="Title" Style="{ThemeResource BodyStrongTextBlockStyle}" TextAlignment="Center"/>
+                        <TextBlock Grid.Column="2" Text="Genre" Style="{ThemeResource BodyStrongTextBlockStyle}" TextAlignment="Center"/>
+                        <TextBlock Grid.Column="3" Text="Age Certificate" Style="{ThemeResource BodyStrongTextBlockStyle}" TextAlignment="Center"/>
+                        <TextBlock Grid.Column="4" Text="Publish Year" Style="{ThemeResource BodyStrongTextBlockStyle}" TextAlignment="Center"/>
+                        <TextBlock Grid.Column="5" Text="Duration" Style="{ThemeResource BodyStrongTextBlockStyle}" TextAlignment="Center"/>
+                        <TextBlock Grid.Column="6" Text="IMDB Score" Style="{ThemeResource BodyStrongTextBlockStyle}" TextAlignment="Center"/>
+                        <TextBlock Grid.Column="7" Text="Detail" Style="{ThemeResource BodyStrongTextBlockStyle}" TextAlignment="Center"/>
+                    </Grid>
+                </ListView.Header>
+                <ListView.ItemTemplate>
+                    <DataTemplate x:Name="TableDataTemplate">
+                        <Grid Height="100">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Rectangle VerticalAlignment="Center" Width="146" Height="90">
+                                <Rectangle.Fill>
+                                    <ImageBrush ImageSource="{Binding PosterUrl}"/>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                            <TextBlock Grid.Column="1" VerticalAlignment="Center" FontSize="18" FontWeight="SemiBold" Text="{Binding Title}" Margin="12, 0, 0, 0"/>
+                            <TextBlock Grid.Column="2" VerticalAlignment="Center" FontSize="17" Text="{Binding GenreName}"  TextAlignment="Center"/>
+                            <TextBlock Grid.Column="3" VerticalAlignment="Center" FontSize="17" Text="{Binding DisplayContent}" TextAlignment="Center"/>
+                            <TextBlock Grid.Column="4" VerticalAlignment="Center" FontSize="17" Text="{Binding PublishYear}" TextAlignment="Center"/>
+                            <TextBlock Grid.Column="5" VerticalAlignment="Center" FontSize="17" Text="{Binding Duration}" TextAlignment="Center"/>
+                            <TextBlock Grid.Column="6" VerticalAlignment="Center" FontSize="17" Text="{Binding ImdbScore}" TextAlignment="Center"/>
+
+                            <Button Grid.Column="7" Margin ="15,10,0,0" Click="Detail_Click" HorizontalAlignment="Center">
+                                <StackPanel Orientation="Horizontal">
+                                    <FontIcon Glyph="&#xE946;" FontSize="15" Margin="0,0,6,0"/>
+                                    <TextBlock Text="Detail" FontSize="15"/>
+                                </StackPanel>
+                            </Button>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <!-- Pagination -->
+            <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Center">
             <Button Content="Previous" Command="{Binding PreviousPageCommand}" VerticalAlignment="Top" Margin="0,10,10,10"/>
             <TextBlock Text="{Binding CurrentPage}"  />
             <TextBlock Text=" / "/>
             <TextBlock Text="{Binding TotalPages}"/>
             <Button Content="Next" Command="{Binding NextPageCommand}" VerticalAlignment="Top" Margin="10,10,0,0"/>
         </StackPanel>
-    </Grid>
+        </Grid>
+    </ScrollViewer>
 </Page>
