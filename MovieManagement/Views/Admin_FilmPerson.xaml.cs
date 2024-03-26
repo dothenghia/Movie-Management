@@ -26,11 +26,14 @@ namespace MovieManagement.Views
     /// </summary>
     public sealed partial class Admin_FilmPerson : Page
     {
+        private Admin_FilmPerson_ViewModel viewModel;
         private DB_MovieManagementContext _context = new DB_MovieManagementContext();
         public Admin_FilmPerson()
         {
             this.InitializeComponent();
-            DataContext = new Admin_FilmPerson_ViewModel();
+            viewModel = new Admin_FilmPerson_ViewModel();
+            DataContext = viewModel;
+            //viewModel.Update_Person();
         }
         private async void AddButton_Click(object sender, RoutedEventArgs e)
         {
@@ -43,6 +46,7 @@ namespace MovieManagement.Views
             Dialog_AddPerson.Content = new MovieDirectorDialog();
             Dialog_AddPerson.RequestedTheme = (VisualTreeHelper.GetParent(sender as Button) as StackPanel).ActualTheme;
             await Dialog_AddPerson.ShowAsync();
+            viewModel.Update_Person();
         }
         private async void EditButton_Click(object sender, RoutedEventArgs e)
         {
@@ -54,6 +58,7 @@ namespace MovieManagement.Views
             Dialog_EditPerson.Content = new MovieDirectorDialog();
             Dialog_EditPerson.DataContext = button.DataContext;
             await Dialog_EditPerson.ShowAsync();
+            viewModel.Update_Person();
 
         }
         private async void DeleteButton_Click(object sender, RoutedEventArgs e)
@@ -69,7 +74,7 @@ namespace MovieManagement.Views
             Dialog_DeletePerson.DefaultButton = ContentDialogButton.Primary;
             Dialog_DeletePerson.Content = new ConfirmDeleteDialog();
             var result = await Dialog_DeletePerson.ShowAsync();
-
+            
             if (result == ContentDialogResult.Primary)
             {
                 var deletePerson = _context.People.FirstOrDefault(p => p.PersonId == personId);
@@ -79,6 +84,9 @@ namespace MovieManagement.Views
                     _context.SaveChanges();
                 }
             }
+
+            viewModel.Update_Person();
+
         }
     }
 }

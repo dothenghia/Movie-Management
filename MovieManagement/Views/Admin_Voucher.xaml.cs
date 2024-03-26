@@ -26,10 +26,13 @@ namespace MovieManagement.Views
     public sealed partial class Admin_Voucher : Page
     {
         private DB_MovieManagementContext _context = new DB_MovieManagementContext();
+        private Admin_Voucher_ViewModel viewModel;
         public Admin_Voucher()
         {
             this.InitializeComponent();
-            DataContext = new Admin_Voucher_ViewModel();
+            viewModel = new Admin_Voucher_ViewModel();
+            DataContext = viewModel;
+            viewModel.Update_Voucher();
         }
         private async void AddButton_Click(object sender, RoutedEventArgs e)
         {
@@ -42,6 +45,7 @@ namespace MovieManagement.Views
             Dialog_AddVoucher.Content = new VoucherDialog();
             Dialog_AddVoucher.RequestedTheme = (VisualTreeHelper.GetParent(sender as Button) as StackPanel).ActualTheme;
             await Dialog_AddVoucher.ShowAsync();
+            viewModel.Update_Voucher();
         }
         private async void EditButton_Click(object sender, RoutedEventArgs e)
         {
@@ -53,6 +57,7 @@ namespace MovieManagement.Views
             Dialog_EditVoucher.Content = new VoucherDialog();
             Dialog_EditVoucher.DataContext = button.DataContext;
             await Dialog_EditVoucher.ShowAsync();
+            viewModel.Update_Voucher();
         }
         private async void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
@@ -77,6 +82,7 @@ namespace MovieManagement.Views
                     _context.SaveChanges();
                 }
             }
+            viewModel.Update_Voucher();
         }
     }
 }

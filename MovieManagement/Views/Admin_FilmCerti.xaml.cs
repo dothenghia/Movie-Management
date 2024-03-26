@@ -27,10 +27,13 @@ namespace MovieManagement.Views
     public sealed partial class Admin_FilmCerti : Page
     {
         private DB_MovieManagementContext _context = new DB_MovieManagementContext();
+        private Admin_FilmCerti_ViewModel viewModel ;
         public Admin_FilmCerti()
         {
             this.InitializeComponent();
-            DataContext = new Admin_FilmCerti_ViewModel();
+            viewModel = new Admin_FilmCerti_ViewModel();
+            DataContext = viewModel;
+            viewModel.UpdateCertificate();
         }
         private async void AddButton_Click(object sender, RoutedEventArgs e)
         {
@@ -43,6 +46,7 @@ namespace MovieManagement.Views
             Dialog_AddNewCerti.Content = new MovieCertiDialog();
             Dialog_AddNewCerti.RequestedTheme = (VisualTreeHelper.GetParent(sender as Button) as StackPanel).ActualTheme;
             await Dialog_AddNewCerti.ShowAsync();
+            viewModel.UpdateCertificate();
         }
         private async void EditButton_Click(object sender, RoutedEventArgs e)
         {
@@ -54,6 +58,7 @@ namespace MovieManagement.Views
             Dialog_EditCerti.Content = new MovieCertiDialog();
             Dialog_EditCerti.DataContext = button.DataContext;
             await Dialog_EditCerti.ShowAsync();
+            viewModel.UpdateCertificate();
         }
         private async void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
@@ -78,6 +83,7 @@ namespace MovieManagement.Views
                     _context.SaveChanges();
                 }
             }
+            viewModel.UpdateCertificate();
         }
     }
 }

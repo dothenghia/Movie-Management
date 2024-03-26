@@ -15,17 +15,26 @@ namespace MovieManagement.ViewModels
         private readonly DB_MovieManagementContext _context = new DB_MovieManagementContext();
         public ObservableCollection<dynamic> Certificates { get; set; }
 
-        public Admin_FilmCerti_ViewModel() 
+        public Admin_FilmCerti_ViewModel()
         {
-            Certificates = new ObservableCollection<dynamic>((from a in _context.AgeCertificates
-                                                                select new
-                                                                {
-                                                                    a.AgeCertificateId,
-                                                                    a.DisplayContent,
-                                                                    a.RequireAge,
-                                                                    a.BackgroundColor,
-                                                                    a.ForegroundColor
-                                                                }).ToList());
+            Certificates = new ObservableCollection<dynamic>();
+        }
+
+        public void UpdateCertificate() {
+            Certificates.Clear();
+            var allCertificates = (from c in _context.AgeCertificates
+                                   select new
+                                   {
+                                       c.AgeCertificateId,
+                                       c.DisplayContent,
+                                       c.RequireAge,
+                                       c.BackgroundColor,
+                                       c.ForegroundColor
+                                   }).ToList();
+            foreach (var certificate in allCertificates)
+            {
+                Certificates.Add(certificate);
+            }
         }
     }
 }

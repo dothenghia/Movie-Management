@@ -26,5 +26,17 @@ namespace MovieManagement.ViewModels
                                                             v.RequirementAmount
                                                         }).ToList());
         }
+
+
+        public void Update_Voucher()
+        {
+            Vouchers.Clear();
+            var allVouchers = (from v in _context.Vouchers
+                               select v).ToList();
+            foreach (var voucher in allVouchers)
+            {
+                Vouchers.Add(voucher);
+            }
+        }
     }
 }
