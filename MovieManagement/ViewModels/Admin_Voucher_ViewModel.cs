@@ -15,16 +15,7 @@ namespace MovieManagement.ViewModels
         public ObservableCollection<dynamic> Vouchers { get; set; }
         public Admin_Voucher_ViewModel() 
         {
-            Vouchers = new ObservableCollection<dynamic>((from v in _context.Vouchers
-                                                        select new
-                                                        {
-                                                            v.VoucherId,
-                                                            v.VoucherCode,
-                                                            v.DiscountAmount,
-                                                            v.IsExpired,
-                                                            v.IsPercentageDiscount,
-                                                            v.RequirementAmount
-                                                        }).ToList());
+            Vouchers = new ObservableCollection<dynamic>();
         }
 
 
@@ -32,11 +23,19 @@ namespace MovieManagement.ViewModels
         {
             Vouchers.Clear();
             var allVouchers = (from v in _context.Vouchers
-                               select v).ToList();
+                               select new
+                               {
+                                   v.VoucherCode,
+                                   v.VoucherId,
+                                   v.DiscountAmount,
+                                   v.IsExpired,
+                                   v.IsPercentageDiscount,
+                                   v.RequirementAmount,
+                               }
+                               ).ToList();
             foreach (var voucher in allVouchers)
             {
-                Vouchers.Add(voucher);
+                Vouchers.Add( voucher );
             }
-        }
-    }
+        }}
 }
