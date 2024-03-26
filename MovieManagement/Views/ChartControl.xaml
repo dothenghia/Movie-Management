@@ -13,8 +13,10 @@
         <vms:ChartViewModel/>
     </UserControl.DataContext>
     <StackPanel>
-        <DatePicker Header="Pick a date" />
-        <lvc:CartesianChart Series="{Binding Series}" Title="{Binding Title}" Height="300" Width="400" />
+        <lvc:CartesianChart Series="{Binding Series}"
+        Title="{Binding Title}" Height="300" Width="500" XAxes="{Binding XAxes}" Margin="0,0,0,0" />
+        <lvc:CartesianChart Series="{Binding Series1}"
+        Title="{Binding Title1}" Height="300" Width="500" XAxes="{Binding XAxes1}" />
     </StackPanel>
 
 </UserControl>
