@@ -7,10 +7,78 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
+    xmlns:wctprimitives="using:CommunityToolkit.WinUI.UI.Controls.Primitives">
 
-    <Grid Margin="20, 10">
-        <TextBlock Text="Manage Tickets" Style="{StaticResource TitleTextBlockStyle}"/>
+    <StackPanel Margin="20, 10">
+        <TextBlock Text="Manage Showtimes" Style="{StaticResource TitleTextBlockStyle}"/>
+        <Button Style="{StaticResource AccentButtonStyle}" HorizontalAlignment="Right" Margin="20" Click="AddButton_Click">
+            <StackPanel Orientation="Horizontal">
+                <FontIcon Glyph="&#xF8AA;" />
+                <TextBlock Text="  Add New Ticket"/>
+            </StackPanel>
+        </Button>
+        <controls:DataGrid x:Name="FilmTickets_DataGrid" Height="600" CanUserResizeColumns="False" CanUserReorderColumns="False" 
+            AutoGenerateColumns="False"
+            ItemsSource="{Binding Tickets}"
+            IsReadOnly="True" HorizontalAlignment="Left">
+            <controls:DataGrid.Resources>
 
-    </Grid>
+                <Color x:Key="HeaderBackgroundColor">Black</Color>
+                <Color x:Key="HeaderHoveredBackgroundColor">Orange</Color>
+                <Color x:Key="HeaderPressedBackgroundColor">Orange</Color>
+                <Color x:Key="RowBackgroundColor">Gray</Color>
+                <Color x:Key="RowSelectedBackgroundColor">Coral</Color>
+                <StaticResource x:Key="DataGridColumnHeaderBackgroundColor" ResourceKey="HeaderBackgroundColor" />
+                <StaticResource x:Key="DataGridColumnHeaderHoveredBackgroundColor" ResourceKey="HeaderHoveredBackgroundColor" />
+                <StaticResource x:Key="DataGridColumnHeaderPressedBackgroundColor" ResourceKey="HeaderPressedBackgroundColor" />
+                <StaticResource x:Key="DataGridRowSelectedBackgroundColor" ResourceKey="RowSelectedBackgroundColor" />
+                <StaticResource x:Key="DataGridRowSelectedHoveredBackgroundColor" ResourceKey="RowSelectedBackgroundColor"/>
+                <StaticResource x:Key="DataGridRowSelectedUnfocusedBackgroundColor" ResourceKey="RowSelectedBackgroundColor"/>
+                <StaticResource x:Key="DataGridRowSelectedHoveredUnfocusedBackgroundColor" ResourceKey="RowSelectedBackgroundColor"/>
+                <Style TargetType="wctprimitives:DataGridColumnHeader">
+                    <Setter Property="FontWeight" Value="Bold" />
+                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                </Style>
+
+            </controls:DataGrid.Resources>
+            <controls:DataGrid.Columns>
+                <controls:DataGridTextColumn Header="Show Date" Width="SizeToCells" Binding="{Binding ShowDate}"/>
+                <controls:DataGridTemplateColumn Header="Movie" Width="*">
+                    <controls:DataGridTemplateColumn.CellTemplate >
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Border CornerRadius="10" BorderThickness="3" BorderBrush="Transparent">
+                                    <Image Source="{Binding PosterUrl}" Width="100" Height="150" Margin="0,0,20,0"/>
+                                </Border>
+                                <TextBlock Text="{Binding Title}" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </controls:DataGridTemplateColumn.CellTemplate>
+                </controls:DataGridTemplateColumn>
+                <controls:DataGridTextColumn Header="Row" Width="SizeToHeader" Binding="{Binding Row}"/>
+                <controls:DataGridTextColumn Header="Column" Width="SizeToHeader" Binding="{Binding Col}"/>
+                <controls:DataGridTextColumn Header="Price" Width="SizeToCells" Binding="{Binding Price}"/>
+                <controls:DataGridTemplateColumn Width="SizeToCells">
+                    <controls:DataGridTemplateColumn.CellTemplate >
+                        <DataTemplate>
+                            <Button Click="EditButton_Click" Padding="5" Margin="5" IsEnabled="{Binding IsButtonEnabled}">
+                                <FontIcon Glyph="&#xE70F;" FontSize="15" />
+                            </Button>
+                        </DataTemplate>
+                    </controls:DataGridTemplateColumn.CellTemplate>
+                </controls:DataGridTemplateColumn>
+                <controls:DataGridTemplateColumn Width="SizeToCells">
+                    <controls:DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="DeleteButton_Click" Padding="5" Margin="5" IsEnabled="{Binding IsButtonEnabled}">
+                                <FontIcon Glyph="&#xE74D;" FontSize="15" />
+                            </Button>
+                        </DataTemplate>
+                    </controls:DataGridTemplateColumn.CellTemplate>
+                </controls:DataGridTemplateColumn>
+            </controls:DataGrid.Columns>
+        </controls:DataGrid>
+    </StackPanel>
 </Page>
